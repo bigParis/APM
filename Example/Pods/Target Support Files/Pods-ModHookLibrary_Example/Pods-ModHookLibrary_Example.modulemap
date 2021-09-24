@@ -1,0 +1,6 @@
+framework module Pods_ModHookLibrary_Example {
+  umbrella header "Pods-ModHookLibrary_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

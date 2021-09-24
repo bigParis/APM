@@ -7,6 +7,7 @@
 //
 
 #import "BPViewController.h"
+#import <ModHookLibrary/BPModInitFuncHook.h>
 
 @interface BPViewController ()
 
@@ -18,6 +19,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    double total = [BPModInitFuncHook total];
+    NSLog(@"-%f", total);
 }
 
 - (void)didReceiveMemoryWarning

@@ -1,0 +1,6 @@
+framework module ModHookLibrary {
+  umbrella header "ModHookLibrary-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "ModHookLibrary",
+  "version": "0.1.0",
+  "summary": "A short description of ModHookLibrary.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/wangfei5/ModHookLibrary",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "wangfei5": "wangfei5@yy.com"
+  },
+  "source": {
+    "git": "https://github.com/wangfei5/ModHookLibrary.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "9.0"
+  },
+  "source_files": "ModHookLibrary/Classes/**/*"
+}
