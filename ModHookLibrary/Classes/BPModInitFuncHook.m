@@ -148,7 +148,8 @@ static BOOL IsHookInit;
 }
 
 + (BOOL)open {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:kBPModInitFuncHookOpenKey];
+    return YES;
+//    return [[NSUserDefaults standardUserDefaults] boolForKey:kBPModInitFuncHookOpenKey];
 }
 
 + (void)setOpen:(BOOL)open {
