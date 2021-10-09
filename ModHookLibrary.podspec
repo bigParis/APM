@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ModHookLibrary'
-  s.version          = '0.0.13'
+  s.version          = '0.0.14'
   s.summary          = 'A APM of Launch initial hook.'
 
 # This description is used to generate tags and improve search results.
@@ -36,7 +36,7 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '9.0'
 
-  s.source_files = 'ModHookLibrary/Classes/**/*'
+#  s.source_files = 'ModHookLibrary/Classes/**/*'
   
   # s.resource_bundles = {
   #   'ModHookLibrary' => ['ModHookLibrary/Assets/*.png']
@@ -50,4 +50,28 @@ Pod::Spec.new do |s|
   # }
   # s.pod_target_xcconfig = {'GCC_WARN_ABOUT_RETURN_TYPE' => 'NO'}
   s.module_name = 'APM01'
+
+  s.subspec "APM1" do |spec|
+    spec.source_files   ="ModHookLibrary/Classes/APM1/**/*"
+    spec.public_header_files ="ModHookLibrary/Classes/APM1/*.{h}"
+#    spec.header_mappings_dir = "APM1"
+    spec.header_dir ="APM1"
+  end
+
+  s.subspec "APM2" do |spec|
+    spec.source_files   ="ModHookLibrary/Classes/APM2/**/*"
+    spec.public_header_files ="ModHookLibrary/Classes/APM2/BPTestCode2.h"
+#    spec.private_header_files ="ModHookLibrary/Classes/APM2/BPTestCode2Private.h"
+#    spec.header_mappings_dir = "APM2"
+    spec.header_dir ="APM2"
+    spec.dependency"ModHookLibrary/APM1"
+  end
+
+  s.subspec "APM3" do |spec|
+    spec.source_files   ="ModHookLibrary/Classes/APM3/**/*"
+    spec.public_header_files ="ModHookLibrary/Classes/APM3/*.{h}"
+#    spec.header_mappings_dir = "APM3"
+    spec.header_dir ="APM3"
+    spec.dependency"ModHookLibrary/APM1"
+  end
 end

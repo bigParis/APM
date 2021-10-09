@@ -1,4 +1,4 @@
-framework module ModHookLibrary {
+framework module APM01 {
   umbrella header "ModHookLibrary-umbrella.h"
 
   export *

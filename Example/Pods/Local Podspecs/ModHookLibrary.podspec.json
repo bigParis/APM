@@ -1,6 +1,6 @@
 {
   "name": "ModHookLibrary",
-  "version": "0.0.11",
+  "version": "0.0.13",
   "summary": "A APM of Launch initial hook.",
   "homepage": "https://github.com/bigParis/APM/blob/main/README.md",
   "description": "https://github.com/bigParis/APM/blob/main/README.md",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/bigParis/APM.git",
-    "tag": "0.0.11"
+    "tag": "0.0.13"
   },
   "cocoapods_version": ">= 1.09",
   "screenshots": [
@@ -25,7 +25,38 @@
     "ios": "9.0"
   },
   "source_files": "ModHookLibrary/Classes/**/*",
-  "pod_target_xcconfig": {
-    "GCC_WARN_ABOUT_RETURN_TYPE": "NO"
-  }
+  "module_name": "APM01",
+  "subspecs": [
+    {
+      "name": "APM1",
+      "source_files": "ModHookLibrary/Classes/APM1/**/*",
+      "public_header_files": "ModHookLibrary/APM1/*.{h}",
+      "header_mappings_dir": "ModHookLibrary/cfiles/**",
+      "header_dir": "APM1"
+    },
+    {
+      "name": "APM2",
+      "source_files": "ModHookLibrary/Classes/APM2/**/*",
+      "public_header_files": "ModHookLibrary/APM2/*.{h}",
+      "private_header_files": "ModHookLibrary/APM2/BPTestCode2Private.h",
+      "header_mappings_dir": "ModHookLibrary/cfiles2/**",
+      "header_dir": "APM2",
+      "dependencies": {
+        "ModHookLibrary/APM1": [
+
+        ]
+      }
+    },
+    {
+      "name": "APM3",
+      "source_files": "ModHookLibrary/Classes/APM3/**/*",
+      "public_header_files": "ModHookLibrary/APM3/*.{h}",
+      "header_dir": "APM3",
+      "dependencies": {
+        "ModHookLibrary/APM1": [
+
+        ]
+      }
+    }
+  ]
 }

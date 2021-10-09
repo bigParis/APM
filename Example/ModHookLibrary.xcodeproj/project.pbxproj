@@ -325,11 +325,11 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ModHookLibrary_Example/Pods-ModHookLibrary_Example-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/ModHookLibrary/ModHookLibrary.framework",
+				"${BUILT_PRODUCTS_DIR}/ModHookLibrary/APM01.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ModHookLibrary.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/APM01.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
