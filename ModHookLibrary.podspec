@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ModHookLibrary'
-  s.version          = '0.0.7'
+  s.version          = '0.0.8'
   s.summary          = 'A APM of Launch initial hook.'
 
 # This description is used to generate tags and improve search results.
@@ -31,7 +31,7 @@ Pod::Spec.new do |s|
   #       open "`pwd`"
   #    CMD
   # s.deprecated = true
-  s.deprecated_in_favor_of = 'ModHookLibraryOldName'
+  # s.deprecated_in_favor_of = 'ModHookLibraryOldName'
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '9.0'
@@ -44,5 +44,9 @@ Pod::Spec.new do |s|
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  # s.dependency 'AFNetworking', '3.2.1', :configurations => ['Debug']
+  s.info_plist = {
+  'CFBundleIdentifier' => 'com.myorg.MyLib',
+  }
+
 end
