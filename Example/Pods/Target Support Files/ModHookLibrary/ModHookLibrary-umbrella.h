@@ -11,6 +11,7 @@
 #endif
 
 #import "BPModInitFuncHook.h"
+#import "BPTestCode.h"
 
 FOUNDATION_EXPORT double ModHookLibraryVersionNumber;
 FOUNDATION_EXPORT const unsigned char ModHookLibraryVersionString[];

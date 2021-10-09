@@ -15,10 +15,6 @@
 
 @implementation BPViewController
 
-- (BOOL)testCode {
-    
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
