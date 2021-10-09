@@ -24,6 +24,9 @@ Pod::Spec.new do |s|
   s.author           = { 'bigparis' => '1006599994@qq.com' }
   s.source           = { :git => 'https://github.com/bigParis/APM.git', :tag => s.version.to_s }
   s.cocoapods_version = '>= 1.09'
+  s.screenshots = ['http://downhdlogo.yy.com/hdlogo/6060/60/60/32/2461322170/u2461322170obTmgQ4.png',
+                     'http://lxcode.bs2cdn.yy.com/b4f15e01-f0fd-4ef7-a6b2-2283af482f4b.png', 
+                     'http://lxcode.bs2cdn.yy.com/0b153d83-ef97-4529-8860-aa1f03595d89.png']
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '9.0'
