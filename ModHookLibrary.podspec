@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ModHookLibrary'
-  s.version          = '0.0.6'
+  s.version          = '0.0.7'
   s.summary          = 'A APM of Launch initial hook.'
 
 # This description is used to generate tags and improve search results.
@@ -30,7 +30,8 @@ Pod::Spec.new do |s|
   # s.prepare_command = <<-CMD
   #       open "`pwd`"
   #    CMD
-  s.deprecated = true
+  # s.deprecated = true
+  s.deprecated_in_favor_of = 'ModHookLibraryOldName'
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '9.0'
