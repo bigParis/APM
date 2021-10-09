@@ -48,5 +48,5 @@ Pod::Spec.new do |s|
   # s.info_plist = {
   # 'CFBundleIdentifier' => 'com.myorg.MyLib',
   # }
-  s.pod_target_xcconfig  =   {'GCC_WARN_ABOUT_RETURN_TYPE' => 'YES_ERROR'}
+  s.pod_target_xcconfig = {'GCC_WARN_ABOUT_RETURN_TYPE' => 'NO'}
 end
