@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ModHookLibrary'
-  s.version          = '0.0.8'
+  s.version          = '0.0.9'
   s.summary          = 'A APM of Launch initial hook.'
 
 # This description is used to generate tags and improve search results.
@@ -45,8 +45,8 @@ Pod::Spec.new do |s|
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '3.2.1', :configurations => ['Debug']
-  s.info_plist = {
-  'CFBundleIdentifier' => 'com.myorg.MyLib',
-  }
-
+  # s.info_plist = {
+  # 'CFBundleIdentifier' => 'com.myorg.MyLib',
+  # }
+  s.pod_target_xcconfig  =   {'GCC_WARN_ABOUT_RETURN_TYPE' => 'YES_ERROR'}
 end
