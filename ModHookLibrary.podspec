@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ModHookLibrary'
-  s.version          = '0.0.2'
+  s.version          = '0.0.3'
   s.summary          = 'A APM of Launch initial hook.'
 
 # This description is used to generate tags and improve search results.
@@ -23,6 +23,7 @@ Pod::Spec.new do |s|
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'bigparis' => '1006599994@qq.com' }
   s.source           = { :git => 'https://github.com/bigParis/APM.git', :tag => s.version.to_s }
+  s.cocoapods_version = '>= 1.09'
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '9.0'
