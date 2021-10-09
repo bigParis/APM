@@ -10,6 +10,6 @@
 
 @implementation BPTestCode
 - (BOOL)testCode {
-    
+    return YES;
 }
 @end
