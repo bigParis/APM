@@ -28,6 +28,12 @@
   "module_name": "APM01",
   "subspecs": [
     {
+      "name": "Core",
+      "source_files": "ModHookLibrary/Classes/*",
+      "public_header_files": "ModHookLibrary/Classes/*.{h}",
+      "header_dir": "Core"
+    },
+    {
       "name": "APM1",
       "source_files": "ModHookLibrary/Classes/APM1/**/*",
       "public_header_files": "ModHookLibrary/Classes/APM1/*.{h}",

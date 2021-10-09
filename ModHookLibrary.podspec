@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ModHookLibrary'
-  s.version          = '0.0.15'
+  s.version          = '0.0.16'
   s.summary          = 'A APM of Launch initial hook.'
 
 # This description is used to generate tags and improve search results.
@@ -50,7 +50,14 @@ Pod::Spec.new do |s|
   # }
   # s.pod_target_xcconfig = {'GCC_WARN_ABOUT_RETURN_TYPE' => 'NO'}
   s.module_name = 'APM01'
-
+  
+  s.subspec "Core" do |spec|
+    spec.source_files   ="ModHookLibrary/Classes/*"
+    spec.public_header_files ="ModHookLibrary/Classes/*.{h}"
+#    spec.header_mappings_dir = "APM1"
+    spec.header_dir ="Core"
+  end
+  
   s.subspec "APM1" do |spec|
     spec.source_files   ="ModHookLibrary/Classes/APM1/**/*"
     spec.public_header_files ="ModHookLibrary/Classes/APM1/*.{h}"

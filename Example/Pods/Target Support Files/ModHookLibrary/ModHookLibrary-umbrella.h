@@ -19,6 +19,8 @@
 #import "BPTestCode1.h"
 #import "BPTestCode2.h"
 #import "BPTestCode3.h"
+#import "BPModInitFuncHook.h"
+#import "BPTestCode.h"
 
 FOUNDATION_EXPORT double APM01VersionNumber;
 FOUNDATION_EXPORT const unsigned char APM01VersionString[];
