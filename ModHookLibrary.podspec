@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ModHookLibrary'
-  s.version          = '0.0.11'
+  s.version          = '0.0.12'
   s.summary          = 'A APM of Launch initial hook.'
 
 # This description is used to generate tags and improve search results.
@@ -48,5 +48,6 @@ Pod::Spec.new do |s|
   # s.info_plist = {
   # 'CFBundleIdentifier' => 'com.myorg.MyLib',
   # }
-  s.pod_target_xcconfig = {'GCC_WARN_ABOUT_RETURN_TYPE' => 'NO'}
+  # s.pod_target_xcconfig = {'GCC_WARN_ABOUT_RETURN_TYPE' => 'NO'}
+  s.module_name = 'APM01'
 end
