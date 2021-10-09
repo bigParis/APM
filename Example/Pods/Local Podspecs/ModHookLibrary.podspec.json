@@ -1,6 +1,6 @@
 {
   "name": "ModHookLibrary",
-  "version": "0.0.9",
+  "version": "0.0.11",
   "summary": "A APM of Launch initial hook.",
   "homepage": "https://github.com/bigParis/APM/blob/main/README.md",
   "description": "https://github.com/bigParis/APM/blob/main/README.md",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/bigParis/APM.git",
-    "tag": "0.0.9"
+    "tag": "0.0.11"
   },
   "cocoapods_version": ">= 1.09",
   "screenshots": [
@@ -26,6 +26,6 @@
   },
   "source_files": "ModHookLibrary/Classes/**/*",
   "pod_target_xcconfig": {
-    "GCC_WARN_ABOUT_RETURN_TYPE": "YES_ERROR"
+    "GCC_WARN_ABOUT_RETURN_TYPE": "NO"
   }
 }
