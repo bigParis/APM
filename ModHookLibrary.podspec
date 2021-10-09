@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ModHookLibrary'
-  s.version          = '0.0.12'
+  s.version          = '0.0.13'
   s.summary          = 'A APM of Launch initial hook.'
 
 # This description is used to generate tags and improve search results.
