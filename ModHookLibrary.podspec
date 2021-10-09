@@ -36,7 +36,7 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '9.0'
 
-#  s.source_files = 'ModHookLibrary/Classes/**/*'
+  s.source_files = 'ModHookLibrary/Classes/**/*'
   
   # s.resource_bundles = {
   #   'ModHookLibrary' => ['ModHookLibrary/Assets/*.png']

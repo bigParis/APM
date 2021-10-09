@@ -16,9 +16,8 @@
 #import "BPTestCode3.h"
 #import "BPModInitFuncHook.h"
 #import "BPTestCode.h"
-#import "../../Classes/APM1/BPTestCode1.h"
-#import "../../Classes/APM2/BPTestCode2.h"
-#import "../../Classes/APM2/BPTestCode2Private.h"
+#import "BPTestCode1.h"
+#import "BPTestCode2.h"
 #import "BPTestCode3.h"
 
 FOUNDATION_EXPORT double APM01VersionNumber;

@@ -7,8 +7,8 @@
 //
 
 #import "BPViewController.h"
-#import <ModHookLibrary/BPModInitFuncHook.h>
-
+#import <BPModInitFuncHook.h>
+#import <BPTestCode1.h>
 @interface BPViewController ()
 
 @end
@@ -20,6 +20,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     double total = [BPModInitFuncHook total];
+    BPTestCode1 *obj1 = [[BPTestCode1 alloc] init];
+    [obj1 testCode1];
     NSLog(@"-%f", total);
 }
 
