@@ -1,6 +1,6 @@
 {
   "name": "ModHookLibrary",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "summary": "A APM of Launch initial hook.",
   "homepage": "https://github.com/bigParis/APM/blob/main/README.md",
   "description": "https://github.com/bigParis/APM/blob/main/README.md",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/bigParis/APM.git",
-    "tag": "0.0.15"
+    "tag": "0.0.16"
   },
   "cocoapods_version": ">= 1.09",
   "screenshots": [
