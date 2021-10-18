@@ -132,12 +132,22 @@ typedef NS_ENUM(NSUInteger, YYUnifiedTaskStatus) {
         YYUnifiedTaskInfo *taskInfo = [self findATaskWhenTimePassOneSecond];
         if (taskInfo) {
             [self triggerTask:taskInfo];
+        } else {
+            NSMutableString *taskChain = [NSMutableString stringWithFormat:@"%@->", self.currentTaskInfo.task.taskId];
+            YYUnifiedTaskInfo *next = self.currentTaskInfo.nextTask;
+            while (next) {
+                NSString *nextString = [NSString stringWithFormat:@"%@->",next.task.taskId];
+                [taskChain appendString:nextString];
+                next = next.nextTask;
+            }
+            NSLog(@"current task:%@", taskChain);
         }
     }];
 }
 
 - (void)triggerTask:(YYUnifiedTaskInfo *)taskInfo
 {
+    NSLog(@"triggerTask:%@", taskInfo.task.taskId);
     YYUnifiedTaskConfigItem *itemConfig = taskInfo.itemConfig;
     
     if (self.currentTaskInfo == nil) {
@@ -164,28 +174,17 @@ typedef NS_ENUM(NSUInteger, YYUnifiedTaskStatus) {
             }
             [self.taskArray removeObject:taskInfo];
         } else {
-            // 强制
-            YYUnifiedTaskConfigItem *itemConfig = [self p_configItemForTaskId:self.currentTaskInfo.task.taskId taskType:self.currentTaskInfo.task.taskType];
-            
-            if (itemConfig.isForce) {
-                // 当前的也是强制的，需要干掉当前的，展示后来的
-                self.currentTaskInfo.taskStatus = YYUnifiedTaskStatusFinished;
-                [self.currentTaskInfo.task taskShouldDismiss:self.currentTaskInfo.task.taskId completion:nil];
-                [self.taskArray removeObject:self.currentTaskInfo];
-                taskInfo.taskStatus = YYUnifiedTaskStatusExecuting;
-                [taskInfo.task taskDidShow:taskInfo.task.taskId completion:^(BOOL finished) {
-                    taskInfo.taskStatus = YYUnifiedTaskStatusExecuted;
-                }];
-                self.currentTaskInfo = taskInfo;
-                
-            } else {
-                // 当前的不是强制的，需要叠加展示
-                self.currentTaskInfo.taskStatus = YYUnifiedTaskStatusExecutingBehind;
-                taskInfo.taskStatus = YYUnifiedTaskStatusExecuting;
-                [taskInfo.task taskDidShow:taskInfo.task.taskId completion:nil];
-                self.currentTaskInfo.nextTask = self.currentTaskInfo;
-                self.currentTaskInfo = taskInfo; // 链式存储下面的
-            }
+            // 强制, 需要叠加展示
+            self.currentTaskInfo.taskStatus = YYUnifiedTaskStatusExecutingBehind;
+            taskInfo.taskStatus = YYUnifiedTaskStatusExecuting;
+            [taskInfo.task taskDidShow:taskInfo.task.taskId completion:^(BOOL finished) {
+                taskInfo.taskStatus = YYUnifiedTaskStatusExecuted;
+            }];
+            [self.taskArray removeObject:taskInfo];
+            // 链式存储下面的
+            YYUnifiedTaskInfo *last = self.currentTaskInfo;
+            self.currentTaskInfo = taskInfo;
+            self.currentTaskInfo.nextTask = last;
         }
     }
 }
@@ -194,7 +193,10 @@ typedef NS_ENUM(NSUInteger, YYUnifiedTaskStatus) {
 {
     NSMutableArray *tempArray = [@[] mutableCopy];
     [self.taskArray enumerateObjectsUsingBlock:^(YYUnifiedTaskInfo * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        obj.taskRemainTimeSec--;
+        if (obj.taskRemainTimeSec > 0) {
+            obj.taskRemainTimeSec--;
+        }
+        
         if (obj.taskRemainTimeSec <= 0) {
             [tempArray addObject:obj];
         }
@@ -243,6 +245,7 @@ typedef NS_ENUM(NSUInteger, YYUnifiedTaskStatus) {
         taskInfo.taskRemainTimeSec = itemConfig.stay;
         taskInfo.itemConfig = itemConfig;
         [self.taskArray addObject:taskInfo];
+        NSLog(@"addTask:%@", task.taskId);
         taskInfo.taskStatus = YYUnifiedTaskStatusAdded;
     }
     

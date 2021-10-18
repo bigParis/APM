@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)addTask:(id<IUnifiedManagementProtocol>)task;
 /// 删除队列中已有的任务
 - (void)removeTasks:(NSArray<NSString *> *)taskIds;
-/// 用户手动触发关闭，调用这个接口结束任务，并在taskShouldDismissBlock实现关闭逻辑
+/// 用户手动触发关闭，调用这个接口结束任务，并在taskShouldDismissBlock实现关闭逻辑，此任务可不再remove
 - (BOOL)manualFinishTask:(NSString *)taskId;
 
 @end

@@ -38,20 +38,20 @@
     YYUnifiedTaskModel *m = [[YYUnifiedTaskModel alloc] initWithTaskId:@"popup_task1" taskType:YYUnifiedTaskTypeNone expectedDuration:10 delay:5];
     [p addTask:m];
 
-    YYUnifiedTaskModel *m2 = [[YYUnifiedTaskModel alloc] initWithTaskId:@"popup_task2" taskType:YYUnifiedTaskTypeNone expectedDuration:10 delay:5];
+    YYUnifiedTaskModel *m2 = [[YYUnifiedTaskModel alloc] initWithTaskId:@"popup_task2" taskType:YYUnifiedTaskTypeNone expectedDuration:10 delay:9];
     [p addTask:m2];
     
     self.task = p;
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    double tm = [BPModInitFuncHook total];
-    NSLog(@"--%f", tm);
+//    double tm = [BPModInitFuncHook total];
+//    NSLog(@"--%f", tm);
     static int x = 2;
     x++;
     YYUnifiedTaskModel *m2 = [[YYUnifiedTaskModel alloc] initWithTaskId:[NSString stringWithFormat:@"popup_task%@", @(x)] taskType:YYUnifiedTaskTypeNone expectedDuration:10 delay:5];
     [self.task addTask:m2];
-    [self testCode];
+//    [self testCode];
     
 //    self.task
 }

@@ -40,12 +40,17 @@
 
 - (void)taskDidShow:(NSString *)taskId completion:(void (^)(BOOL))completion
 {
-    NSLog(@"%s", __func__);
+    NSLog(@"%s:taskId:%@", __func__, taskId);
 }
 
 - (void)taskShouldDismiss:(NSString *)taskId completion:(void (^)(BOOL))completion
 {
-    NSLog(@"%s", __func__);
+    NSLog(@"%s:taskId:%@", __func__, taskId);
+}
+
+- (void)taskHasDiscarded:(NSString *)taskId completion:(void (^)(BOOL))completion
+{
+    NSLog(@"%s:taskId:%@", __func__, taskId);
 }
 
 - (int)expectedDuration
