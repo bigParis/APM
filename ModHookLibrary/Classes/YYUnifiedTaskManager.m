@@ -147,7 +147,7 @@ typedef NS_ENUM(NSUInteger, YYUnifiedTaskStatus) {
 
 - (void)triggerTask:(YYUnifiedTaskInfo *)taskInfo
 {
-    NSLog(@"triggerTask:%@", taskInfo.task.taskId);
+    NSLog(@"--triggerTask:%@", taskInfo.task.taskId);
     YYUnifiedTaskConfigItem *itemConfig = taskInfo.itemConfig;
     
     if (self.currentTaskInfo == nil) {
