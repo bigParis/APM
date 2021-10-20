@@ -7,65 +7,92 @@
 //
 
 #import "BPViewController.h"
-#import <BPModInitFuncHook.h>
-#import <BPTestCode1.h>
+#import "BPTableViewCell.h"
 
-#import "YYUnifiedTaskManager.h"
-#import "YYUnifiedTaskModel.h"
+static NSString *kTableViewCellIdentifier = @"TableViewCellIdentifier";
 
-@interface BPViewController ()
-@property (nonatomic, strong) YYUnifiedTaskManager *task;
+@interface BPTableModel : NSObject
+@property (nonatomic, copy) NSString *content;
+@property (nonatomic, copy) NSString *jumpViewController;
+@end
+
+@implementation BPTableModel
+
+@end
+
+@interface BPViewController ()<UITableViewDelegate, UITableViewDataSource>
+@property (nonatomic, weak) UITableView *tableView;
+@property (nonatomic, copy) NSArray<BPTableModel *> *dataSource;
+
 @end
 
 @implementation BPViewController
 
-//- (void)viewDidLoad
-//{
-//    [super viewDidLoad];
-//	// Do any additional setup after loading the view, typically from a nib.
-//    double total = [BPModInitFuncHook total];
-//    BPTestCode1 *obj1 = [[BPTestCode1 alloc] init];
-//    [obj1 testCode1];
-//    NSLog(@"-%f", total);
-//}
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    BPTestCode1 *obj1 = [[BPTestCode1 alloc] init];
-//    [obj1 testCode1];
-//    [BPModInitFuncHook setOpen:YES];
-    
-    YYUnifiedTaskManager *p = [[YYUnifiedTaskManager alloc] init];
-    YYUnifiedTaskModel *m = [[YYUnifiedTaskModel alloc] initWithTaskId:@"popup_task1" taskType:YYUnifiedTaskTypeNone expectedDuration:10 delay:5];
-    [p addTask:m];
-
-    YYUnifiedTaskModel *m2 = [[YYUnifiedTaskModel alloc] initWithTaskId:@"popup_task2" taskType:YYUnifiedTaskTypeNone expectedDuration:10 delay:9];
-    [p addTask:m2];
-    
-    self.task = p;
+    self.title = @"天生我才";
+//    self.view.backgroundColor = [UIColor whiteColor];
+    [self initSubViews];
+    [self initData];
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-//    double tm = [BPModInitFuncHook total];
-//    NSLog(@"--%f", tm);
-    static int x = 2;
-    x++;
-    YYUnifiedTaskModel *m2 = [[YYUnifiedTaskModel alloc] initWithTaskId:[NSString stringWithFormat:@"popup_task%@", @(x)] taskType:YYUnifiedTaskTypeNone expectedDuration:10 delay:5];
-    [self.task addTask:m2];
-//    [self testCode];
-    
-//    self.task
-}
-
-- (BOOL)testCode {
-    NSLog(@"testCode 123");
-    return YES;
-}
-
-
-- (void)didReceiveMemoryWarning
+- (void)initSubViews
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    UITableView *tableView = [[UITableView alloc] init];
+    tableView.delegate = self;
+    tableView.dataSource = self;
+    [self.view addSubview:tableView];
+    self.tableView = tableView;
 }
 
+- (void)initData
+{
+    NSMutableArray *tempArray = [@[] mutableCopy];
+    [tempArray addObject:[self createModelWith:@"任务管理" vcName:@"BPTaskTestViewController"]];
+    [tempArray addObject:[self createModelWith:@"AMP测试" vcName:@"BPAPMTestViewController"]];
+    [tempArray addObject:[self createModelWith:@"Pod库测试" vcName:@"BPPodLibraryTestViewController"]];
+    self.dataSource = tempArray;
+}
+
+- (BPTableModel *)createModelWith:(NSString *)content vcName:(NSString *)vcName
+{
+    BPTableModel *tm = [[BPTableModel alloc] init];
+    tm.content = content;
+    tm.jumpViewController = vcName;
+    return tm;
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    self.tableView.frame = self.view.bounds;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.dataSource.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    BPTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kTableViewCellIdentifier];
+    if (cell == nil) {
+        cell = [[BPTableViewCell alloc] init];
+    }
+    
+    if (indexPath.row < self.dataSource.count) {
+        cell.desc = self.dataSource[indexPath.row].content;
+    }
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row < self.dataSource.count) {
+        NSString *jumpVC = self.dataSource[indexPath.row].jumpViewController;
+        Class cls = NSClassFromString(jumpVC);
+        UIViewController *target = [[cls alloc] init];
+        [self.navigationController pushViewController:target animated:YES];
+    }
+}
 @end

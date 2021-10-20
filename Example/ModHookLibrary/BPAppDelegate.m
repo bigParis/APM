@@ -7,12 +7,21 @@
 //
 
 #import "BPAppDelegate.h"
+#import "BPViewController.h"
 
 @implementation BPAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    BPViewController *root = [[BPViewController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:root];
+    if (!self.window) {
+        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        self.window.backgroundColor = UIColor.whiteColor;
+    }
+    [self.window makeKeyAndVisible];
+    self.window.rootViewController = nav;
     return YES;
 }
 

@@ -86,6 +86,18 @@ typedef NS_ENUM(NSUInteger, YYUnifiedTaskStatus) {
 @end
 
 @implementation YYUnifiedTaskManager
++ (instancetype)sharedManager
+{
+    static YYUnifiedTaskManager *instance = nil;
+    if (!instance)
+    {
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            instance = [[YYUnifiedTaskManager alloc] init];
+        });
+    }
+    return instance;
+}
 
 - (instancetype)init
 {
@@ -348,16 +360,28 @@ typedef NS_ENUM(NSUInteger, YYUnifiedTaskStatus) {
     return stringType;
 }
 
-- (void)removeTasks:(NSString *)taskIds
+- (void)removeTasks:(NSArray *)taskIds
 {
     NSMutableArray *arrayToRemove = [@[] mutableCopy];
     [self.taskArray enumerateObjectsUsingBlock:^(YYUnifiedTaskInfo * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([taskIds containsString:obj.task.taskId]) {
+        if (obj.task.taskId && [taskIds containsObject:obj.task.taskId]) {
             [arrayToRemove addObject:obj];
-            *stop = YES;
         }
     }];
+    NSLog(@"arrayToRemove:%@", arrayToRemove);
     [self.taskArray removeObjectsInArray:arrayToRemove];
+}
+
+- (void)removeCurrentTaskList
+{
+    while (self.currentTaskInfo) {
+        YYUnifiedTaskInfo *next = self.currentTaskInfo.nextTask;
+        self.currentTaskInfo = next;
+    }
+    if (_timer) {
+        [_timer invalidate];
+        _timer = nil;
+    }
 }
 
 - (NSMutableArray<YYUnifiedTaskInfo *> *)taskArray

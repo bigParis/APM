@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F102B852720728900433099 /* BPTaskTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F102B842720728900433099 /* BPTaskTestViewController.m */; };
+		2F102B892720731600433099 /* BPAPMTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F102B882720731600433099 /* BPAPMTestViewController.m */; };
+		2F102B8D272073AC00433099 /* BPPodLibraryTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F102B8C272073AC00433099 /* BPPodLibraryTestViewController.m */; };
+		2F102B902720779E00433099 /* BPTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F102B8F2720779E00433099 /* BPTableViewCell.m */; };
 		545F40E71056993860B1842C /* Pods_ModHookLibrary_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55595D1FDF89645129853311 /* Pods_ModHookLibrary_Example.framework */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
@@ -38,6 +42,14 @@
 
 /* Begin PBXFileReference section */
 		12681349A1680BC2EE4B8104 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		2F102B832720728900433099 /* BPTaskTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPTaskTestViewController.h; sourceTree = "<group>"; };
+		2F102B842720728900433099 /* BPTaskTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPTaskTestViewController.m; sourceTree = "<group>"; };
+		2F102B872720731600433099 /* BPAPMTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPAPMTestViewController.h; sourceTree = "<group>"; };
+		2F102B882720731600433099 /* BPAPMTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPAPMTestViewController.m; sourceTree = "<group>"; };
+		2F102B8B272073AC00433099 /* BPPodLibraryTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPPodLibraryTestViewController.h; sourceTree = "<group>"; };
+		2F102B8C272073AC00433099 /* BPPodLibraryTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPPodLibraryTestViewController.m; sourceTree = "<group>"; };
+		2F102B8E2720779E00433099 /* BPTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPTableViewCell.h; sourceTree = "<group>"; };
+		2F102B8F2720779E00433099 /* BPTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPTableViewCell.m; sourceTree = "<group>"; };
 		3FF95F849A1C867389655295 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		55595D1FDF89645129853311 /* Pods_ModHookLibrary_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ModHookLibrary_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58A195388D20070C39A /* ModHookLibrary_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ModHookLibrary_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -106,6 +118,33 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		2F102B822720726F00433099 /* TaskManager */ = {
+			isa = PBXGroup;
+			children = (
+				2F102B832720728900433099 /* BPTaskTestViewController.h */,
+				2F102B842720728900433099 /* BPTaskTestViewController.m */,
+			);
+			path = TaskManager;
+			sourceTree = "<group>";
+		};
+		2F102B862720730400433099 /* AMP */ = {
+			isa = PBXGroup;
+			children = (
+				2F102B872720731600433099 /* BPAPMTestViewController.h */,
+				2F102B882720731600433099 /* BPAPMTestViewController.m */,
+			);
+			path = AMP;
+			sourceTree = "<group>";
+		};
+		2F102B8A2720739600433099 /* PodLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				2F102B8B272073AC00433099 /* BPPodLibraryTestViewController.h */,
+				2F102B8C272073AC00433099 /* BPPodLibraryTestViewController.m */,
+			);
+			path = PodLibrary;
+			sourceTree = "<group>";
+		};
 		6003F581195388D10070C39A = {
 			isa = PBXGroup;
 			children = (
@@ -143,6 +182,9 @@
 		6003F593195388D20070C39A /* Example for ModHookLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				2F102B8A2720739600433099 /* PodLibrary */,
+				2F102B862720730400433099 /* AMP */,
+				2F102B822720726F00433099 /* TaskManager */,
 				6003F59C195388D20070C39A /* BPAppDelegate.h */,
 				6003F59D195388D20070C39A /* BPAppDelegate.m */,
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
@@ -151,6 +193,8 @@
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
+				2F102B8E2720779E00433099 /* BPTableViewCell.h */,
+				2F102B8F2720779E00433099 /* BPTableViewCell.m */,
 			);
 			name = "Example for ModHookLibrary";
 			path = ModHookLibrary;
@@ -390,7 +434,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F59E195388D20070C39A /* BPAppDelegate.m in Sources */,
+				2F102B852720728900433099 /* BPTaskTestViewController.m in Sources */,
+				2F102B8D272073AC00433099 /* BPPodLibraryTestViewController.m in Sources */,
 				6003F5A7195388D20070C39A /* BPViewController.m in Sources */,
+				2F102B892720731600433099 /* BPAPMTestViewController.m in Sources */,
+				2F102B902720779E00433099 /* BPTableViewCell.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
