@@ -11,6 +11,8 @@
 		2F102B892720731600433099 /* BPAPMTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F102B882720731600433099 /* BPAPMTestViewController.m */; };
 		2F102B8D272073AC00433099 /* BPPodLibraryTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F102B8C272073AC00433099 /* BPPodLibraryTestViewController.m */; };
 		2F102B902720779E00433099 /* BPTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F102B8F2720779E00433099 /* BPTableViewCell.m */; };
+		2F78C0B72726FCF100C0E335 /* BPPrivateModelVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F78C0B62726FCF100C0E335 /* BPPrivateModelVC.m */; };
+		2F78C0BB2726FDD500C0E335 /* BPUserObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F78C0BA2726FDD500C0E335 /* BPUserObject.m */; };
 		2F7D7DCA2721B441003EEE74 /* BPPointerArrayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F7D7DC92721B441003EEE74 /* BPPointerArrayVC.m */; };
 		2F7D7DCD2721B460003EEE74 /* BPPointArrayMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F7D7DCC2721B460003EEE74 /* BPPointArrayMgr.m */; };
 		2F7D7DD02721B586003EEE74 /* BPPointerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F7D7DCF2721B586003EEE74 /* BPPointerModel.m */; };
@@ -53,6 +55,11 @@
 		2F102B8C272073AC00433099 /* BPPodLibraryTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPPodLibraryTestViewController.m; sourceTree = "<group>"; };
 		2F102B8E2720779E00433099 /* BPTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPTableViewCell.h; sourceTree = "<group>"; };
 		2F102B8F2720779E00433099 /* BPTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPTableViewCell.m; sourceTree = "<group>"; };
+		2F78C0B52726FCF100C0E335 /* BPPrivateModelVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPPrivateModelVC.h; sourceTree = "<group>"; };
+		2F78C0B62726FCF100C0E335 /* BPPrivateModelVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPPrivateModelVC.m; sourceTree = "<group>"; };
+		2F78C0B82726FD6D00C0E335 /* IBPPrivateModelProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IBPPrivateModelProtocol.h; sourceTree = "<group>"; };
+		2F78C0B92726FDD500C0E335 /* BPUserObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPUserObject.h; sourceTree = "<group>"; };
+		2F78C0BA2726FDD500C0E335 /* BPUserObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPUserObject.m; sourceTree = "<group>"; };
 		2F7D7DC82721B441003EEE74 /* BPPointerArrayVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPPointerArrayVC.h; sourceTree = "<group>"; };
 		2F7D7DC92721B441003EEE74 /* BPPointerArrayVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPPointerArrayVC.m; sourceTree = "<group>"; };
 		2F7D7DCB2721B460003EEE74 /* BPPointArrayMgr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPPointArrayMgr.h; sourceTree = "<group>"; };
@@ -155,6 +162,18 @@
 			path = PodLibrary;
 			sourceTree = "<group>";
 		};
+		2F78C0B42726FCD400C0E335 /* PrivateModel */ = {
+			isa = PBXGroup;
+			children = (
+				2F78C0B52726FCF100C0E335 /* BPPrivateModelVC.h */,
+				2F78C0B62726FCF100C0E335 /* BPPrivateModelVC.m */,
+				2F78C0B82726FD6D00C0E335 /* IBPPrivateModelProtocol.h */,
+				2F78C0B92726FDD500C0E335 /* BPUserObject.h */,
+				2F78C0BA2726FDD500C0E335 /* BPUserObject.m */,
+			);
+			path = PrivateModel;
+			sourceTree = "<group>";
+		};
 		2F7D7DC72721B417003EEE74 /* NSPointerArray */ = {
 			isa = PBXGroup;
 			children = (
@@ -206,6 +225,7 @@
 		6003F593195388D20070C39A /* Example for ModHookLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				2F78C0B42726FCD400C0E335 /* PrivateModel */,
 				2F7D7DC72721B417003EEE74 /* NSPointerArray */,
 				2F102B8A2720739600433099 /* PodLibrary */,
 				2F102B862720730400433099 /* AMP */,
@@ -458,6 +478,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F78C0B72726FCF100C0E335 /* BPPrivateModelVC.m in Sources */,
+				2F78C0BB2726FDD500C0E335 /* BPUserObject.m in Sources */,
 				2F7D7DCA2721B441003EEE74 /* BPPointerArrayVC.m in Sources */,
 				6003F59E195388D20070C39A /* BPAppDelegate.m in Sources */,
 				2F102B852720728900433099 /* BPTaskTestViewController.m in Sources */,
