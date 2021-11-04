@@ -19,6 +19,10 @@
 		2FA909EE272791C00099A3F0 /* BPNetworkTestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA909EC272791C00099A3F0 /* BPNetworkTestVC.m */; };
 		2FA90D7C2727A2520099A3F0 /* BPMultiThreadVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA90D7B2727A2520099A3F0 /* BPMultiThreadVC.m */; };
 		2FA90D7F2727A2A50099A3F0 /* BPMultiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA90D7E2727A2A50099A3F0 /* BPMultiManager.m */; };
+		2FC63A7F2733802F0006DE6C /* BPBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC63A7E2733802F0006DE6C /* BPBaseView.m */; };
+		2FC63A82273382BD0006DE6C /* BPDeriveTestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC63A81273382BD0006DE6C /* BPDeriveTestVC.m */; };
+		2FC63A85273383240006DE6C /* BPSubView1.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC63A84273383240006DE6C /* BPSubView1.m */; };
+		2FC63A88273383340006DE6C /* BPSubView2.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC63A87273383340006DE6C /* BPSubView2.m */; };
 		2FC966FF272A92E0008819D1 /* BPTemplateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC966FE272A92E0008819D1 /* BPTemplateVC.m */; };
 		2FC96702272A92F8008819D1 /* BPTemplateBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC96701272A92F8008819D1 /* BPTemplateBase.m */; };
 		2FC96705272A9314008819D1 /* BPTemplateSub.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC96704272A9313008819D1 /* BPTemplateSub.m */; };
@@ -81,6 +85,14 @@
 		2FA90D7B2727A2520099A3F0 /* BPMultiThreadVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPMultiThreadVC.m; sourceTree = "<group>"; };
 		2FA90D7D2727A2A50099A3F0 /* BPMultiManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPMultiManager.h; sourceTree = "<group>"; };
 		2FA90D7E2727A2A50099A3F0 /* BPMultiManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPMultiManager.m; sourceTree = "<group>"; };
+		2FC63A7D2733802E0006DE6C /* BPBaseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPBaseView.h; sourceTree = "<group>"; };
+		2FC63A7E2733802F0006DE6C /* BPBaseView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPBaseView.m; sourceTree = "<group>"; };
+		2FC63A80273382BD0006DE6C /* BPDeriveTestVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPDeriveTestVC.h; sourceTree = "<group>"; };
+		2FC63A81273382BD0006DE6C /* BPDeriveTestVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPDeriveTestVC.m; sourceTree = "<group>"; };
+		2FC63A83273383240006DE6C /* BPSubView1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPSubView1.h; sourceTree = "<group>"; };
+		2FC63A84273383240006DE6C /* BPSubView1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPSubView1.m; sourceTree = "<group>"; };
+		2FC63A86273383340006DE6C /* BPSubView2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPSubView2.h; sourceTree = "<group>"; };
+		2FC63A87273383340006DE6C /* BPSubView2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPSubView2.m; sourceTree = "<group>"; };
 		2FC966FD272A92E0008819D1 /* BPTemplateVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPTemplateVC.h; sourceTree = "<group>"; };
 		2FC966FE272A92E0008819D1 /* BPTemplateVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPTemplateVC.m; sourceTree = "<group>"; };
 		2FC96700272A92F8008819D1 /* BPTemplateBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPTemplateBase.h; sourceTree = "<group>"; };
@@ -236,6 +248,21 @@
 			path = MultiThread;
 			sourceTree = "<group>";
 		};
+		2FC63A7C273380140006DE6C /* Derived */ = {
+			isa = PBXGroup;
+			children = (
+				2FC63A7D2733802E0006DE6C /* BPBaseView.h */,
+				2FC63A7E2733802F0006DE6C /* BPBaseView.m */,
+				2FC63A80273382BD0006DE6C /* BPDeriveTestVC.h */,
+				2FC63A81273382BD0006DE6C /* BPDeriveTestVC.m */,
+				2FC63A83273383240006DE6C /* BPSubView1.h */,
+				2FC63A84273383240006DE6C /* BPSubView1.m */,
+				2FC63A86273383340006DE6C /* BPSubView2.h */,
+				2FC63A87273383340006DE6C /* BPSubView2.m */,
+			);
+			path = Derived;
+			sourceTree = "<group>";
+		};
 		2FC966FC272A92C3008819D1 /* Template */ = {
 			isa = PBXGroup;
 			children = (
@@ -286,6 +313,7 @@
 		6003F593195388D20070C39A /* Example for ModHookLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				2FC63A7C273380140006DE6C /* Derived */,
 				2FC966FC272A92C3008819D1 /* Template */,
 				2FA909EF2727930B0099A3F0 /* MultiThread */,
 				2FA909EB272791C00099A3F0 /* Net */,
@@ -479,12 +507,14 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ModHookLibrary_Example/Pods-ModHookLibrary_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/ModHookLibrary/APM01.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/APM01.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 			);
@@ -546,6 +576,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FC63A88273383340006DE6C /* BPSubView2.m in Sources */,
 				2FC966FF272A92E0008819D1 /* BPTemplateVC.m in Sources */,
 				2FA90D7F2727A2A50099A3F0 /* BPMultiManager.m in Sources */,
 				2F78C0B72726FCF100C0E335 /* BPPrivateModelVC.m in Sources */,
@@ -554,8 +585,11 @@
 				2FC96702272A92F8008819D1 /* BPTemplateBase.m in Sources */,
 				2FDB2390272F7E99005DF5C5 /* BPMutableArray.m in Sources */,
 				6003F59E195388D20070C39A /* BPAppDelegate.m in Sources */,
+				2FC63A85273383240006DE6C /* BPSubView1.m in Sources */,
 				2FA909EE272791C00099A3F0 /* BPNetworkTestVC.m in Sources */,
+				2FC63A7F2733802F0006DE6C /* BPBaseView.m in Sources */,
 				2F102B852720728900433099 /* BPTaskTestViewController.m in Sources */,
+				2FC63A82273382BD0006DE6C /* BPDeriveTestVC.m in Sources */,
 				2FDB238D272F7C6D005DF5C5 /* BPMultiThreadSafeObject.m in Sources */,
 				2FA90D7C2727A2520099A3F0 /* BPMultiThreadVC.m in Sources */,
 				2F102B8D272073AC00433099 /* BPPodLibraryTestViewController.m in Sources */,

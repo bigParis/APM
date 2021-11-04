@@ -24,6 +24,7 @@ PODS:
   - FBSnapshotTestCase/Core (2.1.4)
   - FBSnapshotTestCase/SwiftSupport (2.1.4):
     - FBSnapshotTestCase/Core
+  - Masonry (1.1.0)
   - ModHookLibrary (0.0.16):
     - ModHookLibrary/APM1 (= 0.0.16)
     - ModHookLibrary/APM2 (= 0.0.16)
@@ -45,6 +46,7 @@ DEPENDENCIES:
   - Expecta
   - "Expecta+Snapshots"
   - FBSnapshotTestCase
+  - Masonry (= 1.1.0)
   - ModHookLibrary (from `../`)
   - SDWebImage (~> 5.0)
   - Specta
@@ -55,6 +57,7 @@ SPEC REPOS:
     - Expecta
     - "Expecta+Snapshots"
     - FBSnapshotTestCase
+    - Masonry
     - SDWebImage
     - Specta
 
@@ -67,10 +70,11 @@ SPEC CHECKSUMS:
   Expecta: 3b6bd90a64b9a1dcb0b70aa0e10a7f8f631667d5
   "Expecta+Snapshots": dcff217eef506dabd6dfdc7864ea2da321fafbb8
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   ModHookLibrary: c6a316b6b8b46f9926d39df6b97f91034a472e6a
   SDWebImage: 4dc3e42d9ec0c1028b960a33ac6b637bb432207b
   Specta: 3e1bd89c3517421982dc4d1c992503e48bd5fe66
 
-PODFILE CHECKSUM: f6a411e8d79b07de874fcddcc731a811d7304dec
+PODFILE CHECKSUM: 8b9bba86272ca338c0099e650fc3b9719bd0845d
 
 COCOAPODS: 1.11.2
