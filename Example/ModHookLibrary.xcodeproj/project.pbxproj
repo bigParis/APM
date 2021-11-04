@@ -19,6 +19,11 @@
 		2FA909EE272791C00099A3F0 /* BPNetworkTestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA909EC272791C00099A3F0 /* BPNetworkTestVC.m */; };
 		2FA90D7C2727A2520099A3F0 /* BPMultiThreadVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA90D7B2727A2520099A3F0 /* BPMultiThreadVC.m */; };
 		2FA90D7F2727A2A50099A3F0 /* BPMultiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA90D7E2727A2A50099A3F0 /* BPMultiManager.m */; };
+		2FC966FF272A92E0008819D1 /* BPTemplateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC966FE272A92E0008819D1 /* BPTemplateVC.m */; };
+		2FC96702272A92F8008819D1 /* BPTemplateBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC96701272A92F8008819D1 /* BPTemplateBase.m */; };
+		2FC96705272A9314008819D1 /* BPTemplateSub.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC96704272A9313008819D1 /* BPTemplateSub.m */; };
+		2FDB238D272F7C6D005DF5C5 /* BPMultiThreadSafeObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB238C272F7C6D005DF5C5 /* BPMultiThreadSafeObject.m */; };
+		2FDB2390272F7E99005DF5C5 /* BPMutableArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB238F272F7E99005DF5C5 /* BPMutableArray.m */; };
 		545F40E71056993860B1842C /* Pods_ModHookLibrary_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55595D1FDF89645129853311 /* Pods_ModHookLibrary_Example.framework */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
@@ -76,6 +81,16 @@
 		2FA90D7B2727A2520099A3F0 /* BPMultiThreadVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPMultiThreadVC.m; sourceTree = "<group>"; };
 		2FA90D7D2727A2A50099A3F0 /* BPMultiManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPMultiManager.h; sourceTree = "<group>"; };
 		2FA90D7E2727A2A50099A3F0 /* BPMultiManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPMultiManager.m; sourceTree = "<group>"; };
+		2FC966FD272A92E0008819D1 /* BPTemplateVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPTemplateVC.h; sourceTree = "<group>"; };
+		2FC966FE272A92E0008819D1 /* BPTemplateVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPTemplateVC.m; sourceTree = "<group>"; };
+		2FC96700272A92F8008819D1 /* BPTemplateBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPTemplateBase.h; sourceTree = "<group>"; };
+		2FC96701272A92F8008819D1 /* BPTemplateBase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPTemplateBase.m; sourceTree = "<group>"; };
+		2FC96703272A9313008819D1 /* BPTemplateSub.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPTemplateSub.h; sourceTree = "<group>"; };
+		2FC96704272A9313008819D1 /* BPTemplateSub.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPTemplateSub.m; sourceTree = "<group>"; };
+		2FDB238B272F7C6D005DF5C5 /* BPMultiThreadSafeObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPMultiThreadSafeObject.h; sourceTree = "<group>"; };
+		2FDB238C272F7C6D005DF5C5 /* BPMultiThreadSafeObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPMultiThreadSafeObject.m; sourceTree = "<group>"; };
+		2FDB238E272F7E99005DF5C5 /* BPMutableArray.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPMutableArray.h; sourceTree = "<group>"; };
+		2FDB238F272F7E99005DF5C5 /* BPMutableArray.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPMutableArray.m; sourceTree = "<group>"; };
 		3FF95F849A1C867389655295 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		55595D1FDF89645129853311 /* Pods_ModHookLibrary_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ModHookLibrary_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58A195388D20070C39A /* ModHookLibrary_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ModHookLibrary_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -213,8 +228,25 @@
 				2FA90D7B2727A2520099A3F0 /* BPMultiThreadVC.m */,
 				2FA90D7D2727A2A50099A3F0 /* BPMultiManager.h */,
 				2FA90D7E2727A2A50099A3F0 /* BPMultiManager.m */,
+				2FDB238B272F7C6D005DF5C5 /* BPMultiThreadSafeObject.h */,
+				2FDB238C272F7C6D005DF5C5 /* BPMultiThreadSafeObject.m */,
+				2FDB238E272F7E99005DF5C5 /* BPMutableArray.h */,
+				2FDB238F272F7E99005DF5C5 /* BPMutableArray.m */,
 			);
 			path = MultiThread;
+			sourceTree = "<group>";
+		};
+		2FC966FC272A92C3008819D1 /* Template */ = {
+			isa = PBXGroup;
+			children = (
+				2FC966FD272A92E0008819D1 /* BPTemplateVC.h */,
+				2FC966FE272A92E0008819D1 /* BPTemplateVC.m */,
+				2FC96700272A92F8008819D1 /* BPTemplateBase.h */,
+				2FC96701272A92F8008819D1 /* BPTemplateBase.m */,
+				2FC96703272A9313008819D1 /* BPTemplateSub.h */,
+				2FC96704272A9313008819D1 /* BPTemplateSub.m */,
+			);
+			path = Template;
 			sourceTree = "<group>";
 		};
 		6003F581195388D10070C39A = {
@@ -254,6 +286,7 @@
 		6003F593195388D20070C39A /* Example for ModHookLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				2FC966FC272A92C3008819D1 /* Template */,
 				2FA909EF2727930B0099A3F0 /* MultiThread */,
 				2FA909EB272791C00099A3F0 /* Net */,
 				2F78C0B42726FCD400C0E335 /* PrivateModel */,
@@ -513,18 +546,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FC966FF272A92E0008819D1 /* BPTemplateVC.m in Sources */,
 				2FA90D7F2727A2A50099A3F0 /* BPMultiManager.m in Sources */,
 				2F78C0B72726FCF100C0E335 /* BPPrivateModelVC.m in Sources */,
 				2F78C0BB2726FDD500C0E335 /* BPUserObject.m in Sources */,
 				2F7D7DCA2721B441003EEE74 /* BPPointerArrayVC.m in Sources */,
+				2FC96702272A92F8008819D1 /* BPTemplateBase.m in Sources */,
+				2FDB2390272F7E99005DF5C5 /* BPMutableArray.m in Sources */,
 				6003F59E195388D20070C39A /* BPAppDelegate.m in Sources */,
 				2FA909EE272791C00099A3F0 /* BPNetworkTestVC.m in Sources */,
 				2F102B852720728900433099 /* BPTaskTestViewController.m in Sources */,
+				2FDB238D272F7C6D005DF5C5 /* BPMultiThreadSafeObject.m in Sources */,
 				2FA90D7C2727A2520099A3F0 /* BPMultiThreadVC.m in Sources */,
 				2F102B8D272073AC00433099 /* BPPodLibraryTestViewController.m in Sources */,
 				2F7D7DCD2721B460003EEE74 /* BPPointArrayMgr.m in Sources */,
 				6003F5A7195388D20070C39A /* BPViewController.m in Sources */,
 				2F102B892720731600433099 /* BPAPMTestViewController.m in Sources */,
+				2FC96705272A9314008819D1 /* BPTemplateSub.m in Sources */,
 				2F102B902720779E00433099 /* BPTableViewCell.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				2F7D7DD02721B586003EEE74 /* BPPointerModel.m in Sources */,

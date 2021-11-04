@@ -8,6 +8,7 @@
 
 #import "BPMultiThreadVC.h"
 #import "BPMultiManager.h"
+
 @interface BPMultiThreadVC ()
 @property (nonatomic, weak) UIButton *beginBtn;
 @property (nonatomic, weak) UIButton *endBtn;
@@ -60,6 +61,5 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-//    [[BPMultiManager sharedManager] cancelAll];
 }
 @end

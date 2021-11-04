@@ -55,6 +55,7 @@ static NSString *kTableViewCellIdentifier = @"TableViewCellIdentifier";
     [tempArray addObject:[self createModelWith:@"PrivateModel" vcName:@"BPPrivateModelVC"]];
     [tempArray addObject:[self createModelWith:@"Net" vcName:@"BPNetworkTestVC"]];
     [tempArray addObject:[self createModelWith:@"多线程" vcName:@"BPMultiThreadVC"]];
+    [tempArray addObject:[self createModelWith:@"模板" vcName:@"BPTemplateVC"]];
     self.dataSource = tempArray;
 }
 
