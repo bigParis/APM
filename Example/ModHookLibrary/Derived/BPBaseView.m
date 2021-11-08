@@ -10,8 +10,6 @@
 
 @interface BPBaseView()
 
-
-
 @end
 
 @implementation BPBaseView

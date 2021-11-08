@@ -44,7 +44,7 @@ Pod::Spec.new do |s|
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '3.2.1', :configurations => ['Debug']
+  s.dependency 'YYModel', '1.0.4'
   # s.info_plist = {
   # 'CFBundleIdentifier' => 'com.myorg.MyLib',
   # }

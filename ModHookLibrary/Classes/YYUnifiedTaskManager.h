@@ -9,6 +9,22 @@
 #import "IUnifiedManagementProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
+@interface YYUnifiedTaskStorageSidItem : NSObject
+
+@property (nonatomic, assign) int todayTimes;
+@property (nonatomic, assign) int totalTimes;
+@property (nonatomic, assign) int roomTimes;
+@property (nonatomic, assign) NSTimeInterval lastUpdateTime;
+
+@end
+
+@interface YYUnifiedTaskStorageModel : NSObject
+
+@property (nonatomic, strong) YYUnifiedTaskStorageSidItem *item;
+@property (nonatomic, strong) NSNumber *sid;
+@property (nonatomic, copy) NSString *taskId;
+
+@end
 
 @interface YYUnifiedTaskManager : NSObject
 + (instancetype)sharedManager;
@@ -19,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 用户手动触发关闭，调用这个接口结束任务，并在taskShouldDismissBlock实现关闭逻辑，此任务可不再remove
 - (BOOL)manualFinishTask:(NSString *)taskId;
 /// 移除当前展示的任务列表
-- (void)removeCurrentTaskList;
+//- (void)removeCurrentTaskList;
 @end
 
 NS_ASSUME_NONNULL_END
