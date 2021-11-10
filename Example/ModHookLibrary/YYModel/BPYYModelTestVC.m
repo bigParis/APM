@@ -18,7 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    /*
 //    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     NSMutableArray *temp = [NSMutableArray array];
     for (int i = 0; i < 10; ++i) {
@@ -67,6 +67,6 @@
     NSArray *writedData = [defaults objectForKey:@"12_UnifiedTaskStorage"];
     NSArray <YYUnifiedTaskStorageModel *> *models = [NSArray yy_modelArrayWithClass:YYUnifiedTaskStorageModel.class json:writedData];
     NSLog(@"%@", @(models[1].item.lastUpdateTime));
-    
+   */
 }
 @end

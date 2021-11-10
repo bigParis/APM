@@ -13,19 +13,28 @@
 @property (nonatomic, assign) YYUnifiedTaskType taskType;
 @property (nonatomic, assign) int expectedDuration;
 @property (nonatomic, assign) int delay;
+@property (nonatomic, assign) YYUnifiedTaskShownPosition position;
+@property (nonatomic, weak) id<IUnifiedManagementDelegate> delegate;
 
 @end
 @implementation YYUnifiedTaskModel
-
-- (instancetype)initWithTaskId:(NSString *)taskId taskType:(YYUnifiedTaskType)taskType expectedDuration:(int)expectedDuration delay:(int)delay
-{
+- (instancetype)initWithTaskId:(NSString *)taskId taskType:(YYUnifiedTaskType)taskType expectedDuration:(int)expectedDuration delay:(int)delay position:(YYUnifiedTaskShownPosition)position delegate:(id<IUnifiedManagementDelegate>)delegate {
     if (self = [super init]) {
         _taskId = taskId;
         _taskType = taskType;
         _expectedDuration = expectedDuration;
         _delay = delay;
+        _position = position;
+        _delegate = delegate;
     }
     return self;
+}
+- (instancetype)initWithTaskId:(NSString *)taskId taskType:(YYUnifiedTaskType)taskType expectedDuration:(int)expectedDuration delay:(int)delay {
+    return [self initWithTaskId:taskId taskType:taskType expectedDuration:expectedDuration delay:delay position:YYUnifiedTaskShownPositionNone];
+}
+- (instancetype)initWithTaskId:(NSString *)taskId taskType:(YYUnifiedTaskType)taskType expectedDuration:(int)expectedDuration delay:(int)delay position:(YYUnifiedTaskShownPosition)position
+{
+    return [self initWithTaskId:taskId taskType:taskType expectedDuration:expectedDuration delay:delay position:position delegate:nil];
 }
 
 - (NSString *)taskId
@@ -35,22 +44,17 @@
 
 - (YYUnifiedTaskType)taskType
 {
-    return YYUnifiedTaskTypePopup;
+    return _taskType;
 }
 
-- (void)taskDidShow:(NSString *)taskId completion:(void (^)(BOOL))completion
+- (YYUnifiedTaskShownPosition)taskShownPosition
 {
-    NSLog(@"%s:taskId:%@", __func__, taskId);
+    return _position;
 }
 
-- (void)taskShouldDismiss:(NSString *)taskId completion:(void (^)(BOOL))completion
+- (id<IUnifiedManagementDelegate>)delegate
 {
-    NSLog(@"%s:taskId:%@", __func__, taskId);
-}
-
-- (void)taskHasDiscarded:(NSString *)taskId completion:(void (^)(BOOL))completion
-{
-    NSLog(@"%s:taskId:%@", __func__, taskId);
+    return _delegate;
 }
 
 - (int)expectedDuration
