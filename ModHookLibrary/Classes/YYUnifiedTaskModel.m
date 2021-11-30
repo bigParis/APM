@@ -18,8 +18,13 @@
 
 @end
 @implementation YYUnifiedTaskModel
+- (void)dealloc
+{
+    NSLog(@"%@--dealloc:%p", self, self);
+}
 - (instancetype)initWithTaskId:(NSString *)taskId taskType:(YYUnifiedTaskType)taskType expectedDuration:(int)expectedDuration delay:(int)delay position:(YYUnifiedTaskShownPosition)position delegate:(id<IUnifiedManagementDelegate>)delegate {
     if (self = [super init]) {
+        NSLog(@"%@--initWithTaskId:%p", self, self);
         _taskId = taskId;
         _taskType = taskType;
         _expectedDuration = expectedDuration;
@@ -59,11 +64,11 @@
 
 - (int)expectedDuration
 {
-    return self.expectedDuration;
+    return _expectedDuration;
 }
 
 - (int)delay
 {
-    return self.delay;
+    return _delay;
 }
 @end

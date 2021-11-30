@@ -9,13 +9,21 @@
 #import "BPTaskTestViewController.h"
 #import "YYUnifiedTaskManager.h"
 #import "YYUnifiedTaskModel.h"
+#import "BPTaskView.h"
 
 @interface BPTaskTestViewController ()<IUnifiedManagementDelegate>
+
 @property (nonatomic, strong) YYUnifiedTaskManager *taskMgr;
 @property (nonatomic, weak) UIButton *forceBtn;
 @property (nonatomic, weak) UIButton *notForceBtn;
 @property (nonatomic, weak) UIButton *bubbleBtn;
 @property (nonatomic, weak) UIButton *stopBtn;
+@property (nonatomic, weak) UIButton *immediatellyBtn;
+@property (nonatomic, strong) YYUnifiedTaskModel *tx;
+@property (nonatomic, strong) BPTaskView *topTipsView;
+@property (nonatomic, strong) BPTaskView *bottomTipsView;
+@property (nonatomic, weak) UIButton *topBubble;
+@property (nonatomic, weak) UIButton *bottomBubble;
 @end
 
 @implementation BPTaskTestViewController
@@ -26,20 +34,20 @@
     for (int i = 0; i < 10; ++i) {
         [tmp addObject:[NSString stringWithFormat:@"popup_task%@", @(i+1)]];
     }
-    [self.taskMgr removeTasks:tmp];
-//    [self.taskMgr removeCurrentTaskList];
+    [[YYUnifiedTaskManager sharedManager] removeTasks:tmp];
+//    [[YYUnifiedTaskManager sharedManager] removeCurrentTaskList];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    YYUnifiedTaskManager *mgr = [YYUnifiedTaskManager sharedManager];
+//    YYUnifiedTaskManager *mgr = [YYUnifiedTaskManager sharedManager];
 //    YYUnifiedTaskModel *t1 = [[YYUnifiedTaskModel alloc] initWithTaskId:@"popup_task1" taskType:YYUnifiedTaskTypeNone expectedDuration:10 delay:5];
-//    [mgr addTask:t1];
+//    [mgr addTask:t1 completion:nil];
 //
 //    YYUnifiedTaskModel *t2 = [[YYUnifiedTaskModel alloc] initWithTaskId:@"popup_task2" taskType:YYUnifiedTaskTypeNone expectedDuration:10 delay:9];
-//    [mgr addTask:t2];
-    
-    self.taskMgr = mgr;
+//    [mgr addTask:t2 completion:nil];
+////    self.tx = t1;
+//    [YYUnifiedTaskManager sharedManager] = mgr;
     [self initViews];
 }
 
@@ -76,21 +84,50 @@
     [bubbleBtn addTarget:self action:@selector(onBubbleClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:bubbleBtn];
     self.bubbleBtn = bubbleBtn;
+    
+    UIButton *immediatellyBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+    [immediatellyBtn setTitle:@"立即" forState:UIControlStateNormal];
+    [immediatellyBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
+    [immediatellyBtn setBackgroundColor:UIColor.cyanColor];
+    [immediatellyBtn addTarget:self action:@selector(onImmediatellyClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:immediatellyBtn];
+    self.immediatellyBtn = immediatellyBtn;
+    
+    UIButton *topBubble = [UIButton buttonWithType:UIButtonTypeSystem];
+    [topBubble setTitle:@"顶部气泡" forState:UIControlStateNormal];
+    [topBubble setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
+    [topBubble setBackgroundColor:UIColor.cyanColor];
+    [topBubble addTarget:self action:@selector(onTopBubbleClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:topBubble];
+    self.topBubble = topBubble;
+    
+    UIButton *bottomBubble = [UIButton buttonWithType:UIButtonTypeSystem];
+    [bottomBubble setTitle:@"底部气泡" forState:UIControlStateNormal];
+    [bottomBubble setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
+    [bottomBubble setBackgroundColor:UIColor.cyanColor];
+    [bottomBubble addTarget:self action:@selector(onBottomBubbleClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:bottomBubble];
+    self.bottomBubble = bottomBubble;
 }
 
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
     self.notForceBtn.frame = CGRectMake(0, 0, 120, 30);
-    self.notForceBtn.center = self.view.center;
+    self.notForceBtn.center = CGPointMake(self.view.center.x, 130);
     self.forceBtn.frame = CGRectMake(CGRectGetMinX(self.notForceBtn.frame), CGRectGetMaxY(self.notForceBtn.frame) + 10, 120, 30);
     self.stopBtn.frame = CGRectMake(CGRectGetMinX(self.notForceBtn.frame), CGRectGetMaxY(self.forceBtn.frame) + 10, 120, 30);
     self.bubbleBtn.frame = CGRectMake(CGRectGetMinX(self.notForceBtn.frame), CGRectGetMaxY(self.stopBtn.frame) + 10, 120, 30);
+    self.immediatellyBtn.frame = CGRectMake(CGRectGetMinX(self.notForceBtn.frame), CGRectGetMaxY(self.bubbleBtn.frame) + 10, 120, 30);
+    self.topBubble.frame = CGRectMake(CGRectGetMinX(self.notForceBtn.frame), CGRectGetMaxY(self.immediatellyBtn.frame) + 10, 120, 30);
+    self.bottomBubble.frame = CGRectMake(CGRectGetMinX(self.notForceBtn.frame), CGRectGetMaxY(self.topBubble.frame) + 10, 120, 30);
 }
 
 - (void)onStopClicked
 {
     NSLog(@"stop clicked");
+    [[YYUnifiedTaskManager sharedManager] removeTasks:@[@"bubble_task1"]];
+    [[YYUnifiedTaskManager sharedManager] removeTasks:@[@"bubble_task1"]];
 }
 
 - (void)onForceClicked
@@ -100,7 +137,7 @@
     NSString *taskId = [NSString stringWithFormat:@"popup_task%@", @(x)];
     NSLog(@"will add force:%@", taskId);
     YYUnifiedTaskModel *tx = [[YYUnifiedTaskModel alloc] initWithTaskId:taskId taskType:YYUnifiedTaskTypeNone expectedDuration:10 delay:3];
-    [self.taskMgr addTask:tx completion:nil];
+    [[YYUnifiedTaskManager sharedManager] addTask:tx completion:nil];
 }
 
 - (void)onNotForceClicked
@@ -110,7 +147,7 @@
     NSString *taskId = [NSString stringWithFormat:@"popup_task%@", @(y)];
     NSLog(@"will add not force:%@", taskId);
     YYUnifiedTaskModel *tx = [[YYUnifiedTaskModel alloc] initWithTaskId:taskId taskType:YYUnifiedTaskTypeNone expectedDuration:10 delay:3];
-    [self.taskMgr addTask:tx completion:nil];
+    [[YYUnifiedTaskManager sharedManager] addTask:tx completion:nil];
 }
 
 - (void)onBubbleClicked
@@ -120,13 +157,38 @@
     NSString *taskId = [NSString stringWithFormat:@"bubble_task%@", @(z)];
     NSLog(@"will add bubble:%@", taskId);
     if (z % 2) {
-        YYUnifiedTaskModel *tx = [[YYUnifiedTaskModel alloc] initWithTaskId:taskId taskType:YYUnifiedTaskTypeBubble expectedDuration:10 delay:3 position:YYUnifiedTaskShownPositionTop delegate:self];
-        [self.taskMgr addTask:tx completion:nil];
+        YYUnifiedTaskModel *tx = [[YYUnifiedTaskModel alloc] initWithTaskId:taskId taskType:YYUnifiedTaskTypeBubble expectedDuration:10 delay:0 position:YYUnifiedTaskShownPositionTop delegate:self];
+        [[YYUnifiedTaskManager sharedManager] addTask:tx completion:nil];
     } else {
-        YYUnifiedTaskModel *tx = [[YYUnifiedTaskModel alloc] initWithTaskId:taskId taskType:YYUnifiedTaskTypeBubble expectedDuration:10 delay:3 position:YYUnifiedTaskShownPositionBottom delegate:self];
-        [self.taskMgr addTask:tx completion:nil];
+        YYUnifiedTaskModel *tx = [[YYUnifiedTaskModel alloc] initWithTaskId:taskId taskType:YYUnifiedTaskTypeBubble expectedDuration:10 delay:0 position:YYUnifiedTaskShownPositionBottom delegate:self];
+        [[YYUnifiedTaskManager sharedManager] addTask:tx completion:nil];
     }
+}
+
+- (void)onImmediatellyClicked
+{
     
+}
+
+- (void)onTopBubbleClicked
+{
+    self.topTipsView = [[BPTaskView alloc] init];
+    __weak __typeof(self) weakSelf = self;
+    self.topTipsView.willShowBlock = ^{
+        weakSelf.topTipsView.frame = CGRectMake((weakSelf.view.bounds.size.width - 100) * 0.5, 60, 100, 20);
+    };
+    [self.topTipsView showInView:self.view position:YYBubblePostionTypeBottom duration:10 taskId:@"bubble_task1" expectedDelay:0 showImmediately:NO];
+}
+
+- (void)onBottomBubbleClicked
+{
+    self.bottomTipsView = [[BPTaskView alloc] init];
+    __weak __typeof(self) weakSelf = self;
+    self.bottomTipsView.willShowBlock = ^{
+        weakSelf.bottomTipsView.backgroundColor = UIColor.redColor;
+        weakSelf.bottomTipsView.frame = CGRectMake((weakSelf.view.bounds.size.width - 100) * 0.5, weakSelf.view.bounds.size.height - 60, 100, 20);
+    };
+    [self.bottomTipsView showInView:self.view position:YYBubblePostionTypeTop duration:10 taskId:@"bubble_task2" expectedDelay:5 showImmediately:NO];
 }
 
 - (void)taskShouldShow:(NSString *)taskId completion:(void (^)(BOOL))completion

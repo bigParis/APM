@@ -28,6 +28,8 @@
 		2FC966FF272A92E0008819D1 /* BPTemplateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC966FE272A92E0008819D1 /* BPTemplateVC.m */; };
 		2FC96702272A92F8008819D1 /* BPTemplateBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC96701272A92F8008819D1 /* BPTemplateBase.m */; };
 		2FC96705272A9314008819D1 /* BPTemplateSub.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC96704272A9313008819D1 /* BPTemplateSub.m */; };
+		2FD76E7E2754F85800C62981 /* BPTaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FD76E7D2754F85800C62981 /* BPTaskView.m */; };
+		2FD773232754F8D100C62981 /* YYBubbleTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FD773222754F8D100C62981 /* YYBubbleTask.m */; };
 		2FDB238D272F7C6D005DF5C5 /* BPMultiThreadSafeObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB238C272F7C6D005DF5C5 /* BPMultiThreadSafeObject.m */; };
 		2FDB2390272F7E99005DF5C5 /* BPMutableArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB238F272F7E99005DF5C5 /* BPMutableArray.m */; };
 		545F40E71056993860B1842C /* Pods_ModHookLibrary_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55595D1FDF89645129853311 /* Pods_ModHookLibrary_Example.framework */; };
@@ -105,6 +107,10 @@
 		2FC96701272A92F8008819D1 /* BPTemplateBase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPTemplateBase.m; sourceTree = "<group>"; };
 		2FC96703272A9313008819D1 /* BPTemplateSub.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPTemplateSub.h; sourceTree = "<group>"; };
 		2FC96704272A9313008819D1 /* BPTemplateSub.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPTemplateSub.m; sourceTree = "<group>"; };
+		2FD76E7C2754F85800C62981 /* BPTaskView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPTaskView.h; sourceTree = "<group>"; };
+		2FD76E7D2754F85800C62981 /* BPTaskView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPTaskView.m; sourceTree = "<group>"; };
+		2FD773212754F8D100C62981 /* YYBubbleTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYBubbleTask.h; sourceTree = "<group>"; };
+		2FD773222754F8D100C62981 /* YYBubbleTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYBubbleTask.m; sourceTree = "<group>"; };
 		2FDB238B272F7C6D005DF5C5 /* BPMultiThreadSafeObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPMultiThreadSafeObject.h; sourceTree = "<group>"; };
 		2FDB238C272F7C6D005DF5C5 /* BPMultiThreadSafeObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPMultiThreadSafeObject.m; sourceTree = "<group>"; };
 		2FDB238E272F7E99005DF5C5 /* BPMutableArray.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPMutableArray.h; sourceTree = "<group>"; };
@@ -180,8 +186,12 @@
 		2F102B822720726F00433099 /* TaskManager */ = {
 			isa = PBXGroup;
 			children = (
+				2FD773212754F8D100C62981 /* YYBubbleTask.h */,
+				2FD773222754F8D100C62981 /* YYBubbleTask.m */,
 				2F102B832720728900433099 /* BPTaskTestViewController.h */,
 				2F102B842720728900433099 /* BPTaskTestViewController.m */,
+				2FD76E7C2754F85800C62981 /* BPTaskView.h */,
+				2FD76E7D2754F85800C62981 /* BPTaskView.m */,
 			);
 			path = TaskManager;
 			sourceTree = "<group>";
@@ -626,12 +636,14 @@
 				2FC64FCB27353C3D0006DE6C /* BPMemoryTestVC.m in Sources */,
 				2FA90D7C2727A2520099A3F0 /* BPMultiThreadVC.m in Sources */,
 				2F102B8D272073AC00433099 /* BPPodLibraryTestViewController.m in Sources */,
+				2FD76E7E2754F85800C62981 /* BPTaskView.m in Sources */,
 				2F7D7DCD2721B460003EEE74 /* BPPointArrayMgr.m in Sources */,
 				6003F5A7195388D20070C39A /* BPViewController.m in Sources */,
 				2F102B892720731600433099 /* BPAPMTestViewController.m in Sources */,
 				2FC96705272A9314008819D1 /* BPTemplateSub.m in Sources */,
 				2F102B902720779E00433099 /* BPTableViewCell.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				2FD773232754F8D100C62981 /* YYBubbleTask.m in Sources */,
 				2F7D7DD02721B586003EEE74 /* BPPointerModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

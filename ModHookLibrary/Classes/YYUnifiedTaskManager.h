@@ -6,28 +6,44 @@
 //  Copyright © 2021 YY.inc. All rights reserved.
 
 #import <Foundation/Foundation.h>
-#import "IUnifiedManagementProtocol.h"
-#ifdef YY
-#import "YYSharedInstanceDefine.h"
-#endif
-NS_ASSUME_NONNULL_BEGIN
+#import "IYYUnifiedTaskManagerProtocol.h"
 
-@interface YYUnifiedTaskManager : NSObject
-#ifdef YY
-YYSharedInstance_HEADER(YYUnifiedTaskManager);
-#else
-+ (instancetype)sharedManager;
-#endif
-/// 触发气泡、弹窗、蒙层后，先将任务放入队列，并在taskDidShowBlock实现展示逻辑
-/// 可不判断是否登录、不用处理延时、不用处理是否新用户【控制中心会统一处理】
-/// 需要主线程调用 completion taskId == nil说明添加失败了
-- (void)addTask:(id<IUnifiedManagementProtocol>)task completion:(void(^)(NSString *taskId))completion;
-/// 删除队列中已有的任务，如果生命周期提前结束，会自动释放
-- (void)removeTasks:(NSArray<NSString *> *)taskIds;
-/// 用户手动触发关闭，调用这个接口结束任务，并在taskShouldDismissBlock实现关闭逻辑，此任务可不再remove
-- (BOOL)manualFinishTask:(NSString *)taskId;
-/// 是否可以添加到任务队列
-- (BOOL)canAddTask:(id<IUnifiedManagementProtocol>)task;
+@interface YYUnifiedTaskConfigItem : NSObject
+
+@property (nonatomic, assign) BOOL isManual;
+@property (nonatomic, assign) BOOL isForce;
+@property (nonatomic, assign) int priorty;
+@property (nonatomic, assign) int duration; // 展示时长
+@property (nonatomic, assign) int stay;
+@property (nonatomic, assign) BOOL needLogin;
+@property (nonatomic, assign) int roomLimit;
+@property (nonatomic, assign) int todayLimit;
+@property (nonatomic, assign) int totalLimit;
+@property (nonatomic, copy) NSString *taskId;
+@property (nonatomic, assign) YYUnifiedTaskType taskType;
+
 @end
 
-NS_ASSUME_NONNULL_END
+@interface YYUnifiedTaskStorageSidItem : NSObject
+
+@property (nonatomic, assign) int roomTimes;
+@property (nonatomic, assign) NSTimeInterval lastUpdateTime;
+
+@end
+
+
+@interface YYUnifiedTaskStorageModel : NSObject
+
+@property (nonatomic, strong) NSDictionary<NSNumber *, YYUnifiedTaskStorageSidItem *> *storageSidMap;
+@property (nonatomic, assign) int todayTimes;
+@property (nonatomic, assign) int totalTimes;
+@property (nonatomic, assign) NSTimeInterval lastUpdateTime;
+@property (nonatomic, copy) NSString *taskId;
+
+@end
+
+@interface YYUnifiedTaskManager : NSObject<IYYUnifiedTaskManagerProtocol>
+
++ (instancetype)sharedManager;
+
+@end

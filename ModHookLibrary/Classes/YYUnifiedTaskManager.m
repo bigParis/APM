@@ -6,19 +6,38 @@
 //
 
 #import "YYUnifiedTaskManager.h"
-//#import <yymediatorsdk/YYCoresService.h>
-//#import <yymediatorInterface/IAuthCore.h>
-//#import <yymediatorInterface/AuthClient.h>
-//#import <yymediatorInterface/ChannelCoreClient.h>
-//#import <yymediatorInterface/IChannelCore.h>
-//#import <yybaseapisdk/YYLogger.h>
 #import <YYModel/YYModel.h>
-//#import "YYWeakTimer.h"
-//#import "YYUserDefaults.h"
 #import "NSDate+Util.h"
+#define YYEnv 0
+#if YYEnv
+#import <yymediatorsdk/YYCoresService.h>
+#import <yymediatorInterface/IAuthCore.h>
+#import <yymediatorInterface/AuthClient.h>
+#import <yymediatorInterface/ChannelCoreClient.h>
+#import <yymediatorInterface/IChannelCore.h>
+#import <yybaseapisdk/YYLogger.h>
+#import <yybaseapisdk/BaseApiSDK_Macro.h>
+#import <yybaseapisdk/YYModuleEnvironment.h>
+#import <yybaseapisdk/YYHttpClient.h>
+#import <yybaseapisdk/NSDictionary+Safe.h>
+#import <yybaseapisdk/YYUserDefaultsDefine.h>
+#import <yybaseapisdk/YYWeakTimer.h>
+#import <yybaseapisdk/YYUserDefaults.h>
+#import "IYYUnifiedTaskManagerProtocol.h"
+#else
+#define safetyCallblock(block, ...) if((block)) { block(__VA_ARGS__); }
+#endif
 static NSString * const kTag = @"YYUnifiedTaskManager";
 static NSString * const kYYUnifiedTaskStorageSuffix = @"UnifiedTaskStorage";
-#define safetyCallblock(block, ...) if((block)) { block(__VA_ARGS__); }
+static NSString * const kYYUnifiedTaskConfigStorage = @"UnifiedTaskConfigStorage";
+
+#if YYEnv
+#define CHANNEL_SID CHANNEL_SID
+#define USER_ID [YYGetCoreI(IAuthCore) getUserId]
+#else
+#define CHANNEL_SID 123
+#define USER_ID 0001
+#endif
 
 typedef NS_ENUM(NSUInteger, YYUnifiedTaskStatus) {
     YYUnifiedTaskStatusNone,
@@ -31,21 +50,6 @@ typedef NS_ENUM(NSUInteger, YYUnifiedTaskStatus) {
     YYUnifiedTaskStatusFinished,
 };
 
-@interface YYUnifiedTaskConfigItem : NSObject
-
-@property (nonatomic, assign) BOOL isManual;
-@property (nonatomic, assign) BOOL isForce;
-@property (nonatomic, assign) int priorty;
-@property (nonatomic, assign) int duration; // 展示时长
-@property (nonatomic, assign) int stay;
-@property (nonatomic, assign) BOOL needLogin;
-@property (nonatomic, assign) int roomLimit;
-@property (nonatomic, assign) int todayLimit;
-@property (nonatomic, assign) int totalLimit;
-@property (nonatomic, copy) NSString *taskId;
-
-@end
-
 @implementation YYUnifiedTaskConfigItem
 
 @end
@@ -57,7 +61,11 @@ typedef NS_ENUM(NSUInteger, YYUnifiedTaskStatus) {
 @end
 
 @implementation YYUnifiedTaskConfigData
-
++ (NSDictionary *)modelContainerPropertyGenericClass
+{
+    return @{@"itemsArray" : [YYUnifiedTaskConfigItem class],
+             };
+}
 @end
 
 @interface YYUnifiedTaskConfig: NSObject
@@ -80,7 +88,7 @@ typedef NS_ENUM(NSUInteger, YYUnifiedTaskStatus) {
 @property (nonatomic, strong) YYUnifiedTaskInfo *preTask;
 @property (nonatomic, strong) YYUnifiedTaskInfo *nextTask;
 @property (nonatomic, strong) YYUnifiedTaskConfigItem *itemConfig;
-#ifdef YY
+#if YYEnv
 @property (nonatomic, strong) YYWeakTimer *showTimer;
 #else
 @property (nonatomic, strong) NSTimer *showTimer;
@@ -101,30 +109,16 @@ typedef NS_ENUM(NSUInteger, YYUnifiedTaskStatus) {
 
 @end
 
-@interface YYUnifiedTaskStorageSidItem : NSObject
-
-@property (nonatomic, assign) int todayTimes;
-@property (nonatomic, assign) int totalTimes;
-@property (nonatomic, assign) int roomTimes;
-@property (nonatomic, assign) NSTimeInterval lastUpdateTime;
-
-@end
-
 @implementation YYUnifiedTaskStorageSidItem
 
 @end
 
-@interface YYUnifiedTaskStorageModel : NSObject
-
-@property (nonatomic, strong) YYUnifiedTaskStorageSidItem *item;
-@property (nonatomic, strong) NSNumber *sid;
-@property (nonatomic, copy) NSString *taskId;
-
-@end
-
-
 @implementation YYUnifiedTaskStorageModel
-
++ (NSDictionary *)modelContainerPropertyGenericClass
+{
+    return @{@"storageSidMap" : [YYUnifiedTaskStorageSidItem class],
+             };
+}
 @end
 
 @interface YYUnifiedTaskManager ()
@@ -134,17 +128,18 @@ typedef NS_ENUM(NSUInteger, YYUnifiedTaskStatus) {
 @property (nonatomic, strong) YYUnifiedTaskInfo *currentDialogTaskInfo;
 @property (nonatomic, strong) YYUnifiedTaskInfo *currentBubbleTopTaskInfo;
 @property (nonatomic, strong) YYUnifiedTaskInfo *currentBubbleBottomTaskInfo;
+#if YYEnv
+@property (nonatomic, strong) YYWeakTimer *timer;
+#else
 @property (nonatomic, strong) NSTimer *timer;
-@property (nonatomic, strong) NSTimer *showTimer;
+#endif
 @property (nonatomic, copy) NSArray<YYUnifiedTaskStorageModel *> *savedModels;
 @property (nonatomic, strong) NSMutableArray *pendingTasks;
 
 @end
 
 @implementation YYUnifiedTaskManager
-#ifdef YY
-YYSharedInstance_IMPLEMENTATION(YYUnifiedTaskManager);
-#else
+
 + (instancetype)sharedManager
 {
     static YYUnifiedTaskManager *instance = nil;
@@ -157,96 +152,25 @@ YYSharedInstance_IMPLEMENTATION(YYUnifiedTaskManager);
     }
     return instance;
 }
-#endif
 
 - (instancetype)init
 {
     if (self = [super init]) {
         [self p_configManager];
-        [self p_loadLocalStorage];
-#ifdef DEBUG
-        [self p_initTestData];
         [self p_queryConfig];
         [self p_initTimer];
+        [self p_initTestData];
+#if !OFFICIAL_RELEASE
+        [self p_loadLocalStorage];
 #endif
     }
     return self;
 }
 
-- (void)p_configManager
-{
-#ifdef YY
-    AddCoreClient(AuthClient, self);
-    AddCoreClient(ChannelCoreClient, self);
-#endif
-}
-
-- (void)p_loadLocalStorage
-{
-    NSArray *savedData = nil;
-#ifdef YY
-    savedData = [YYUserDefaults objectForKey:[NSString stringWithFormat:@"%@_%@", @([YYGetCoreI(IAuthCore) getUserId]), kYYUnifiedTaskStorageSuffix] forModule:YYUserDefaults_UnifiedTask];
-#else
-    savedData = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_%@", @(123), kYYUnifiedTaskStorageSuffix]];
-#endif
-    NSArray <YYUnifiedTaskStorageModel *> *models = [NSArray yy_modelArrayWithClass:YYUnifiedTaskStorageModel.class json:savedData];
-    self.savedModels = models;
-    
-    [self p_refreshTodayTimes];
-}
-
-- (void)p_refreshTodayTimes
-{
-    if (nil == self.savedModels) {
-        return;
-    }
-    
-    BOOL changed = NO;
-    for (int i = 0; i < self.savedModels.count; ++i) {
-        YYUnifiedTaskStorageModel *model = self.savedModels[i];
-        NSDate *lastDate = [NSDate dateWithTimeIntervalSince1970:model.item.lastUpdateTime];
-        if (![lastDate yy_isToday]) {
-            model.item.lastUpdateTime = [[NSDate date] timeIntervalSince1970];
-            model.item.todayTimes = 0;
-            changed = YES;
-        }
-    }
-    
-    if (changed) {
-        [self p_updateDatas];
-    }
-}
-
-- (void)p_updateDatas
-{
-    if (nil == self.savedModels) {
-        return;
-    }
-    NSArray *savedData = [self.savedModels yy_modelToJSONObject];
-#ifdef YY
-    [YYUserDefaults setObject:savedData forKey:[NSString stringWithFormat:@"%@_%@", @([YYGetCoreI(IAuthCore) getUserId]), kYYUnifiedTaskStorageSuffix] forModule:YYUserDefaults_UnifiedTask];
-#else
-    [[NSUserDefaults standardUserDefaults] setObject:savedData forKey:[NSString stringWithFormat:@"%@_%@", @(123), kYYUnifiedTaskStorageSuffix]];
-#endif
-}
-
-#ifdef YY
-#pragma mark - AuthClient
-- (void)onCurrentAccountChanged:(UserID)newUserId
-{
-    [self removeTasksWithLoginNeed];
-}
-
-#pragma mark - ChannelCoreClient
-- (void)onChannelWillChanged:(id<IChannelDetailInfo>)info
-{
-    [self removeTaskWithChannelNeed];
-}
-#endif
 
 - (void)p_initTestData
 {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         NSMutableArray *tempArray = [@[] mutableCopy];
         for (int i = 0; i < 100; ++i) {
             YYUnifiedTaskConfigItem *item = [[YYUnifiedTaskConfigItem alloc] init];
@@ -254,7 +178,7 @@ YYSharedInstance_IMPLEMENTATION(YYUnifiedTaskManager);
             item.isForce = (i+1) % 2;
             item.priorty = i+1;
             item.duration = 10;
-            item.stay = 5;
+            item.stay = 0;
             item.roomLimit = 90;
             item.todayLimit = 100;
             item.totalLimit = 1000;
@@ -280,83 +204,217 @@ YYSharedInstance_IMPLEMENTATION(YYUnifiedTaskManager);
     });
 }
 
+
+- (void)p_configManager
+{
+#if YYEnv
+    AddCoreClient(AuthClient, self);
+    AddCoreClient(ChannelCoreClient, self);
+#endif
+}
+
+- (void)p_loadLocalStorage
+{
+    NSArray *savedData = [self p_objectForKey:[NSString stringWithFormat:@"%@_%@", @(USER_ID), kYYUnifiedTaskStorageSuffix]];
+    NSArray <YYUnifiedTaskStorageModel *> *models = [NSArray yy_modelArrayWithClass:YYUnifiedTaskStorageModel.class json:savedData];
+    self.savedModels = models;
+    
+    [self p_refreshTodayTimes];
+}
+
+- (void)p_refreshTodayTimes
+{
+    if (nil == self.savedModels) {
+        return;
+    }
+    
+    BOOL changed = NO;
+    for (int i = 0; i < self.savedModels.count; ++i) {
+        YYUnifiedTaskStorageModel *model = self.savedModels[i];
+        NSDate *lastDate = [NSDate dateWithTimeIntervalSince1970:model.lastUpdateTime];
+        if (![lastDate yy_isToday]) {
+            model.lastUpdateTime = [[NSDate date] timeIntervalSince1970];
+            model.todayTimes = 0;
+            changed = YES;
+        }
+    }
+    
+    if (changed) {
+        [self p_updateDatas];
+    }
+}
+
+- (void)p_updateDatas
+{
+    if (nil == self.savedModels) {
+        return;
+    }
+    NSArray *savedData = [self.savedModels yy_modelToJSONObject];
+#if YYEnv
+    [YYUserDefaults setObject:savedData forKey:[NSString stringWithFormat:@"%@_%@", @(USER_ID), kYYUnifiedTaskStorageSuffix] forModule:YYUserDefaults_UnifiedTask];
+#else
+    [[NSUserDefaults standardUserDefaults] setObject:savedData forKey:[NSString stringWithFormat:@"%@_%@", @(USER_ID), kYYUnifiedTaskStorageSuffix]];
+#endif
+}
+
+#if YYEnv
+#pragma mark - AuthClient
+- (void)onCurrentAccountChanged:(UserID)newUserId
+{
+    [self removeTasksWithLoginNeed];
+}
+
+#pragma mark - ChannelCoreClient
+- (void)onChannelWillChanged:(id<IChannelDetailInfo>)info
+{
+    if (CHANNEL_SID != info.sid
+        || YYGetCoreI(IChannelCore).currentChannelInfo.topSid != info.topSid) {
+        [self removeTaskWithChannelNeed];
+    }
+}
+#endif
+
 - (void)p_queryConfig
 {
-#ifdef YY
+#if YYEnv
     WEAKIFYSELF;
     [[YYHttpClient sharedClient] GET:[self p_taskConfigURL] parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        [self info:kTag message:@"query config success %@", responseObject];
+        [_weak_self info:kTag message:@"bubble query config success %@", responseObject];
         NSDictionary *responseDict = (NSDictionary *)responseObject;
         [_weak_self p_processConfigData:responseDict];
     } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error) {
-        [self error:kTag message:@"query config failed %@", error];
+        [_weak_self error:kTag message:@"query config failed %@", error];
+        [_weak_self p_processConfigDataByUseLocalData];
     }];
 #endif
 }
 
+- (void)p_processConfigDataByUseLocalData
+{
+    NSDictionary *savedData = [self p_objectForKey:kYYUnifiedTaskConfigStorage];
+    YYUnifiedTaskConfig *config = [YYUnifiedTaskConfig yy_modelWithJSON:savedData];
+    self.taskConfigMap[@"bubble"] = config;
+    [self p_callbackPendingTasks];
+}
+
+- (void)p_loadLocalConfigData
+{
+    NSArray *savedData = [self p_objectForKey:[NSString stringWithFormat:@"%@_%@", @(USER_ID), kYYUnifiedTaskStorageSuffix]];
+    NSArray <YYUnifiedTaskStorageModel *> *models = [NSArray yy_modelArrayWithClass:YYUnifiedTaskStorageModel.class json:savedData];
+    self.savedModels = models;
+    
+    [self p_refreshTodayTimes];
+}
+
 - (void)p_processConfigData:(NSDictionary *)responseDict
 {
-#ifdef YY
+#if YY_Env
     NSDictionary *data = [responseDict dictionaryForKey:@"data" or:nil];
-    NSArray *bubbleArray = [data arrayForKey:@"bubble" or:nil];
+    NSArray *bubbleArray = [data arrayForKey:@"bubbleStandards" or:nil];
     
     NSMutableArray *tempArray = [@[] mutableCopy];
     for (int i = 0; i < bubbleArray.count; ++i) {
         YYUnifiedTaskConfigItem *item = [[YYUnifiedTaskConfigItem alloc] init];
         NSDictionary *dict = bubbleArray[i];
-        NSNumber *taskIdNum = [dict numberForKey:@"id" or:@(0)];
-        item.taskId = [NSString stringWithFormat:@"%@", taskIdNum];
-        item.duration = [[dict numberForKey:@"duration" or:@(0)] intValue];
+        item.taskId = [dict stringForKey:@"standardCode" or:nil];
+        item.duration = [[dict numberForKey:@"largestShowTime" or:@(0)] intValue];
+        item.taskType = YYUnifiedTaskTypeBubble;
+        item.totalLimit = -1;
+        item.todayLimit = -1;
+        item.roomLimit = -1;
         [tempArray addObject:item];
     }
     
     YYUnifiedTaskConfigData *dataConfig = [[YYUnifiedTaskConfigData alloc] init];
     dataConfig.itemsArray = [tempArray copy];
-    
+    YYUnifiedTaskConfig *config = [self p_createUnifiedConfig:dataConfig];
+    self.taskConfigMap[@"bubble"] = config;
+    [self p_callbackPendingTasks];
+    NSDictionary *savedData = [config yy_modelToJSONObject];
+    [self p_setObject:savedData forKey:kYYUnifiedTaskConfigStorage];
+#endif
+}
+
+- (nullable id)p_objectForKey:(NSString *)defaultName
+{
+#if YYEnv
+    return [YYUserDefaults objectForKey:[NSString stringWithFormat:defaultName forModule:YYUserDefaults_UnifiedTask];
+#else
+    return [[NSUserDefaults standardUserDefaults] objectForKey:defaultName];
+#endif
+}
+
+- (void)p_setObject:(nullable id)value forKey:(NSString *)defaultName
+{
+#if YYEnv
+    [YYUserDefaults setObject:value forKey:defaultName forModule:YYUserDefaults_UnifiedTask];
+#else
+    [[NSUserDefaults standardUserDefaults] setObject:value forKey:defaultName];
+#endif
+}
+
+- (YYUnifiedTaskConfig *)p_createUnifiedConfig:(YYUnifiedTaskConfigData *)dataConfig
+{
     YYUnifiedTaskConfig *config = [[YYUnifiedTaskConfig alloc] init];
     config.configData = dataConfig;
     config.taskType = YYUnifiedTaskTypeBubble;
-//    config.taskGap = 5000;
-    
-    self.taskConfigMap[@"bubble"] = config;
-#endif
+    return config;
+}
+
+- (void)p_callbackPendingTasks
+{
+    if (self.pendingTasks.count != 0) {
+        for (int i = 0; i < self.pendingTasks.count; ++i) {
+            dispatch_block_t block = self.pendingTasks[i];
+            block();
+        }
+        [self.pendingTasks removeAllObjects];
+    }
 }
 
 - (NSString *)p_taskConfigURL
 {
     NSString *serverDomain = [self p_serverDomain];
-    return [NSString stringWithFormat:@"%@/material/standard", serverDomain];
+    return [NSString stringWithFormat:@"%@/standard/all", serverDomain];
 }
 
 - (NSString *)p_serverDomain
 {
     NSString *serverDomain;
-    
-#ifdef YY
-#if OFFICIAL_RELEASE
-    serverDomain = @"https://cfg-material.yy.com";
+#if YYEnv
+    #if OFFICIAL_RELEASE
+        serverDomain = @"https://mob-standard.yy.com";
+    #else
+        if ([[YYModuleEnvironment sharedObject] isTestServer]) {
+            serverDomain = @"https://test-mob-standard.yy.com";
+        } else {
+            serverDomain = @"https://mob-standard.yy.com";
+        }
+    #endif
 #else
-    if ([[YYModuleEnvironment sharedObject] isTestServer]) {
-        serverDomain = @"https://test-cfg-material.yy.com";
-    } else {
-        serverDomain = @"https://cfg-material.yy.com";
-    }
-#endif
-#else
-    serverDomain = @"https://test-cfg-material.yy.com";
+    serverDomain = @"https://test-mob-standard.yy.com";
 #endif
     return serverDomain;
 }
+
 - (void)p_initTimer
 {
-#ifdef YY
+#if YYEnv
     self.timer = [YYWeakTimer scheduledTimerToMainQueueWithTimeInterval:1.f target:self selector:@selector(onTimePassedOneSecond) userInfo:nil repeats:YES];
-#endif
+#else
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(onTimePassedOneSecond) userInfo:nil repeats:YES];
+#endif
 }
 
 - (void)onTimePassedOneSecond
 {
+    [self.taskArray addPointer:NULL];
+    [self.taskArray compact];
+    if (self.taskArray.count == 0) {
+        [self info:kTag message:@"no task now, stop timer"];
+        [self.timer invalidate];
+        self.timer = nil;
+    }
 //    [self p_handleDialogTask];
     [self p_handleBubbleTask];
 }
@@ -388,7 +446,7 @@ YYSharedInstance_IMPLEMENTATION(YYUnifiedTaskManager);
     } else {
         NSString *topTaskId = self.currentBubbleTopTaskInfo.task.taskId;
         NSString *bottomTaskId = self.currentBubbleBottomTaskInfo.task.taskId;
-        [self info:kTag message:@"current topTaskId:%@, bottomTaskId:%@", topTaskId, bottomTaskId];
+        [self info:kTag message:@"current queue:%@, topTaskId:%@, bottomTaskId:%@", [self p_getQueueTaskString], topTaskId, bottomTaskId];
     }
 }
 
@@ -408,7 +466,7 @@ YYSharedInstance_IMPLEMENTATION(YYUnifiedTaskManager);
     if (self.currentDialogTaskInfo == nil) {
         [self info:kTag message:@"no task now, show task now:%@", taskInfo.task.taskId];
         taskInfo.taskStatus = YYUnifiedTaskStatusExecuting;
-        [taskInfo.task.delegate taskShouldShow:taskInfo.task.taskId completion:^(BOOL finished) {
+        [taskInfo.task.delegate taskShouldShow:taskInfo.task.taskId showInview:taskInfo.task.taskShowInview completion:^(BOOL finished) {
             taskInfo.taskStatus = YYUnifiedTaskStatusExecuted;
         }];
         [self p_startShowTimer:taskInfo];
@@ -436,7 +494,7 @@ YYSharedInstance_IMPLEMENTATION(YYUnifiedTaskManager);
             // 强制, 需要叠加展示
             self.currentDialogTaskInfo.taskStatus = YYUnifiedTaskStatusExecutingBehind;
             taskInfo.taskStatus = YYUnifiedTaskStatusExecuting;
-            [taskInfo.task.delegate taskShouldShow:taskInfo.task.taskId completion:^(BOOL finished) {
+            [taskInfo.task.delegate taskShouldShow:taskInfo.task.taskId showInview:taskInfo.task.taskShowInview completion:^(BOOL finished) {
                 taskInfo.taskStatus = YYUnifiedTaskStatusExecuted;
             }];
             [self p_startShowTimer:taskInfo];
@@ -468,9 +526,9 @@ YYSharedInstance_IMPLEMENTATION(YYUnifiedTaskManager);
             [self p_showBubbleNow:taskInfo atPosition:YYUnifiedTaskShownPositionBottom];
             return;
         }
-        if (self.currentBubbleTopTaskInfo != nil) {
+        if (self.currentBubbleBottomTaskInfo != nil) {
             // 当前有气泡显示，直接丢弃
-            [self info:kTag message:@"showing bubble %@", self.currentBubbleTopTaskInfo.task.taskId];
+            [self info:kTag message:@"showing bubble %@", self.currentBubbleBottomTaskInfo.task.taskId];
             [self p_discardBubble:taskInfo];
         }
     }
@@ -480,7 +538,29 @@ YYSharedInstance_IMPLEMENTATION(YYUnifiedTaskManager);
 {
     [self info:kTag message:@"no task now, show task now:%@ atPosition:%@", taskInfo.task.taskId, @(atPosition)];
     taskInfo.taskStatus = YYUnifiedTaskStatusExecuting;
-    [taskInfo.task.delegate taskShouldShow:taskInfo.task.taskId completion:^(BOOL finished) {
+    if (taskInfo.task.delegate == nil) {
+        [self error:kTag message:@"task:%@ can not show because no delegate, maybe caused by use weak reference", taskInfo.task.taskId];
+//        return;
+    }
+    
+    if ([taskInfo.task respondsToSelector:@selector(postConditionSatisfiedBlock:)]) {
+        YYUnifiedTaskConditionSatisfiedBlcok satisfiedBlock = [taskInfo.task postConditionSatisfiedBlock:taskInfo.task.taskId];
+        if (satisfiedBlock) {
+            BOOL satisfied = satisfiedBlock(taskInfo.task.taskId);
+            if (!satisfied) {
+                [self info:kTag message:@"%@ post condition not satisfied", taskInfo.task.taskId];
+                if ([taskInfo.task.delegate respondsToSelector:@selector(taskHasDiscarded:reason:completion:)]) {
+                    [taskInfo.task.delegate taskHasDiscarded:taskInfo.task.taskId reason:YYUnifiedTaskDiscardReasonPostConditionNotSatisfied completion:nil];
+                    [self p_removeTask:taskInfo.task.taskId];
+                    return;
+                }
+            } else {
+                [self info:kTag message:@"%@ post condition satisfied", taskInfo.task.taskId];
+            }
+        }
+    }
+    
+    [taskInfo.task.delegate taskShouldShow:taskInfo.task.taskId showInview:taskInfo.task.taskShowInview completion:^(BOOL finished) {
         taskInfo.taskStatus = YYUnifiedTaskStatusExecuted;
     }];
     
@@ -491,12 +571,14 @@ YYSharedInstance_IMPLEMENTATION(YYUnifiedTaskManager);
         self.currentBubbleBottomTaskInfo = taskInfo;
     }
     
-//    [self p_addTaskExposureTime:taskInfo.task.taskId];
+    [self info:kTag message:@"remove task from queue when executed"];
     if (YYUnifiedTaskShownPositionTop == atPosition) {
         [self p_removeTask:self.currentBubbleTopTaskInfo.task.taskId];
     } else if (YYUnifiedTaskShownPositionBottom == atPosition) {
         [self p_removeTask:self.currentBubbleBottomTaskInfo.task.taskId];
     }
+    
+    [self p_addTaskExposureTime:taskInfo.task.taskId];
 }
 
 - (void)p_discardBubble:(YYUnifiedTaskInfo *)taskInfo
@@ -512,9 +594,7 @@ YYSharedInstance_IMPLEMENTATION(YYUnifiedTaskManager);
 - (YYUnifiedTaskInfo *)findATaskWhenTimePassOneSecond:(YYUnifiedTaskType)taskType
 {
     NSMutableArray *tempArray = [@[] mutableCopy];
-    [self.taskArray addPointer:NULL];
-    [self.taskArray compact];
-    for (int i = 0; i< self.taskArray.count; ++i) {
+    for (int i = 0; i < self.taskArray.count; ++i) {
         YYUnifiedTaskInfo *taskInfo = [self.taskArray pointerAtIndex:i];
         if (taskInfo.taskRemainTimeSec > 0) {
             taskInfo.taskRemainTimeSec--;
@@ -541,7 +621,12 @@ YYSharedInstance_IMPLEMENTATION(YYUnifiedTaskManager);
 
 - (BOOL)canAddTask:(id<IUnifiedManagementProtocol>)task
 {
+    if (![task respondsToSelector:@selector(needImmediatelyShow)] || !task.needImmediatelyShow) {
+        return YES;
+    }
+    
     if (self.taskArray.count != 0) {
+        [self info:kTag message:@"current queue not empty, count:%@", @(self.taskArray.count)];
         return NO;
     }
     
@@ -574,21 +659,39 @@ YYSharedInstance_IMPLEMENTATION(YYUnifiedTaskManager);
             [self addTask:task completion:completion];
         };
         [self.pendingTasks addObject:block];
+        return;
+    }
+    
+    if (![self canAddTask:task]) {
+        [self info:kTag message:@"task need show immediately, but current queue is not empty or a task showing now, discard it:%@", task.taskId];
         safetyCallblock(completion, nil);
         return;
     }
     
+    if ([task respondsToSelector:@selector(preConditionSatisfiedBlock:)]) {
+        YYUnifiedTaskConditionSatisfiedBlcok satisfiedBlock = [task preConditionSatisfiedBlock:task.taskId];
+        if (satisfiedBlock) {
+            BOOL satisfied = satisfiedBlock(task.taskId);
+            if (!satisfied) {
+                [self p_postError:task reason:YYUnifiedTaskAddFailReasonPreConditionNotSatisfied msg:[NSString stringWithFormat:@"pre condition not satisfied for task:%@", task.taskId]];
+                safetyCallblock(completion, nil);
+                return;
+            } else {
+                [self info:kTag message:@"%@ pre condition satisfied", task.taskId];
+            }
+        }
+    }
     YYUnifiedTaskConfigItem *itemConfig = [self p_configItemForTaskId:task.taskId taskType:task.taskType];
         
     if (!itemConfig) {
-        [self p_postError:task reason:YYUnifiedTaskAddFailReasonTaskNotConfig msg:[NSString stringWithFormat:@"config not exist for task:%@", task.taskId]];
+        [self p_postError:task reason:YYUnifiedTaskAddFailReasonTaskNotConfig msg:[NSString stringWithFormat:@"config not exist for task:%@, add task failed", task.taskId]];
         safetyCallblock(completion, nil);
         return;
     }
     
     YYUnifiedTaskAddFailReason reason = [self p_conditionsSatisfied:itemConfig];
     if (YYUnifiedTaskAddFailReasonNone != reason) {
-        [self p_postError:task reason:reason msg:[NSString stringWithFormat:@"config not exist for task:%@", task.taskId]];
+        [self p_postError:task reason:reason msg:[NSString stringWithFormat:@"conditions Satisfied for task:%@", task.taskId]];
         safetyCallblock(completion, nil);
         return;
     }
@@ -609,8 +712,9 @@ YYSharedInstance_IMPLEMENTATION(YYUnifiedTaskManager);
         taskInfo.taskRemainTimeSec = itemConfig.stay != 0 ? itemConfig.stay : taskExpectedDelay;
         taskInfo.itemConfig = itemConfig;
         [self.taskArray addPointer:(__bridge void * _Nullable)taskInfo];
-        [self info:kTag message:@"addTask:%@", task.taskId];
+        [self info:kTag message:@"addTask:%@(%@), taskType:%@, triggerTime:%@", task.taskId, task, @(task.taskType), @(taskInfo.taskRemainTimeSec)];
         taskInfo.taskStatus = YYUnifiedTaskStatusAdded;
+        [self p_initTimer];
         safetyCallblock(completion, task.taskId);
     }
 }
@@ -648,26 +752,43 @@ YYSharedInstance_IMPLEMENTATION(YYUnifiedTaskManager);
 
 - (BOOL)manualFinishTask:(NSString *)taskId
 {
-    if (![self.currentDialogTaskInfo.task.taskId isEqualToString:taskId]) {
-        [self error:kTag message:@"the task you want finish is not executing now"];
-        return NO;
+    YYUnifiedTaskInfo *taskInfo = nil;
+    YYUnifiedTaskConfigItem *config = [self p_configItemForTaskId:taskId taskType:YYUnifiedTaskTypeNone];
+    if (YYUnifiedTaskTypePopup == config.taskType) {
+        if (![self.currentDialogTaskInfo.task.taskId isEqualToString:taskId]) {
+            [self error:kTag message:@"the task you want finish is not executing now:%@", taskId];
+            return NO;
+        } else {
+            taskInfo = self.currentDialogTaskInfo;
+        }
+        
+        if (!config.isManual) {
+            [self error:kTag message:@"the task you want finish is not manual task"];
+            return NO;
+        }
+    } else if (YYUnifiedTaskTypeBubble == config.taskType) {
+        if ([self.currentBubbleTopTaskInfo.task.taskId isEqualToString:taskId]) {
+            taskInfo = self.currentBubbleTopTaskInfo;
+            self.currentBubbleTopTaskInfo = nil;
+        } else if ([self.currentBubbleBottomTaskInfo.task.taskId isEqualToString:taskId]) {
+            taskInfo = self.currentBubbleBottomTaskInfo;
+            self.currentBubbleBottomTaskInfo = nil;
+        }
     }
     
-    YYUnifiedTaskInfo *taskInfo = [self p_taskInfoForTaskId:taskId];
-    if (![self p_configItemForTaskId:taskId taskType:taskInfo.task.taskType].isManual) {
-        [self error:kTag message:@"the task you want finish is not manual task"];
-        return NO;
-    }
-    
-    taskInfo.taskStatus = YYUnifiedTaskStatusExecuting;
+    [self info:kTag message:@"dismiss task:%@ by manual finish", taskInfo.task.taskId];
     [taskInfo.task.delegate taskShouldDismiss:taskInfo.task.taskId completion:nil];
     taskInfo.taskStatus = YYUnifiedTaskStatusFinished;
-    [self p_removeTask:taskId];
     
-    if (taskInfo.nextTask != nil) {
-        taskInfo.nextTask.taskStatus = YYUnifiedTaskStatusExecuted;
-        [taskInfo.nextTask.task.delegate taskRefresh:taskInfo.task.taskId completion:nil];
+    if (YYUnifiedTaskTypePopup == config.taskType) {
+        if (taskInfo.nextTask != nil) {
+            taskInfo.nextTask.taskStatus = YYUnifiedTaskStatusExecuted;
+            [taskInfo.nextTask.task.delegate taskRefresh:taskInfo.task.taskId completion:nil];
+        }
+    } else if (YYUnifiedTaskTypeBubble == config.taskType) {
+        [self p_deleteCurrentBubbleNode:taskInfo];
     }
+    
     return YES;
 }
 
@@ -675,9 +796,22 @@ YYSharedInstance_IMPLEMENTATION(YYUnifiedTaskManager);
 {
     NSString *stringType = [self _stringForTaskType:taskType];
     if (!stringType) {
+        for (int i = 0; i < self.taskConfigMap.allKeys.count; ++i) {
+            NSString *strType = self.taskConfigMap.allKeys[i];
+            YYUnifiedTaskConfigItem *config = [self p_configItemForTaskId:taskId stringType:strType];
+            if (config) {
+                return config;
+            }
+        }
         [self error:kTag message:@"can not find taskType:%@", @(taskType)];
         return nil;
     }
+    
+    return [self p_configItemForTaskId:taskId stringType:stringType];
+}
+
+- (YYUnifiedTaskConfigItem *)p_configItemForTaskId:(NSString *)taskId stringType:(NSString *)stringType
+{
     YYUnifiedTaskConfig *config = self.taskConfigMap[stringType];
     if (!config) {
         [self error:kTag message:@"can not find config for taskType:%@", stringType];
@@ -714,7 +848,7 @@ YYSharedInstance_IMPLEMENTATION(YYUnifiedTaskManager);
         [self info:kTag message:@"current room shown tiems limited for task:%@", itemConfig.taskId];
         return YYUnifiedTaskAddFailReasonRoomLimit;
     }
-#ifdef YY
+#if YYEnv
     BOOL isLogined = [YYGetCoreI(IAuthCore) isUserLogined];
 #else
     BOOL isLogined = YES;
@@ -732,7 +866,7 @@ YYSharedInstance_IMPLEMENTATION(YYUnifiedTaskManager);
     for (int i = 0; i < self.savedModels.count; ++i) {
         YYUnifiedTaskStorageModel *model = self.savedModels[i];
         if (model.taskId && [taskId isEqualToString:model.taskId]) {
-            return model.item.totalTimes;
+            return model.totalTimes;
         }
     }
     return -1;
@@ -743,7 +877,7 @@ YYSharedInstance_IMPLEMENTATION(YYUnifiedTaskManager);
     for (int i = 0; i < self.savedModels.count; ++i) {
         YYUnifiedTaskStorageModel *model = self.savedModels[i];
         if (model.taskId && [taskId isEqualToString:model.taskId]) {
-            return model.item.todayTimes;
+            return model.todayTimes;
         }
     }
     return -1;
@@ -754,34 +888,49 @@ YYSharedInstance_IMPLEMENTATION(YYUnifiedTaskManager);
     for (int i = 0; i < self.savedModels.count; ++i) {
         YYUnifiedTaskStorageModel *model = self.savedModels[i];
         if (model.taskId && [taskId isEqualToString:model.taskId]) {
-            return model.item.roomTimes;
+            YYUnifiedTaskStorageSidItem *sidItem = [self p_getStorageSidItem:model];
+            if (sidItem != nil) {
+                return sidItem.roomTimes;
+            }
         }
     }
     return -1;
 }
 
+- (YYUnifiedTaskStorageSidItem *)p_getStorageSidItem:(YYUnifiedTaskStorageModel *)model
+{
+#if YYEnv
+            YYUnifiedTaskStorageSidItem *sidItem =  model.storageSidMap[@(CHANNEL_SID)];
+#else
+            YYUnifiedTaskStorageSidItem *sidItem = model.storageSidMap[@(123)];
+#endif
+    return sidItem;
+}
+
 - (void)p_addTaskExposureTime:(NSString *)taskId
 {
-    YYUnifiedTaskInfo *taskInfo = [self p_taskInfoForTaskId:taskId];
     BOOL found = NO;
     for (int i = 0; i < self.savedModels.count; ++i) {
         YYUnifiedTaskStorageModel *model = self.savedModels[i];
-        BOOL sidEqual = NO;
-#ifdef YY
-        sidEqual = model.sid.unsignedIntegerValue == YYGetCoreI(IChannelCore).currentChannelInfo.sid
-#endif
-        
-        if (sidEqual
-            && model.item.todayTimes < taskInfo.itemConfig.todayLimit
-            && model.item.totalTimes < taskInfo.itemConfig.totalLimit
-            && model.taskId && [model.taskId isEqualToString:taskId]) {
-            model.item.todayTimes++;
-            model.item.totalTimes++;
-            model.item.roomTimes++;
-            model.item.lastUpdateTime = [[NSDate date] timeIntervalSince1970];
+        if (model.taskId && [model.taskId isEqualToString:taskId]) {
             found = YES;
-            [self info:kTag message:@"storage exist add one time"];
-            break;
+            model.todayTimes++;
+            model.totalTimes++;
+            model.lastUpdateTime = [[NSDate date] timeIntervalSince1970];
+            
+            YYUnifiedTaskStorageSidItem *sidItem = [self p_getStorageSidItem:model];
+            if (sidItem) {
+                sidItem.roomTimes++;
+                sidItem.lastUpdateTime = [[NSDate date] timeIntervalSince1970];
+            } else {
+                NSNumber *sid = [NSNumber numberWithUnsignedLong:CHANNEL_SID];
+                YYUnifiedTaskStorageSidItem *sidItem = [[YYUnifiedTaskStorageSidItem alloc] init];
+                sidItem.roomTimes = 1;
+                sidItem.lastUpdateTime = [[NSDate date] timeIntervalSince1970];
+                NSMutableDictionary *storageSidMap = [NSMutableDictionary dictionaryWithDictionary:model.storageSidMap];
+                [storageSidMap setObject:sidItem forKey:sid];
+                model.storageSidMap = storageSidMap;
+            }
         }
     }
     
@@ -796,18 +945,18 @@ YYSharedInstance_IMPLEMENTATION(YYUnifiedTaskManager);
          
         YYUnifiedTaskStorageModel *model = [[YYUnifiedTaskStorageModel alloc] init];
         YYUnifiedTaskStorageSidItem *item = [[YYUnifiedTaskStorageSidItem alloc] init];
-        item.todayTimes = 1;
-        item.totalTimes = 1;
+        model.todayTimes = 1;
+        model.totalTimes = 1;
         item.roomTimes = 1;
         item.lastUpdateTime = [[NSDate date] timeIntervalSince1970];
-        model.item = item;
-#ifdef YY
-        model.sid = @(YYGetCoreI(IChannelCore).currentChannelInfo.sid);
-#endif
+        NSMutableDictionary *storageSidMap = [NSMutableDictionary dictionary];
+        NSNumber *sid = [NSNumber numberWithUnsignedLong:CHANNEL_SID];
+        [storageSidMap setObject:item forKey:sid];
+        model.storageSidMap = storageSidMap;
         model.taskId = taskId;
+        model.lastUpdateTime = [[NSDate date] timeIntervalSince1970];
         [tempArrar addObject:model];
         self.savedModels = tempArrar;
-
     }
     
     [self p_updateDatas];
@@ -832,35 +981,53 @@ YYSharedInstance_IMPLEMENTATION(YYUnifiedTaskManager);
 - (void)p_startShowTimer:(YYUnifiedTaskInfo *)taskInfo
 {
     YYUnifiedTaskConfigItem *configItem = [self p_configItemForTaskId:taskInfo.task.taskId taskType:taskInfo.task.taskType];
-    int duration = 0;
+    int duration = -1;
     if (configItem.duration <= 0) {
         if ([taskInfo.task respondsToSelector:@selector(expectedShownDuration)]) {
+            // 本地希望传递了希望的显示时间，使用本地
             duration = [taskInfo.task expectedShownDuration];
         } else {
-            [self error:kTag message:@"both config duration and expectedShownDuration is 0"];
+            // 这种情况会一直显示
+            [self error:kTag message:@"server config duration is -1, local has no config"];
         }
     } else {
         if ([taskInfo.task respondsToSelector:@selector(expectedShownDuration)]) {
-            duration = MIN([taskInfo.task expectedShownDuration], configItem.duration);
+            if ([taskInfo.task expectedShownDuration] >= 0) {
+                // 取配置和本地的最小值作为展示时长
+                duration = MIN([taskInfo.task expectedShownDuration], configItem.duration);
+            } else {
+                // 业务要求一直显示，后台配置了最大时长大于0，
+                duration = configItem.duration;
+            }
         } else {
+            // 本地没传显示时间，使用服务器配置的时间
             duration = configItem.duration;
         }
     }
     
     [self info:kTag message:@"startShowTimer:%@ dismiss after %@ seconds", taskInfo.task.taskId, @(duration)];
     
+    if (duration < 0) {
+        [self info:kTag message:@"a persistent task"];
+        return;
+    }
+    
     NSDictionary *userInfo = @{@"taskInfo": taskInfo};
-#ifdef YY
+#if YYEnv
     YYWeakTimer *showTimer = [YYWeakTimer scheduledTimerWithTimeInterval:duration target:self selector:@selector(onShouldDismissCurrent:) userInfo:userInfo repeats:NO dispatchQueue:dispatch_get_main_queue()];
 #else
     NSTimer *showTimer = [NSTimer scheduledTimerWithTimeInterval:duration target:self selector:@selector(onShouldDismissCurrent:) userInfo:userInfo repeats:NO];
 #endif
     taskInfo.showTimer = showTimer;
 }
-
+#if YYEnv
+- (void)onShouldDismissCurrent:(YYWeakTimer *)timer
+#else
 - (void)onShouldDismissCurrent:(NSTimer *)timer
+#endif
 {
     YYUnifiedTaskInfo *taskInfo = [timer.userInfo valueForKey:@"taskInfo"];
+    [self info:kTag message:@"dismiss task:%@ when timeout", taskInfo.task.taskId];
     [taskInfo.task.delegate taskShouldDismiss:taskInfo.task.taskId completion:nil];
     if (taskInfo.showTimer) {
         [taskInfo.showTimer invalidate];
@@ -893,16 +1060,43 @@ YYSharedInstance_IMPLEMENTATION(YYUnifiedTaskManager);
     } else {
         [self error:kTag message:@"task has changed? taskId:%@", taskInfo.task.taskId];
     }
+    
+    NSString *topTaskId = self.currentBubbleTopTaskInfo.task.taskId;
+    NSString *bottomTaskId = self.currentBubbleBottomTaskInfo.task.taskId;
+    [self info:kTag message:@"current queue:%@, topTaskId:%@, bottomTaskId:%@", [self p_getQueueTaskString], topTaskId, bottomTaskId];
+}
+
+- (NSString *)p_getQueueTaskString
+{
+    NSString *queueString = @"";
+    for (int i = 0; i < self.taskArray.count; ++i) {
+        YYUnifiedTaskInfo *taskInfo = [self.taskArray pointerAtIndex:i];
+        if (taskInfo.task.taskId) {
+            NSString *currentTaskString = [NSString stringWithFormat:@"%@(%@)", taskInfo.task.taskId, @(taskInfo.taskRemainTimeSec)];
+            queueString = [queueString stringByAppendingString:currentTaskString];
+            if (i != self.taskArray.count - 1) {
+                queueString = [queueString stringByAppendingString:@"->"];
+            }
+        }
+    }
+    return queueString;
 }
 
 - (void)p_removeTask:(NSString *)taskId
 {
-    for (int i = 0; self.taskArray.count; ++i) {
+    BOOL found = NO;
+    for (int i = 0; i < self.taskArray.count; ++i) {
         YYUnifiedTaskInfo *taskInfo = [self.taskArray pointerAtIndex:i];
         if (taskInfo.task.taskId && [taskId isEqualToString:taskInfo.task.taskId]) {
+            [self info:kTag message:@"remove task from queue:%@", taskId];
             [self.taskArray removePointerAtIndex:i];
+            found = YES;
             break;
         }
+    }
+    
+    if (!found) {
+        [self info:kTag message:@"task:%@ not in queue", taskId];
     }
 }
 
@@ -910,10 +1104,28 @@ YYSharedInstance_IMPLEMENTATION(YYUnifiedTaskManager);
 {
     for (int i = 0; i < taskIds.count; ++i) {
         NSString *taskId = taskIds[i];
+        // 如果任务还在队列，先移除任务
         [self p_removeTask:taskId];
-        YYUnifiedTaskInfo *taskInfo = [self p_taskInfoForTaskId:taskId];
-        if (YYUnifiedTaskTypePopup == taskInfo.task.taskType) {
+        YYUnifiedTaskInfo *taskInfo = nil;
+        YYUnifiedTaskConfigItem *config = [self p_configItemForTaskId:taskId taskType:YYUnifiedTaskTypeNone];
+        // 如果任务已经在执行了，需要把任务停掉
+        if (YYUnifiedTaskTypePopup == config.taskType) {
             [self p_dismissOnTheChain:taskIds[i]];
+        } else if (YYUnifiedTaskTypeBubble == config.taskType) {
+            if ([self.currentBubbleTopTaskInfo.task.taskId isEqualToString:taskId]) {
+                taskInfo = self.currentBubbleTopTaskInfo;
+                self.currentBubbleTopTaskInfo = nil;
+            } else if ([self.currentBubbleBottomTaskInfo.task.taskId isEqualToString:taskId]) {
+                taskInfo = self.currentBubbleBottomTaskInfo;
+                self.currentBubbleBottomTaskInfo = nil;
+            }
+            
+            [self info:kTag message:@"dismiss task:%@ by force remove task", taskInfo.task.taskId];
+            
+            [taskInfo.showTimer invalidate];
+            taskInfo.showTimer = nil;
+            [taskInfo.task.delegate taskShouldDismiss:taskInfo.task.taskId completion:nil];
+            taskInfo.taskStatus = YYUnifiedTaskStatusFinished;
         }
     }
 }
@@ -922,6 +1134,7 @@ YYSharedInstance_IMPLEMENTATION(YYUnifiedTaskManager);
 {
     YYUnifiedTaskInfo *taskInfo = self.currentDialogTaskInfo;
     if (taskInfo.task.taskId && [taskId isEqualToString:taskInfo.task.taskId]) {
+        [self info:kTag message:@"dismiss task:%@ on the chain", taskInfo.task.taskId];
         [taskInfo.task.delegate taskShouldDismiss:taskId completion:nil];
         self.currentDialogTaskInfo = self.currentDialogTaskInfo.nextTask;
         return;
@@ -940,28 +1153,29 @@ YYSharedInstance_IMPLEMENTATION(YYUnifiedTaskManager);
 
 - (void)removeTasksWithLoginNeed
 {
-    for (int i = 0; self.taskArray.count; ++i) {
-        YYUnifiedTaskInfo *taskInfo = [self.taskArray pointerAtIndex:i];
-        if ([taskInfo.task respondsToSelector:@selector(requireCurrentUser:)] && [taskInfo.task requireCurrentUser:taskInfo.task.taskId]) {
-            [self.taskArray removePointerAtIndex:i];
-        }
-    }
-    
+    [self p_removeTaskInQueue:@selector(requireCurrentUser:)];
 //    [self p_removeCurrentDialogTaskIfNotCurrent:@selector(requireCurrentUser:)];
     [self p_removeCurrentBubbleTask:@selector(requireCurrentUser:)];
 }
 
 - (void)removeTaskWithChannelNeed
 {
-    for (int i = 0; self.taskArray.count; ++i) {
+    [self p_removeTaskInQueue:@selector(requireCurrentChannel:)];
+//    [self p_removeCurrentDialogTaskIfNotCurrent:@selector(requireCurrentChannel:)];
+    [self p_removeCurrentBubbleTask:@selector(requireCurrentChannel:)];
+}
+
+- (void)p_removeTaskInQueue:(SEL)aSelector
+{
+    for (int i = 0; i < self.taskArray.count; ++i) {
         YYUnifiedTaskInfo *taskInfo = [self.taskArray pointerAtIndex:i];
-        if ([taskInfo.task respondsToSelector:@selector(requireCurrentChannel:)] && [taskInfo.task requireCurrentChannel:taskInfo.task.taskId]) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        if ([taskInfo.task respondsToSelector:aSelector] && [taskInfo.task performSelector:aSelector withObject:taskInfo.task.taskId]) {
+#pragma clang diagnostic pop
             [self.taskArray removePointerAtIndex:i];
         }
     }
-
-//    [self p_removeCurrentDialogTaskIfNotCurrent:@selector(requireCurrentChannel:)];
-    [self p_removeCurrentBubbleTask:@selector(requireCurrentChannel:)];
 }
 
 - (void)p_removeCurrentDialogTaskIfNotCurrent:(SEL)aSelector
@@ -969,11 +1183,15 @@ YYSharedInstance_IMPLEMENTATION(YYUnifiedTaskManager);
     YYUnifiedTaskInfo *next = self.currentDialogTaskInfo.nextTask;
     while (next) {
         if ([next.task respondsToSelector:aSelector]) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
             BOOL need = [next.task performSelector:aSelector withObject:next.task.taskId];
+#pragma clang diagnostic pop
             if (need) {
                 self.currentDialogTaskInfo.nextTask = next.nextTask;
                 next.nextTask.preTask = next.preTask;
                 if (next.task && next.task.taskId) {
+                    [self info:kTag message:@"dismiss task:%@ on the chain", next.task.taskId];
                     [next.task.delegate taskShouldDismiss:next.task.taskId completion:nil];
                 }
             }
@@ -983,8 +1201,12 @@ YYSharedInstance_IMPLEMENTATION(YYUnifiedTaskManager);
     
     // 处理头结点
     if (self.currentDialogTaskInfo.task && self.currentDialogTaskInfo.task.taskId && [self.currentDialogTaskInfo.task respondsToSelector:aSelector]) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
         BOOL need = [self.currentDialogTaskInfo.task performSelector:aSelector withObject:self.currentDialogTaskInfo.task.taskId];
+#pragma clang diagnostic pop
         if (need) {
+            [self info:kTag message:@"dismiss task:%@ on the chain", self.currentDialogTaskInfo.task.taskId];
             [self.currentDialogTaskInfo.task.delegate taskShouldDismiss:self.currentDialogTaskInfo.task.taskId completion:nil];
             self.currentDialogTaskInfo.nextTask.preTask = self.currentDialogTaskInfo.preTask;
             self.currentDialogTaskInfo = self.currentDialogTaskInfo.nextTask;
@@ -995,8 +1217,12 @@ YYSharedInstance_IMPLEMENTATION(YYUnifiedTaskManager);
 
 - (void)p_removeCurrentBubbleTask:(SEL)aSelector
 {
-    [self p_removeCurrentBubbleTaskIfNotCurrent:aSelector forTask:self.currentBubbleTopTaskInfo];
-    [self p_removeCurrentBubbleTaskIfNotCurrent:aSelector forTask:self.currentBubbleBottomTaskInfo];
+    if (self.currentBubbleTopTaskInfo) {
+        [self p_removeCurrentBubbleTaskIfNotCurrent:aSelector forTask:self.currentBubbleTopTaskInfo];
+    }
+    if (self.currentBubbleBottomTaskInfo) {
+        [self p_removeCurrentBubbleTaskIfNotCurrent:aSelector forTask:self.currentBubbleBottomTaskInfo];
+    }
 }
 
 - (void)p_removeCurrentBubbleTaskIfNotCurrent:(SEL)aSelector forTask:(YYUnifiedTaskInfo *)taskInfo
@@ -1017,8 +1243,12 @@ YYSharedInstance_IMPLEMENTATION(YYUnifiedTaskManager);
     }
     
     if ([taskInfo.task respondsToSelector:aSelector]) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
         BOOL need = [taskInfo.task performSelector:aSelector withObject:taskInfo.task.taskId];
+#pragma clang diagnostic pop
         if (need) {
+            [self info:kTag message:@"dismiss task:%@ by sel:%@", taskInfo.task.taskId, NSStringFromSelector(aSelector)];
             [taskInfo.task.delegate taskShouldDismiss:taskInfo.task.taskId completion:nil];
         }
     }
@@ -1029,7 +1259,7 @@ YYSharedInstance_IMPLEMENTATION(YYUnifiedTaskManager);
     va_list args;
     va_start(args, format);
     NSString *input = [[NSString alloc] initWithFormat:format arguments:args];
-#ifdef YY
+#if YYEnv
     [YYLogger info:tag message:@"%@", input];
 #else
     NSLog(@"%@", input);
@@ -1042,12 +1272,30 @@ YYSharedInstance_IMPLEMENTATION(YYUnifiedTaskManager);
     va_list args;
     va_start(args, format);
     NSString *input = [[NSString alloc] initWithFormat:format arguments:args];
-#ifdef YY
+#if YYEnv
     [YYLogger error:tag message:@"%@", input];
 #else
     NSLog(@"%@", input);
 #endif
     va_end(args);
+}
+
+- (NSArray *)taskConfigs
+{
+    return self.taskConfigMap[@"bubble"].configData.itemsArray;
+}
+
+- (void)clearTaskConfigs
+{
+    _taskConfigMap = nil;
+}
+
+- (NSArray *)currentShownStatus
+{
+    if (self.savedModels == nil) {
+        [self p_loadLocalStorage];
+    }
+    return self.savedModels;
 }
 
 - (NSPointerArray *)taskArray

@@ -40,7 +40,7 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-//    [self testCode4];
+    [self testCode3];
 }
 
 - (void)testCode1
