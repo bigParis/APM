@@ -54,7 +54,6 @@ static const CGFloat kAnimatedDuration = 0.2;
             } else {
                 if (self.discardBubbleBlock) {
                     self.discardBubbleBlock();
-                    self.discardBubbleBlock = nil;
                 }
             }
         }];
@@ -109,15 +108,17 @@ static const CGFloat kAnimatedDuration = 0.2;
     [self info:kTaskManagerTag message:@"bubble:%@ not shown because:%@", taskId, @(reason)];
     if (self.discardBubbleBlock) {
         self.discardBubbleBlock();
-        self.discardBubbleBlock = nil;
-    }
-    
-    if (self.willShowBlock) {
-        self.willShowBlock = nil;
     }
     
     if (completion) {
         completion(YES);
+    }
+}
+
+- (void)willMoveToSuperview:(UIView *)newSuperview
+{
+    if (newSuperview == nil) {
+        NSLog(@"");
     }
 }
 

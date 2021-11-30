@@ -399,6 +399,10 @@ typedef NS_ENUM(NSUInteger, YYUnifiedTaskStatus) {
 
 - (void)p_initTimer
 {
+    if (self.timer != nil) {
+        [self info:kTag message:@"already has a timer runing, no need more"];
+        return;
+    }
 #if YYEnv
     self.timer = [YYWeakTimer scheduledTimerToMainQueueWithTimeInterval:1.f target:self selector:@selector(onTimePassedOneSecond) userInfo:nil repeats:YES];
 #else
@@ -594,16 +598,26 @@ typedef NS_ENUM(NSUInteger, YYUnifiedTaskStatus) {
 - (YYUnifiedTaskInfo *)findATaskWhenTimePassOneSecond:(YYUnifiedTaskType)taskType
 {
     NSMutableArray *tempArray = [@[] mutableCopy];
+    NSMutableArray *arrayIndexsToRemove = [@[] mutableCopy];
     for (int i = 0; i < self.taskArray.count; ++i) {
         YYUnifiedTaskInfo *taskInfo = [self.taskArray pointerAtIndex:i];
-        if (taskInfo.taskRemainTimeSec > 0) {
-            taskInfo.taskRemainTimeSec--;
-        }
         
-        if (taskInfo.taskRemainTimeSec <= 0 && taskType == taskInfo.task.taskType) {
-            [tempArray addObject:taskInfo];
+        if (taskInfo.task.taskShowInview == nil || taskInfo.task.delegate == nil) {
+            [self info:kTag message:@"task \"%@\" should remove from queue, because view released or superview released", taskInfo.task.taskId];
+            [self.taskArray replacePointerAtIndex:i withPointer:NULL];
+        } else {
+            if (taskInfo.taskRemainTimeSec > 0) {
+                taskInfo.taskRemainTimeSec--;
+            }
+            
+            if (taskInfo.taskRemainTimeSec <= 0 && taskType == taskInfo.task.taskType) {
+                [tempArray addObject:taskInfo];
+            }
         }
     }
+    
+    [self.taskArray addPointer:NULL];
+    [self.taskArray compact];
     
     if (tempArray.count == 0) {
         return nil;
