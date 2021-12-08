@@ -34,6 +34,7 @@
 		2FC96702272A92F8008819D1 /* BPTemplateBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC96701272A92F8008819D1 /* BPTemplateBase.m */; };
 		2FC96705272A9314008819D1 /* BPTemplateSub.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC96704272A9313008819D1 /* BPTemplateSub.m */; };
 		2FCA420127608F1800D3CED2 /* BPSVGAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FCA420027608F1800D3CED2 /* BPSVGAViewController.m */; };
+		2FCA4204276092E100D3CED2 /* index_anchor_info_live_animation.svga in Resources */ = {isa = PBXBuildFile; fileRef = 2FCA4203276092E000D3CED2 /* index_anchor_info_live_animation.svga */; };
 		2FD76E7E2754F85800C62981 /* BPTaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FD76E7D2754F85800C62981 /* BPTaskView.m */; };
 		2FD773232754F8D100C62981 /* YYBubbleTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FD773222754F8D100C62981 /* YYBubbleTask.m */; };
 		2FDB238D272F7C6D005DF5C5 /* BPMultiThreadSafeObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB238C272F7C6D005DF5C5 /* BPMultiThreadSafeObject.m */; };
@@ -125,6 +126,7 @@
 		2FC96704272A9313008819D1 /* BPTemplateSub.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPTemplateSub.m; sourceTree = "<group>"; };
 		2FCA41FF27608F1800D3CED2 /* BPSVGAViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPSVGAViewController.h; sourceTree = "<group>"; };
 		2FCA420027608F1800D3CED2 /* BPSVGAViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPSVGAViewController.m; sourceTree = "<group>"; };
+		2FCA4203276092E000D3CED2 /* index_anchor_info_live_animation.svga */ = {isa = PBXFileReference; lastKnownFileType = file; path = index_anchor_info_live_animation.svga; sourceTree = "<group>"; };
 		2FD76E7C2754F85800C62981 /* BPTaskView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPTaskView.h; sourceTree = "<group>"; };
 		2FD76E7D2754F85800C62981 /* BPTaskView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPTaskView.m; sourceTree = "<group>"; };
 		2FD773212754F8D100C62981 /* YYBubbleTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYBubbleTask.h; sourceTree = "<group>"; };
@@ -347,6 +349,14 @@
 			path = SVGA;
 			sourceTree = "<group>";
 		};
+		2FCA4202276092E000D3CED2 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				2FCA4203276092E000D3CED2 /* index_anchor_info_live_animation.svga */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
 		6003F581195388D10070C39A = {
 			isa = PBXGroup;
 			children = (
@@ -384,6 +394,7 @@
 		6003F593195388D20070C39A /* Example for ModHookLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				2FCA4202276092E000D3CED2 /* Resource */,
 				2FCA41FE27608F0200D3CED2 /* SVGA */,
 				2FC0B4FE2738FFF30042CBB1 /* YYModel */,
 				2FC64FC827353BBF0006DE6C /* Memory */,
@@ -540,6 +551,7 @@
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
+				2FCA4204276092E100D3CED2 /* index_anchor_info_live_animation.svga in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

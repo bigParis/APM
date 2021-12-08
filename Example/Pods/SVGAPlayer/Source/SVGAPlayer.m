@@ -83,7 +83,11 @@
         return;
     }
     self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(next)];
-    self.displayLink.frameInterval = 60 / self.videoItem.FPS;
+    if (@available(iOS 10.0, *)) {
+        self.displayLink.preferredFramesPerSecond = self.videoItem.FPS;
+    } else {
+        self.displayLink.frameInterval = 60 / self.videoItem.FPS;
+    }
     [self.displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:self.mainRunLoopMode];
     self.forwardAnimating = !self.reversing;
 }
