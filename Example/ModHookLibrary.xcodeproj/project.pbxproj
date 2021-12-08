@@ -19,6 +19,11 @@
 		2FA909EE272791C00099A3F0 /* BPNetworkTestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA909EC272791C00099A3F0 /* BPNetworkTestVC.m */; };
 		2FA90D7C2727A2520099A3F0 /* BPMultiThreadVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA90D7B2727A2520099A3F0 /* BPMultiThreadVC.m */; };
 		2FA90D7F2727A2A50099A3F0 /* BPMultiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA90D7E2727A2A50099A3F0 /* BPMultiManager.m */; };
+		2FAB9A5C27577267008BF04F /* BPLeakModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FAB9A5B27577266008BF04F /* BPLeakModel.m */; };
+		2FAB9A5F275781BB008BF04F /* BPHoldModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FAB9A5E275781BB008BF04F /* BPHoldModel.m */; };
+		2FAB9A6227578258008BF04F /* BPLeakModelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FAB9A6127578257008BF04F /* BPLeakModelManager.m */; };
+		2FAB9A6527579070008BF04F /* BPLeakHoldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FAB9A6427579070008BF04F /* BPLeakHoldView.m */; };
+		2FAB9A6827579C48008BF04F /* BPLeakShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FAB9A6727579C48008BF04F /* BPLeakShowView.m */; };
 		2FC0B501273900060042CBB1 /* BPYYModelTestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0B500273900060042CBB1 /* BPYYModelTestVC.m */; };
 		2FC63A7F2733802F0006DE6C /* BPBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC63A7E2733802F0006DE6C /* BPBaseView.m */; };
 		2FC63A82273382BD0006DE6C /* BPDeriveTestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC63A81273382BD0006DE6C /* BPDeriveTestVC.m */; };
@@ -28,6 +33,7 @@
 		2FC966FF272A92E0008819D1 /* BPTemplateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC966FE272A92E0008819D1 /* BPTemplateVC.m */; };
 		2FC96702272A92F8008819D1 /* BPTemplateBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC96701272A92F8008819D1 /* BPTemplateBase.m */; };
 		2FC96705272A9314008819D1 /* BPTemplateSub.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC96704272A9313008819D1 /* BPTemplateSub.m */; };
+		2FCA420127608F1800D3CED2 /* BPSVGAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FCA420027608F1800D3CED2 /* BPSVGAViewController.m */; };
 		2FD76E7E2754F85800C62981 /* BPTaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FD76E7D2754F85800C62981 /* BPTaskView.m */; };
 		2FD773232754F8D100C62981 /* YYBubbleTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FD773222754F8D100C62981 /* YYBubbleTask.m */; };
 		2FDB238D272F7C6D005DF5C5 /* BPMultiThreadSafeObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB238C272F7C6D005DF5C5 /* BPMultiThreadSafeObject.m */; };
@@ -89,6 +95,16 @@
 		2FA90D7B2727A2520099A3F0 /* BPMultiThreadVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPMultiThreadVC.m; sourceTree = "<group>"; };
 		2FA90D7D2727A2A50099A3F0 /* BPMultiManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPMultiManager.h; sourceTree = "<group>"; };
 		2FA90D7E2727A2A50099A3F0 /* BPMultiManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPMultiManager.m; sourceTree = "<group>"; };
+		2FAB9A5A27577266008BF04F /* BPLeakModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPLeakModel.h; sourceTree = "<group>"; };
+		2FAB9A5B27577266008BF04F /* BPLeakModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPLeakModel.m; sourceTree = "<group>"; };
+		2FAB9A5D275781BB008BF04F /* BPHoldModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPHoldModel.h; sourceTree = "<group>"; };
+		2FAB9A5E275781BB008BF04F /* BPHoldModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPHoldModel.m; sourceTree = "<group>"; };
+		2FAB9A6027578257008BF04F /* BPLeakModelManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPLeakModelManager.h; sourceTree = "<group>"; };
+		2FAB9A6127578257008BF04F /* BPLeakModelManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPLeakModelManager.m; sourceTree = "<group>"; };
+		2FAB9A6327579070008BF04F /* BPLeakHoldView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPLeakHoldView.h; sourceTree = "<group>"; };
+		2FAB9A6427579070008BF04F /* BPLeakHoldView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPLeakHoldView.m; sourceTree = "<group>"; };
+		2FAB9A6627579C48008BF04F /* BPLeakShowView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPLeakShowView.h; sourceTree = "<group>"; };
+		2FAB9A6727579C48008BF04F /* BPLeakShowView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPLeakShowView.m; sourceTree = "<group>"; };
 		2FC0B4FF273900060042CBB1 /* BPYYModelTestVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPYYModelTestVC.h; sourceTree = "<group>"; };
 		2FC0B500273900060042CBB1 /* BPYYModelTestVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPYYModelTestVC.m; sourceTree = "<group>"; };
 		2FC63A7D2733802E0006DE6C /* BPBaseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPBaseView.h; sourceTree = "<group>"; };
@@ -107,6 +123,8 @@
 		2FC96701272A92F8008819D1 /* BPTemplateBase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPTemplateBase.m; sourceTree = "<group>"; };
 		2FC96703272A9313008819D1 /* BPTemplateSub.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPTemplateSub.h; sourceTree = "<group>"; };
 		2FC96704272A9313008819D1 /* BPTemplateSub.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPTemplateSub.m; sourceTree = "<group>"; };
+		2FCA41FF27608F1800D3CED2 /* BPSVGAViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPSVGAViewController.h; sourceTree = "<group>"; };
+		2FCA420027608F1800D3CED2 /* BPSVGAViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPSVGAViewController.m; sourceTree = "<group>"; };
 		2FD76E7C2754F85800C62981 /* BPTaskView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPTaskView.h; sourceTree = "<group>"; };
 		2FD76E7D2754F85800C62981 /* BPTaskView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPTaskView.m; sourceTree = "<group>"; };
 		2FD773212754F8D100C62981 /* YYBubbleTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYBubbleTask.h; sourceTree = "<group>"; };
@@ -293,6 +311,16 @@
 			children = (
 				2FC64FC927353C3D0006DE6C /* BPMemoryTestVC.h */,
 				2FC64FCA27353C3D0006DE6C /* BPMemoryTestVC.m */,
+				2FAB9A5A27577266008BF04F /* BPLeakModel.h */,
+				2FAB9A5B27577266008BF04F /* BPLeakModel.m */,
+				2FAB9A5D275781BB008BF04F /* BPHoldModel.h */,
+				2FAB9A5E275781BB008BF04F /* BPHoldModel.m */,
+				2FAB9A6027578257008BF04F /* BPLeakModelManager.h */,
+				2FAB9A6127578257008BF04F /* BPLeakModelManager.m */,
+				2FAB9A6327579070008BF04F /* BPLeakHoldView.h */,
+				2FAB9A6427579070008BF04F /* BPLeakHoldView.m */,
+				2FAB9A6627579C48008BF04F /* BPLeakShowView.h */,
+				2FAB9A6727579C48008BF04F /* BPLeakShowView.m */,
 			);
 			path = Memory;
 			sourceTree = "<group>";
@@ -308,6 +336,15 @@
 				2FC96704272A9313008819D1 /* BPTemplateSub.m */,
 			);
 			path = Template;
+			sourceTree = "<group>";
+		};
+		2FCA41FE27608F0200D3CED2 /* SVGA */ = {
+			isa = PBXGroup;
+			children = (
+				2FCA41FF27608F1800D3CED2 /* BPSVGAViewController.h */,
+				2FCA420027608F1800D3CED2 /* BPSVGAViewController.m */,
+			);
+			path = SVGA;
 			sourceTree = "<group>";
 		};
 		6003F581195388D10070C39A = {
@@ -347,6 +384,7 @@
 		6003F593195388D20070C39A /* Example for ModHookLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				2FCA41FE27608F0200D3CED2 /* SVGA */,
 				2FC0B4FE2738FFF30042CBB1 /* YYModel */,
 				2FC64FC827353BBF0006DE6C /* Memory */,
 				2FC63A7C273380140006DE6C /* Derived */,
@@ -548,7 +586,10 @@
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/ModHookLibrary/APM01.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SSZipArchive/SSZipArchive.framework",
+				"${BUILT_PRODUCTS_DIR}/SVGAPlayer/SVGAPlayer.framework",
 				"${BUILT_PRODUCTS_DIR}/YYModel/YYModel.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -556,7 +597,10 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/APM01.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SSZipArchive.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGAPlayer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYModel.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -630,18 +674,24 @@
 				2FC0B501273900060042CBB1 /* BPYYModelTestVC.m in Sources */,
 				2FA909EE272791C00099A3F0 /* BPNetworkTestVC.m in Sources */,
 				2FC63A7F2733802F0006DE6C /* BPBaseView.m in Sources */,
+				2FAB9A6827579C48008BF04F /* BPLeakShowView.m in Sources */,
 				2F102B852720728900433099 /* BPTaskTestViewController.m in Sources */,
 				2FC63A82273382BD0006DE6C /* BPDeriveTestVC.m in Sources */,
 				2FDB238D272F7C6D005DF5C5 /* BPMultiThreadSafeObject.m in Sources */,
+				2FAB9A5F275781BB008BF04F /* BPHoldModel.m in Sources */,
 				2FC64FCB27353C3D0006DE6C /* BPMemoryTestVC.m in Sources */,
 				2FA90D7C2727A2520099A3F0 /* BPMultiThreadVC.m in Sources */,
 				2F102B8D272073AC00433099 /* BPPodLibraryTestViewController.m in Sources */,
+				2FCA420127608F1800D3CED2 /* BPSVGAViewController.m in Sources */,
+				2FAB9A5C27577267008BF04F /* BPLeakModel.m in Sources */,
+				2FAB9A6227578258008BF04F /* BPLeakModelManager.m in Sources */,
 				2FD76E7E2754F85800C62981 /* BPTaskView.m in Sources */,
 				2F7D7DCD2721B460003EEE74 /* BPPointArrayMgr.m in Sources */,
 				6003F5A7195388D20070C39A /* BPViewController.m in Sources */,
 				2F102B892720731600433099 /* BPAPMTestViewController.m in Sources */,
 				2FC96705272A9314008819D1 /* BPTemplateSub.m in Sources */,
 				2F102B902720779E00433099 /* BPTableViewCell.m in Sources */,
+				2FAB9A6527579070008BF04F /* BPLeakHoldView.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				2FD773232754F8D100C62981 /* YYBubbleTask.m in Sources */,
 				2F7D7DD02721B586003EEE74 /* BPPointerModel.m in Sources */,

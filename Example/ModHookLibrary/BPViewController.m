@@ -59,6 +59,7 @@ static NSString *kTableViewCellIdentifier = @"TableViewCellIdentifier";
     [tempArray addObject:[self createModelWith:@"继承" vcName:@"BPDeriveTestVC"]];
     [tempArray addObject:[self createModelWith:@"内存" vcName:@"BPMemoryTestVC"]];
     [tempArray addObject:[self createModelWith:@"YYModel" vcName:@"BPYYModelTestVC"]];
+    [tempArray addObject:[self createModelWith:@"SVGA" vcName:@"BPSVGAViewController"]];
     self.dataSource = tempArray;
 }
 

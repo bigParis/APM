@@ -8,7 +8,7 @@ target 'ModHookLibrary_Example' do
   pod 'SDWebImage', '~> 5.0'
   pod 'Masonry', '1.1.0'
   pod 'YYModel', '1.0.4'
-
+  pod 'SVGAPlayer', '~> 2.5'
   target 'ModHookLibrary_Tests' do
     inherit! :search_paths
 

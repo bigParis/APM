@@ -7,22 +7,67 @@
 //
 
 #import "BPMemoryTestVC.h"
+#import "BPLeakModel.h"
+#import "BPHoldModel.h"
+#import "BPLeakModelManager.h"
+#import "BPLeakHoldView.h"
+#import "BPLeakShowView.h"
 
 @interface BPMemoryTestVC ()
 
 @property (nonatomic, weak) UIImageView *imageView;
+@property (nonatomic, weak)  UIButton *leakBtn;
+@property (nonatomic, strong) BPLeakModel *leakModel;
+@property (nonatomic, strong) BPLeakHoldView *holdView;
+@property (nonatomic, strong) BPLeakShowView *showView;
+@property (nonatomic, strong) NSTimer *timer;
 @end
 
 @implementation BPMemoryTestVC
+- (void)dealloc
+{
+    NSLog(@"%s", __func__);
+    [[BPLeakModelManager sharedManager] unRegisterModel:@"BPLeakHoldView"];
+    [[BPLeakModelManager sharedManager] unRegisterModel:@"BPLeakShowView"];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIImageView *imageView = [[UIImageView alloc] init];
-//    imageView.image = [UIImage imageNamed:@"memory_test.jpeg"];
-    imageView.image = [self getCompressedImage];
+    [self initManager];
+    [self initViews];
+    
+}
 
+- (void)initViews
+{
+    UIImageView *imageView = [[UIImageView alloc] init];
+    imageView.image = [self getCompressedImage];
     self.imageView = imageView;
     [self.view addSubview:self.imageView];
+    
+    UIButton *leakBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+    [leakBtn setTitle:@"泄漏按钮" forState:UIControlStateNormal];
+    [leakBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
+    [leakBtn setBackgroundColor:UIColor.cyanColor];
+    [leakBtn addTarget:self action:@selector(onLeakClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:leakBtn];
+    self.leakBtn = leakBtn;
+    
+    self.showView = [[BPLeakModelManager sharedManager] getModelForKey:@"BPLeakShowView"];
+    BPLeakHoldView *holdView = [[BPLeakModelManager sharedManager] getModelForKey:@"BPLeakHoldView"];
+    self.showView.leakBlock = ^{
+        NSLog(@"%@", holdView.name);
+    };
+    [self.view addSubview:self.showView];
+}
+
+- (void)initManager
+{
+    BPLeakHoldView *holdView = [[BPLeakHoldView alloc] init];
+    [[BPLeakModelManager sharedManager] registerModel:holdView forKey:@"BPLeakHoldView"];
+    
+    BPLeakShowView *showView = [[BPLeakShowView alloc] init];
+    [[BPLeakModelManager sharedManager] registerModel:showView forKey:@"BPLeakShowView"];
 }
 
 - (void)viewDidLayoutSubviews
@@ -30,6 +75,16 @@
     [super viewDidLayoutSubviews];
     self.imageView.frame = CGRectMake(100, 200, 200, 200);
     self.imageView.center = self.view.center;
+    self.leakBtn.frame = CGRectMake((self.view.bounds.size.width - 120) * 0.5, 120, 120, 30);
+//    self.holdView.frame = CGRectMake(60, 100, 30, 30);
+    self.showView.frame = CGRectMake(60, 160, 30, 30);
+}
+
+- (void)onLeakClicked
+{
+    /// Demo1
+    
+    [self.showView testLeak];
 }
 
 - (UIImage *)getCompressedImage

@@ -41,10 +41,20 @@ PODS:
     - YYModel (= 1.0.4)
   - ModHookLibrary/Core (0.0.16):
     - YYModel (= 1.0.4)
+  - Protobuf (3.19.1)
   - SDWebImage (5.12.1):
     - SDWebImage/Core (= 5.12.1)
   - SDWebImage/Core (5.12.1)
   - Specta (1.0.7)
+  - SSZipArchive (2.4.2)
+  - SVGAPlayer (2.5.7):
+    - SVGAPlayer/Core (= 2.5.7)
+    - SVGAPlayer/ProtoFiles (= 2.5.7)
+  - SVGAPlayer/Core (2.5.7):
+    - SSZipArchive (>= 1.8.1)
+    - SVGAPlayer/ProtoFiles
+  - SVGAPlayer/ProtoFiles (2.5.7):
+    - Protobuf (~> 3.4)
   - YYModel (1.0.4)
 
 DEPENDENCIES:
@@ -56,6 +66,7 @@ DEPENDENCIES:
   - ModHookLibrary (from `../`)
   - SDWebImage (~> 5.0)
   - Specta
+  - SVGAPlayer (~> 2.5)
   - YYModel (= 1.0.4)
 
 SPEC REPOS:
@@ -65,8 +76,11 @@ SPEC REPOS:
     - "Expecta+Snapshots"
     - FBSnapshotTestCase
     - Masonry
+    - Protobuf
     - SDWebImage
     - Specta
+    - SSZipArchive
+    - SVGAPlayer
     - YYModel
 
 EXTERNAL SOURCES:
@@ -80,10 +94,13 @@ SPEC CHECKSUMS:
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   ModHookLibrary: 3a86bdd88aa505baec8a317dfe8572dadcd3fe88
+  Protobuf: 3724efa50cb2846d7ccebc8691c574e85fd74471
   SDWebImage: 4dc3e42d9ec0c1028b960a33ac6b637bb432207b
   Specta: 3e1bd89c3517421982dc4d1c992503e48bd5fe66
+  SSZipArchive: e7b4f3d9e780c2acc1764cd88fbf2de28f26e5b2
+  SVGAPlayer: 318b85a78b61292d6ae9dfcd651f3f0d1cdadd86
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: 9dd80780f69f3ceb93f0c0566c08cda113a94f24
+PODFILE CHECKSUM: 0ab6f5e699b26053b115e3f6121463fe73124caf
 
 COCOAPODS: 1.11.2

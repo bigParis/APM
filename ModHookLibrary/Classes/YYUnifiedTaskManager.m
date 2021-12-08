@@ -32,7 +32,7 @@ static NSString * const kYYUnifiedTaskStorageSuffix = @"UnifiedTaskStorage";
 static NSString * const kYYUnifiedTaskConfigStorage = @"UnifiedTaskConfigStorage";
 
 #if YYEnv
-#define CHANNEL_SID CHANNEL_SID
+#define CHANNEL_SID YYGetCoreI(IChannelCore).currentChannelInfo.sid
 #define USER_ID [YYGetCoreI(IAuthCore) getUserId]
 #else
 #define CHANNEL_SID 123
@@ -157,53 +157,18 @@ typedef NS_ENUM(NSUInteger, YYUnifiedTaskStatus) {
 {
     if (self = [super init]) {
         [self p_configManager];
-        [self p_queryConfig];
         [self p_initTimer];
+#if YY_Env
+        [self p_queryConfig];
+#else
         [self p_initTestData];
+#endif
 #if !OFFICIAL_RELEASE
         [self p_loadLocalStorage];
 #endif
     }
     return self;
 }
-
-
-- (void)p_initTestData
-{
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        NSMutableArray *tempArray = [@[] mutableCopy];
-        for (int i = 0; i < 100; ++i) {
-            YYUnifiedTaskConfigItem *item = [[YYUnifiedTaskConfigItem alloc] init];
-            item.isManual = i <= 5;
-            item.isForce = (i+1) % 2;
-            item.priorty = i+1;
-            item.duration = 10;
-            item.stay = 0;
-            item.roomLimit = 90;
-            item.todayLimit = 100;
-            item.totalLimit = 1000;
-            item.taskId = [NSString stringWithFormat:@"bubble_task%@", @(i+1)];
-            [tempArray addObject:item];
-        }
-        YYUnifiedTaskConfigData *data = [[YYUnifiedTaskConfigData alloc] init];
-        data.itemsArray = [tempArray copy];
-        
-        YYUnifiedTaskConfig *config = [[YYUnifiedTaskConfig alloc] init];
-        config.configData = data;
-        config.taskType = YYUnifiedTaskTypeBubble;
-        config.taskGap = 5000;
-        
-        self.taskConfigMap[@"bubble"] = config;
-        if (self.pendingTasks.count != 0) {
-            for (int i = 0; i < self.pendingTasks.count; ++i) {
-                dispatch_block_t block = self.pendingTasks[i];
-                block();
-            }
-            [self.pendingTasks removeAllObjects];
-        }
-    });
-}
-
 
 - (void)p_configManager
 {
@@ -250,11 +215,7 @@ typedef NS_ENUM(NSUInteger, YYUnifiedTaskStatus) {
         return;
     }
     NSArray *savedData = [self.savedModels yy_modelToJSONObject];
-#if YYEnv
-    [YYUserDefaults setObject:savedData forKey:[NSString stringWithFormat:@"%@_%@", @(USER_ID), kYYUnifiedTaskStorageSuffix] forModule:YYUserDefaults_UnifiedTask];
-#else
-    [[NSUserDefaults standardUserDefaults] setObject:savedData forKey:[NSString stringWithFormat:@"%@_%@", @(USER_ID), kYYUnifiedTaskStorageSuffix]];
-#endif
+    [self p_setObject:savedData forKey:[NSString stringWithFormat:@"%@_%@", @(USER_ID), kYYUnifiedTaskStorageSuffix]];
 }
 
 #if YYEnv
@@ -273,6 +234,43 @@ typedef NS_ENUM(NSUInteger, YYUnifiedTaskStatus) {
     }
 }
 #endif
+
+- (void)p_initTestData
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        NSMutableArray *tempArray = [@[] mutableCopy];
+        for (int i = 0; i < 60; ++i) {
+            YYUnifiedTaskConfigItem *item = [[YYUnifiedTaskConfigItem alloc] init];
+            item.isManual = i <= 5;
+            item.isForce = (i+1) % 2;
+            item.priorty = i+1;
+            item.duration = 10;
+            item.stay = 0;
+            item.roomLimit = 90;
+            item.todayLimit = 100;
+            item.totalLimit = 1000;
+            item.taskId = [NSString stringWithFormat:@"bubble_task%@", @(i+1)];
+            [tempArray addObject:item];
+        }
+        YYUnifiedTaskConfigData *data = [[YYUnifiedTaskConfigData alloc] init];
+        data.itemsArray = [tempArray copy];
+        
+        YYUnifiedTaskConfig *config = [[YYUnifiedTaskConfig alloc] init];
+        config.configData = data;
+        config.taskType = YYUnifiedTaskTypeBubble;
+        config.taskGap = 5000;
+        
+        self.taskConfigMap[@"bubble"] = config;
+        if (self.pendingTasks.count != 0) {
+            for (int i = 0; i < self.pendingTasks.count; ++i) {
+                dispatch_block_t block = self.pendingTasks[i];
+                block();
+            }
+            [self.pendingTasks removeAllObjects];
+        }
+    });
+}
+
 
 - (void)p_queryConfig
 {
@@ -308,7 +306,7 @@ typedef NS_ENUM(NSUInteger, YYUnifiedTaskStatus) {
 
 - (void)p_processConfigData:(NSDictionary *)responseDict
 {
-#if YY_Env
+#if YYEnv
     NSDictionary *data = [responseDict dictionaryForKey:@"data" or:nil];
     NSArray *bubbleArray = [data arrayForKey:@"bubbleStandards" or:nil];
     
@@ -338,7 +336,7 @@ typedef NS_ENUM(NSUInteger, YYUnifiedTaskStatus) {
 - (nullable id)p_objectForKey:(NSString *)defaultName
 {
 #if YYEnv
-    return [YYUserDefaults objectForKey:[NSString stringWithFormat:defaultName forModule:YYUserDefaults_UnifiedTask];
+    return [YYUserDefaults objectForKey:defaultName forModule:YYUserDefaults_UnifiedTask];
 #else
     return [[NSUserDefaults standardUserDefaults] objectForKey:defaultName];
 #endif
@@ -598,7 +596,6 @@ typedef NS_ENUM(NSUInteger, YYUnifiedTaskStatus) {
 - (YYUnifiedTaskInfo *)findATaskWhenTimePassOneSecond:(YYUnifiedTaskType)taskType
 {
     NSMutableArray *tempArray = [@[] mutableCopy];
-    NSMutableArray *arrayIndexsToRemove = [@[] mutableCopy];
     for (int i = 0; i < self.taskArray.count; ++i) {
         YYUnifiedTaskInfo *taskInfo = [self.taskArray pointerAtIndex:i];
         
@@ -913,11 +910,7 @@ typedef NS_ENUM(NSUInteger, YYUnifiedTaskStatus) {
 
 - (YYUnifiedTaskStorageSidItem *)p_getStorageSidItem:(YYUnifiedTaskStorageModel *)model
 {
-#if YYEnv
-            YYUnifiedTaskStorageSidItem *sidItem =  model.storageSidMap[@(CHANNEL_SID)];
-#else
-            YYUnifiedTaskStorageSidItem *sidItem = model.storageSidMap[@(123)];
-#endif
+    YYUnifiedTaskStorageSidItem *sidItem = model.storageSidMap[@(CHANNEL_SID)];
     return sidItem;
 }
 
