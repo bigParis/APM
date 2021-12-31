@@ -13,6 +13,7 @@
 @interface BPLeakModel()
 @property (nonatomic, strong) BPHoldModel *holdModel;
 @property (nonatomic, strong) UIView *view;
+@property (nonatomic, assign) int number;
 @end
 
 @implementation BPLeakModel
@@ -40,8 +41,26 @@
     }
 }
 
+- (instancetype)initWithCount:(int)count
+{
+    if (self = [super init]) {
+        _number = count;
+    }
+    return self;
+}
+
 - (NSDictionary *)leakMap
 {
     return @{@"leak1" : self.holdModel};
+}
+
+- (void)increment
+{
+    _number++;
+}
+
+- (int)currentCount
+{
+    return _number;
 }
 @end

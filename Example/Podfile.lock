@@ -24,6 +24,7 @@ PODS:
   - FBSnapshotTestCase/Core (2.1.4)
   - FBSnapshotTestCase/SwiftSupport (2.1.4):
     - FBSnapshotTestCase/Core
+  - FLAnimatedImage (1.0.16)
   - Masonry (1.1.0)
   - ModHookLibrary (0.0.16):
     - ModHookLibrary/APM1 (= 0.0.16)
@@ -62,6 +63,7 @@ DEPENDENCIES:
   - Expecta
   - "Expecta+Snapshots"
   - FBSnapshotTestCase
+  - FLAnimatedImage (~> 1.0)
   - Masonry (= 1.1.0)
   - ModHookLibrary (from `../`)
   - SDWebImage (~> 5.0)
@@ -75,6 +77,7 @@ SPEC REPOS:
     - Expecta
     - "Expecta+Snapshots"
     - FBSnapshotTestCase
+    - FLAnimatedImage
     - Masonry
     - Protobuf
     - SDWebImage
@@ -92,6 +95,7 @@ SPEC CHECKSUMS:
   Expecta: 3b6bd90a64b9a1dcb0b70aa0e10a7f8f631667d5
   "Expecta+Snapshots": dcff217eef506dabd6dfdc7864ea2da321fafbb8
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
+  FLAnimatedImage: 8f3e854ebf9680b71f0b6e700939687fc4d82b4b
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   ModHookLibrary: 3a86bdd88aa505baec8a317dfe8572dadcd3fe88
   Protobuf: 3724efa50cb2846d7ccebc8691c574e85fd74471
@@ -101,6 +105,6 @@ SPEC CHECKSUMS:
   SVGAPlayer: 318b85a78b61292d6ae9dfcd651f3f0d1cdadd86
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: 0ab6f5e699b26053b115e3f6121463fe73124caf
+PODFILE CHECKSUM: e38474e53e428b40b89bbcd07ec79a1a157e63b2
 
 COCOAPODS: 1.11.2

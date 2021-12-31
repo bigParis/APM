@@ -17,6 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *modelName;
 - (void)testLeak;
 - (NSDictionary *)leakMap;
+
+- (instancetype)initWithCount:(int)count;
+- (void)increment;
+- (int)currentCount;
 @end
 
 NS_ASSUME_NONNULL_END

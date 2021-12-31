@@ -12,6 +12,8 @@
 #import "BPLeakModelManager.h"
 #import "BPLeakHoldView.h"
 #import "BPLeakShowView.h"
+#import "BPContainer.h"
+#import "BPLeakModel.h"
 
 @interface BPMemoryTestVC ()
 
@@ -21,21 +23,47 @@
 @property (nonatomic, strong) BPLeakHoldView *holdView;
 @property (nonatomic, strong) BPLeakShowView *showView;
 @property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, strong) BPContainer *container;
+@property (nonatomic, strong) NSThread *thread;
 @end
 
 @implementation BPMemoryTestVC
 - (void)dealloc
 {
     NSLog(@"%s", __func__);
-    [[BPLeakModelManager sharedManager] unRegisterModel:@"BPLeakHoldView"];
-    [[BPLeakModelManager sharedManager] unRegisterModel:@"BPLeakShowView"];
+//    [[BPLeakModelManager sharedManager] unRegisterModel:@"BPLeakHoldView"];
+//    [[BPLeakModelManager sharedManager] unRegisterModel:@"BPLeakShowView"];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self initManager];
-    [self initViews];
+//    [self initManager];
+//    [self initViews];
+    self.container = [[BPContainer alloc] init];
+
+    for (int i = 0; i < 10; i++) {
+        @autoreleasepool {
+            [self.container addModel:[[BPLeakModel alloc] initWithCount:i]];
+        }
+    }
+
+    self.thread = [[NSThread alloc] initWithTarget:self selector:@selector(loop) object:nil];
+    [self.thread setName:@"com.walle.test"];
+    [self.thread start];
     
+}
+
+- (void)loop
+{
+    while (true) {
+        BPLeakModel *m = [self.container takeModel];
+        [m increment];
+        if (m) {
+            [m increment];
+        } else {
+            break;
+        }
+    }
 }
 
 - (void)initViews

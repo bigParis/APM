@@ -24,6 +24,10 @@
 		2FAB9A6227578258008BF04F /* BPLeakModelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FAB9A6127578257008BF04F /* BPLeakModelManager.m */; };
 		2FAB9A6527579070008BF04F /* BPLeakHoldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FAB9A6427579070008BF04F /* BPLeakHoldView.m */; };
 		2FAB9A6827579C48008BF04F /* BPLeakShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FAB9A6727579C48008BF04F /* BPLeakShowView.m */; };
+		2FB06E90277B113F00C5CD22 /* d8ab2f92559a5b73af0c11437.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2FB06E8F277B113E00C5CD22 /* d8ab2f92559a5b73af0c11437.gif */; };
+		2FB23E8E277D9D6A00C897E9 /* BPBlockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB23E8D277D9D6900C897E9 /* BPBlockViewController.m */; };
+		2FB24744277DB26500C897E9 /* YmEzZjdhMjgtNmY1MC00MWQyLWE5NjEtMzZhN2M2ZTRlODJl.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2FB24743277DB26500C897E9 /* YmEzZjdhMjgtNmY1MC00MWQyLWE5NjEtMzZhN2M2ZTRlODJl.gif */; };
+		2FB78B8E2761C39C00E1365D /* BPContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB78B8D2761C39C00E1365D /* BPContainer.m */; };
 		2FC0B501273900060042CBB1 /* BPYYModelTestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0B500273900060042CBB1 /* BPYYModelTestVC.m */; };
 		2FC63A7F2733802F0006DE6C /* BPBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC63A7E2733802F0006DE6C /* BPBaseView.m */; };
 		2FC63A82273382BD0006DE6C /* BPDeriveTestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC63A81273382BD0006DE6C /* BPDeriveTestVC.m */; };
@@ -106,6 +110,12 @@
 		2FAB9A6427579070008BF04F /* BPLeakHoldView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPLeakHoldView.m; sourceTree = "<group>"; };
 		2FAB9A6627579C48008BF04F /* BPLeakShowView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPLeakShowView.h; sourceTree = "<group>"; };
 		2FAB9A6727579C48008BF04F /* BPLeakShowView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPLeakShowView.m; sourceTree = "<group>"; };
+		2FB06E8F277B113E00C5CD22 /* d8ab2f92559a5b73af0c11437.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = d8ab2f92559a5b73af0c11437.gif; sourceTree = "<group>"; };
+		2FB23E8C277D9D6900C897E9 /* BPBlockViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPBlockViewController.h; sourceTree = "<group>"; };
+		2FB23E8D277D9D6900C897E9 /* BPBlockViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPBlockViewController.m; sourceTree = "<group>"; };
+		2FB24743277DB26500C897E9 /* YmEzZjdhMjgtNmY1MC00MWQyLWE5NjEtMzZhN2M2ZTRlODJl.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = YmEzZjdhMjgtNmY1MC00MWQyLWE5NjEtMzZhN2M2ZTRlODJl.gif; sourceTree = "<group>"; };
+		2FB78B8C2761C39C00E1365D /* BPContainer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPContainer.h; sourceTree = "<group>"; };
+		2FB78B8D2761C39C00E1365D /* BPContainer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPContainer.m; sourceTree = "<group>"; };
 		2FC0B4FF273900060042CBB1 /* BPYYModelTestVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPYYModelTestVC.h; sourceTree = "<group>"; };
 		2FC0B500273900060042CBB1 /* BPYYModelTestVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPYYModelTestVC.m; sourceTree = "<group>"; };
 		2FC63A7D2733802E0006DE6C /* BPBaseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPBaseView.h; sourceTree = "<group>"; };
@@ -284,6 +294,15 @@
 			path = MultiThread;
 			sourceTree = "<group>";
 		};
+		2FB23E8B277D9D5300C897E9 /* Block */ = {
+			isa = PBXGroup;
+			children = (
+				2FB23E8C277D9D6900C897E9 /* BPBlockViewController.h */,
+				2FB23E8D277D9D6900C897E9 /* BPBlockViewController.m */,
+			);
+			path = Block;
+			sourceTree = "<group>";
+		};
 		2FC0B4FE2738FFF30042CBB1 /* YYModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -323,6 +342,8 @@
 				2FAB9A6427579070008BF04F /* BPLeakHoldView.m */,
 				2FAB9A6627579C48008BF04F /* BPLeakShowView.h */,
 				2FAB9A6727579C48008BF04F /* BPLeakShowView.m */,
+				2FB78B8C2761C39C00E1365D /* BPContainer.h */,
+				2FB78B8D2761C39C00E1365D /* BPContainer.m */,
 			);
 			path = Memory;
 			sourceTree = "<group>";
@@ -352,6 +373,8 @@
 		2FCA4202276092E000D3CED2 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				2FB24743277DB26500C897E9 /* YmEzZjdhMjgtNmY1MC00MWQyLWE5NjEtMzZhN2M2ZTRlODJl.gif */,
+				2FB06E8F277B113E00C5CD22 /* d8ab2f92559a5b73af0c11437.gif */,
 				2FCA4203276092E000D3CED2 /* index_anchor_info_live_animation.svga */,
 			);
 			path = Resource;
@@ -394,6 +417,7 @@
 		6003F593195388D20070C39A /* Example for ModHookLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				2FB23E8B277D9D5300C897E9 /* Block */,
 				2FCA4202276092E000D3CED2 /* Resource */,
 				2FCA41FE27608F0200D3CED2 /* SVGA */,
 				2FC0B4FE2738FFF30042CBB1 /* YYModel */,
@@ -549,6 +573,8 @@
 			files = (
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
+				2FB06E90277B113F00C5CD22 /* d8ab2f92559a5b73af0c11437.gif in Resources */,
+				2FB24744277DB26500C897E9 /* YmEzZjdhMjgtNmY1MC00MWQyLWE5NjEtMzZhN2M2ZTRlODJl.gif in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 				2FCA4204276092E100D3CED2 /* index_anchor_info_live_animation.svga in Resources */,
@@ -596,6 +622,7 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ModHookLibrary_Example/Pods-ModHookLibrary_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/ModHookLibrary/APM01.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
@@ -607,6 +634,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/APM01.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
@@ -696,6 +724,7 @@
 				2F102B8D272073AC00433099 /* BPPodLibraryTestViewController.m in Sources */,
 				2FCA420127608F1800D3CED2 /* BPSVGAViewController.m in Sources */,
 				2FAB9A5C27577267008BF04F /* BPLeakModel.m in Sources */,
+				2FB78B8E2761C39C00E1365D /* BPContainer.m in Sources */,
 				2FAB9A6227578258008BF04F /* BPLeakModelManager.m in Sources */,
 				2FD76E7E2754F85800C62981 /* BPTaskView.m in Sources */,
 				2F7D7DCD2721B460003EEE74 /* BPPointArrayMgr.m in Sources */,
@@ -706,6 +735,7 @@
 				2FAB9A6527579070008BF04F /* BPLeakHoldView.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				2FD773232754F8D100C62981 /* YYBubbleTask.m in Sources */,
+				2FB23E8E277D9D6A00C897E9 /* BPBlockViewController.m in Sources */,
 				2F7D7DD02721B586003EEE74 /* BPPointerModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
