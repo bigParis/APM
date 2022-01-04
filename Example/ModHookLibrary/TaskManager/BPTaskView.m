@@ -17,7 +17,6 @@ static const CGFloat kAnimatedDuration = 0.2;
 - (instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
-        self.backgroundColor = UIColor.yellowColor;
     }
     return self;
 }
@@ -118,7 +117,9 @@ static const CGFloat kAnimatedDuration = 0.2;
 - (void)willMoveToSuperview:(UIView *)newSuperview
 {
     if (newSuperview == nil) {
-        NSLog(@"");
+        NSLog(@"-willMoveToSuperview nil-");
+    } else {
+        NSLog(@"-willMoveToSuperview %@-", newSuperview);
     }
 }
 
@@ -144,6 +145,9 @@ static const CGFloat kAnimatedDuration = 0.2;
 {
     if (!animated) {
         [self removeAction];
+        if (completion) {
+            completion(YES);
+        }
         return;
     }
     

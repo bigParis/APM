@@ -157,13 +157,13 @@ typedef NS_ENUM(NSUInteger, YYUnifiedTaskStatus) {
 {
     if (self = [super init]) {
         [self p_configManager];
-        [self p_initTimer];
-#if YY_Env
+#if YYEnv
         [self p_queryConfig];
 #else
         [self p_initTestData];
 #endif
-#if !OFFICIAL_RELEASE
+        [self p_initTimer];
+#if DEBUG
         [self p_loadLocalStorage];
 #endif
     }
@@ -243,7 +243,7 @@ typedef NS_ENUM(NSUInteger, YYUnifiedTaskStatus) {
             YYUnifiedTaskConfigItem *item = [[YYUnifiedTaskConfigItem alloc] init];
             item.isManual = i <= 5;
             item.isForce = (i+1) % 2;
-            item.priorty = i+1;
+            item.priorty = 60-i;
             item.duration = 10;
             item.stay = 0;
             item.roomLimit = 90;
@@ -270,7 +270,6 @@ typedef NS_ENUM(NSUInteger, YYUnifiedTaskStatus) {
         }
     });
 }
-
 
 - (void)p_queryConfig
 {
@@ -316,6 +315,7 @@ typedef NS_ENUM(NSUInteger, YYUnifiedTaskStatus) {
         NSDictionary *dict = bubbleArray[i];
         item.taskId = [dict stringForKey:@"standardCode" or:nil];
         item.duration = [[dict numberForKey:@"largestShowTime" or:@(0)] intValue];
+        item.priorty = [[dict numberForKey:@"sort" or:@(0)] intValue];
         item.taskType = YYUnifiedTaskTypeBubble;
         item.totalLimit = -1;
         item.todayLimit = -1;
@@ -380,15 +380,11 @@ typedef NS_ENUM(NSUInteger, YYUnifiedTaskStatus) {
 {
     NSString *serverDomain;
 #if YYEnv
-    #if OFFICIAL_RELEASE
+    if ([[YYModuleEnvironment sharedObject] isTestServer]) {
+        serverDomain = @"https://test-mob-standard.yy.com";
+    } else {
         serverDomain = @"https://mob-standard.yy.com";
-    #else
-        if ([[YYModuleEnvironment sharedObject] isTestServer]) {
-            serverDomain = @"https://test-mob-standard.yy.com";
-        } else {
-            serverDomain = @"https://mob-standard.yy.com";
-        }
-    #endif
+    }
 #else
     serverDomain = @"https://test-mob-standard.yy.com";
 #endif
@@ -519,9 +515,14 @@ typedef NS_ENUM(NSUInteger, YYUnifiedTaskStatus) {
             return;
         }
         if (self.currentBubbleTopTaskInfo != nil) {
-            // 当前有气泡显示，直接丢弃
-            [self info:kTag message:@"showing bubble %@", self.currentBubbleTopTaskInfo.task.taskId];
-            [self p_discardBubble:taskInfo];
+            // 当前有气泡显示，要判断优先级
+            [self info:kTag message:@"showing bubble %@, show priorty:%@, this priorty:%@", self.currentBubbleTopTaskInfo.task.taskId, @(self.currentBubbleTopTaskInfo.itemConfig.priorty), @(taskInfo.itemConfig.priorty)];
+            if (self.currentBubbleTopTaskInfo.itemConfig.priorty >= taskInfo.itemConfig.priorty) {
+                // 当前显示的气泡优先级>=新来的气泡，新来的丢弃
+                [self p_discardBubbleInQueue:taskInfo];
+            } else {
+                [self p_showBubbleNow:taskInfo atPosition:YYUnifiedTaskShownPositionTop];
+            }
         }
     } else if (YYUnifiedTaskShownPositionBottom == taskInfo.task.taskShownPosition) {
         if (self.currentBubbleBottomTaskInfo == nil) {
@@ -529,20 +530,24 @@ typedef NS_ENUM(NSUInteger, YYUnifiedTaskStatus) {
             return;
         }
         if (self.currentBubbleBottomTaskInfo != nil) {
-            // 当前有气泡显示，直接丢弃
-            [self info:kTag message:@"showing bubble %@", self.currentBubbleBottomTaskInfo.task.taskId];
-            [self p_discardBubble:taskInfo];
+            // 当前有气泡显示，要判断优先级
+            [self info:kTag message:@"showing bubble %@, show priorty:%@, this priorty:%@", self.currentBubbleBottomTaskInfo.task.taskId, @(self.currentBubbleBottomTaskInfo.itemConfig.priorty), @(taskInfo.itemConfig.priorty)];
+            if (self.currentBubbleBottomTaskInfo.itemConfig.priorty >= taskInfo.itemConfig.priorty) {
+                // 当前显示的气泡优先级>=新来的气泡，新来的丢弃
+                [self p_discardBubbleInQueue:taskInfo];
+            } else {
+                [self p_showBubbleNow:taskInfo atPosition:YYUnifiedTaskShownPositionBottom];
+            }
         }
     }
 }
 
 - (void)p_showBubbleNow:(YYUnifiedTaskInfo *)taskInfo atPosition:(YYUnifiedTaskShownPosition)atPosition
 {
-    [self info:kTag message:@"no task now, show task now:%@ atPosition:%@", taskInfo.task.taskId, @(atPosition)];
+    [self info:kTag message:@"try to show task now:%@ atPosition:%@", taskInfo.task.taskId, @(atPosition)];
     taskInfo.taskStatus = YYUnifiedTaskStatusExecuting;
     if (taskInfo.task.delegate == nil) {
         [self error:kTag message:@"task:%@ can not show because no delegate, maybe caused by use weak reference", taskInfo.task.taskId];
-//        return;
     }
     
     if ([taskInfo.task respondsToSelector:@selector(postConditionSatisfiedBlock:)]) {
@@ -553,15 +558,22 @@ typedef NS_ENUM(NSUInteger, YYUnifiedTaskStatus) {
                 [self info:kTag message:@"%@ post condition not satisfied", taskInfo.task.taskId];
                 if ([taskInfo.task.delegate respondsToSelector:@selector(taskHasDiscarded:reason:completion:)]) {
                     [taskInfo.task.delegate taskHasDiscarded:taskInfo.task.taskId reason:YYUnifiedTaskDiscardReasonPostConditionNotSatisfied completion:nil];
-                    [self p_removeTask:taskInfo.task.taskId];
-                    return;
                 }
+                [self p_removeTask:taskInfo.task.taskId];
+                return;
             } else {
                 [self info:kTag message:@"%@ post condition satisfied", taskInfo.task.taskId];
             }
         }
     }
     
+    [self p_dismissCurrentBubble:atPosition completion:^(BOOL finished) {
+        [self p_realShowBubble:taskInfo atPosition:atPosition];
+    }];
+}
+
+- (void)p_realShowBubble:(YYUnifiedTaskInfo *)taskInfo atPosition:(YYUnifiedTaskShownPosition)atPosition
+{
     [taskInfo.task.delegate taskShouldShow:taskInfo.task.taskId showInview:taskInfo.task.taskShowInview completion:^(BOOL finished) {
         taskInfo.taskStatus = YYUnifiedTaskStatusExecuted;
     }];
@@ -583,14 +595,41 @@ typedef NS_ENUM(NSUInteger, YYUnifiedTaskStatus) {
     [self p_addTaskExposureTime:taskInfo.task.taskId];
 }
 
+- (void)p_dismissCurrentBubble:(YYUnifiedTaskShownPosition)atPosition completion:(void(^)(BOOL finished))completion
+{
+    YYUnifiedTaskInfo *taskInfo = nil;
+    if (YYUnifiedTaskShownPositionTop == atPosition) {
+        taskInfo = self.currentBubbleTopTaskInfo;
+    } else if (YYUnifiedTaskShownPositionBottom == atPosition) {
+        taskInfo = self.currentBubbleBottomTaskInfo;
+    }
+    
+    if (taskInfo) {
+        [self info:kTag message:@"dismiss current bubble:%@ at %@", taskInfo.task.taskId, @(atPosition)];
+        [taskInfo.showTimer invalidate];
+        taskInfo.showTimer = nil;
+        [taskInfo.task.delegate taskShouldDismiss:taskInfo.task.taskId completion:completion];
+        taskInfo.taskStatus = YYUnifiedTaskStatusFinished;
+    } else {
+        if (completion) {
+            completion(YES);
+        }
+    }
+}
+
+- (void)p_discardBubbleInQueue:(YYUnifiedTaskInfo *)taskInfo
+{
+    [self p_discardBubble:taskInfo];
+    [self p_removeTask:taskInfo.task.taskId];
+}
+
 - (void)p_discardBubble:(YYUnifiedTaskInfo *)taskInfo
 {
-    [self info:kTag message:@"has bubble show at same position:%@, discard it:%@", @(taskInfo.task.taskShownPosition), taskInfo.task.taskId];
+    [self info:kTag message:@"has bubble show at same position:%@ and has high priorty, discard it:%@", @(taskInfo.task.taskShownPosition), taskInfo.task.taskId];
     if ([taskInfo.task.delegate respondsToSelector:@selector(taskHasDiscarded:reason:completion:)]) {
         taskInfo.taskStatus = YYUnifiedTaskStatusFinished;
         [taskInfo.task.delegate taskHasDiscarded:taskInfo.task.taskId reason:YYUnifiedTaskDiscardReasonATaskIsShown completion:nil];
     }
-    [self p_removeTask:taskInfo.task.taskId];
 }
 
 - (YYUnifiedTaskInfo *)findATaskWhenTimePassOneSecond:(YYUnifiedTaskType)taskType

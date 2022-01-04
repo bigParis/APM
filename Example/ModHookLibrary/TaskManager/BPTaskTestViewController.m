@@ -30,6 +30,7 @@
 @property (nonatomic, weak) UIButton *adjustLayoutBtn;
 @property (nonatomic, weak) UIButton *reuseBtn;
 @property (nonatomic, weak) UIButton *crashBtn;
+@property (nonatomic, weak) UIButton *priortyBtn;
 
 @property (nonatomic, strong) YYUnifiedTaskModel *tx;
 @property (nonatomic, strong) BPTaskView *topTipsView;
@@ -59,9 +60,9 @@
     [super viewDidLoad];
     [self initViews];
 //    [self prepareReuseBubble];
-//    [self prepareTwoBubble];
+    [self prepareTwoBubble];
 //    [self prepareCycleTask];
-    [self prepareMasonryBubble];
+//    [self prepareMasonryBubble];
 }
 
 - (void)initViews
@@ -176,6 +177,14 @@
     [self.taskBtnView addSubview:crashBtn];
     self.crashBtn = crashBtn;
     
+    UIButton *priortyBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+    [priortyBtn setTitle:@"优先级" forState:UIControlStateNormal];
+    [priortyBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
+    [priortyBtn setBackgroundColor:UIColor.cyanColor];
+    [priortyBtn addTarget:self action:@selector(onPriortyBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.taskBtnView addSubview:priortyBtn];
+    self.priortyBtn = priortyBtn;
+    
 }
 
 - (void)viewDidLayoutSubviews
@@ -196,7 +205,8 @@
     self.restoreLayoutTaskBtn.frame = CGRectMake(30, CGRectGetMaxY(self.updateLayoutTaskBtn.frame) + 10, 120, 30);
     self.reuseBtn.frame = CGRectMake(30, CGRectGetMaxY(self.restoreLayoutTaskBtn.frame) + 10, 120, 30);
     self.crashBtn.frame = CGRectMake(30, CGRectGetMaxY(self.reuseBtn.frame) + 10, 120, 30);
-    
+    self.priortyBtn.frame = CGRectMake(30, CGRectGetMaxY(self.crashBtn.frame) + 10, 120, 30);
+
     self.adjustLayoutBtn.frame = CGRectMake(CGRectGetMaxX(self.bubbleBtn.frame) + 20, 10, 120, 30);
 }
 
@@ -243,11 +253,18 @@
     __weak __typeof(self) weakSelf = self;
     self.bottomTipsView.willShowBlock = ^{
         __strong __typeof(self) strongSelf = weakSelf;
-        strongSelf.bottomTipsView.frame = CGRectMake((strongSelf.view.bounds.size.width - 100) * 0.5, CGRectGetMinY(strongSelf.taskBtnView.frame), 100, 20);
-//        CGRectMake(10, CGRectGetMaxY(self.stopBtn.frame) + 10, self.view.bounds.size.width - 20, self.view.bounds.size.height * 0.5);
-        [strongSelf.view setNeedsLayout];
-        [strongSelf.view layoutIfNeeded];
-        strongSelf.taskBtnView.frame = CGRectMake(10, CGRectGetMaxY(strongSelf.bottomTipsView.frame) + 10, self.view.bounds.size.width - 20, self.view.bounds.size.height * 0.5);
+//        strongSelf.bottomTipsView.frame = CGRectMake((strongSelf.view.bounds.size.width - 100) * 0.5, CGRectGetMinY(strongSelf.taskBtnView.frame), 100, 20);
+////        CGRectMake(10, CGRectGetMaxY(self.stopBtn.frame) + 10, self.view.bounds.size.width - 20, self.view.bounds.size.height * 0.5);
+//        [strongSelf.view setNeedsLayout];
+//        [strongSelf.view layoutIfNeeded];
+//        strongSelf.taskBtnView.frame = CGRectMake(10, CGRectGetMaxY(strongSelf.bottomTipsView.frame) + 10, self.view.bounds.size.width - 20, self.view.bounds.size.height * 0.5);
+//        strongSelf.bottomTipsView.backgroundColor = [UIColor blueColor];
+        strongSelf.bottomTipsView.frame = CGRectMake((strongSelf.view.bounds.size.width - 100) * 0.5, strongSelf.view.bounds.size.height - 60, 100, 20);
+        if (strongSelf.isTop) {
+            strongSelf.bottomTipsView.backgroundColor = [UIColor redColor];
+        } else {
+            strongSelf.bottomTipsView.backgroundColor = [UIColor blueColor];
+        }
     };
     
     self.bottomTipsView.removeFromSuperBlock = ^{
@@ -259,8 +276,10 @@
         __strong __typeof(self) strongSelf = weakSelf;
         if (strongSelf.isTop) {
             strongSelf.topTipsView.frame = CGRectMake((weakSelf.view.bounds.size.width - 100) * 0.5, 60, 100, 20);
+            strongSelf.topTipsView.backgroundColor = [UIColor redColor];
         } else {
             strongSelf.topTipsView.frame = CGRectMake((weakSelf.view.bounds.size.width - 100) * 0.5, weakSelf.view.bounds.size.height - 60, 100, 20);
+            strongSelf.topTipsView.backgroundColor = [UIColor blueColor];
         }
     };
     
@@ -378,6 +397,16 @@
 - (void)onCrashClicked
 {
     [self.masonryTipsView showInView:self.view position:YYBubblePostionTypeTop duration:10 taskId:@"bubble_task6" expectedDelay:5 showImmediately:NO];
+}
+
+- (void)onPriortyBtnClicked
+{
+    static int x = 0;
+    x++;
+    NSString *taskId = [NSString stringWithFormat:@"bubble_task%@", @(x)];
+    self.isTop = x % 2 == 0;
+    
+    [self.bottomTipsView showInView:self.view position:YYBubblePostionTypeBottom duration:100 taskId:taskId expectedDelay:0 showImmediately:NO];
 }
 
 - (void)onImmediatellyClicked
