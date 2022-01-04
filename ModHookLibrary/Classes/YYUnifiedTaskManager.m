@@ -135,6 +135,7 @@ typedef NS_ENUM(NSUInteger, YYUnifiedTaskStatus) {
 #endif
 @property (nonatomic, copy) NSArray<YYUnifiedTaskStorageModel *> *savedModels;
 @property (nonatomic, strong) NSMutableArray *pendingTasks;
+@property (nonatomic, assign) BOOL queryingConfig;
 
 @end
 
@@ -273,6 +274,7 @@ typedef NS_ENUM(NSUInteger, YYUnifiedTaskStatus) {
 
 - (void)p_queryConfig
 {
+    self.queryingConfig = YES;
 #if YYEnv
     WEAKIFYSELF;
     [[YYHttpClient sharedClient] GET:[self p_taskConfigURL] parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -288,6 +290,7 @@ typedef NS_ENUM(NSUInteger, YYUnifiedTaskStatus) {
 
 - (void)p_processConfigDataByUseLocalData
 {
+    self.queryingConfig = NO;
     NSDictionary *savedData = [self p_objectForKey:kYYUnifiedTaskConfigStorage];
     YYUnifiedTaskConfig *config = [YYUnifiedTaskConfig yy_modelWithJSON:savedData];
     self.taskConfigMap[@"bubble"] = config;
@@ -305,6 +308,7 @@ typedef NS_ENUM(NSUInteger, YYUnifiedTaskStatus) {
 
 - (void)p_processConfigData:(NSDictionary *)responseDict
 {
+    self.queryingConfig = NO;
 #if YYEnv
     NSDictionary *data = [responseDict dictionaryForKey:@"data" or:nil];
     NSArray *bubbleArray = [data arrayForKey:@"bubbleStandards" or:nil];
@@ -709,6 +713,9 @@ typedef NS_ENUM(NSUInteger, YYUnifiedTaskStatus) {
             [self addTask:task completion:completion];
         };
         [self.pendingTasks addObject:block];
+        if (!self.queryingConfig) {
+            [self p_queryConfig];
+        }
         return;
     }
     
