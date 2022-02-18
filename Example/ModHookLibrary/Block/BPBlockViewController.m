@@ -8,6 +8,27 @@
 
 #import "BPBlockViewController.h"
 
+//这是一个简化代码
+@interface TestObj: NSObject
+
+-(NSString*)testString;
+
+-(NSInteger)length;
+
+@end
+
+@implementation TestObj
+- (NSInteger)length
+{
+    return 10;
+}
+
+//- (NSString *)testString
+//{
+//    return @"1234567";
+//}
+@end
+
 @interface BPBlockViewController ()
 
 @end
@@ -26,7 +47,16 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    [self test1];
+//    [self testCrash];
+    BOOL isHello = YES;
+    int x = 50;
+    NSString *test = @"123";
+    
+    if (isHello && (x > 10) && [test isEqualToString:@"123"]) {
+        NSLog(@"");
+    } else {
+        NSLog(@"failed");
+    }
 }
 
 - (void)test1
@@ -53,5 +83,25 @@
     if (completed) {
         completed();
     }
+}
+
+- (void)testCrash
+{
+    [self fn:[TestObj new] queue:dispatch_get_global_queue(0, 0)];
+}
+
+//代码片段
+-(void)fn:(TestObj*)testObj queue:(dispatch_queue_t)queue {
+    dispatch_async(queue, ^{
+        @autoreleasepool {
+              if ([testObj length] != 0) {
+                  NSString *suffix = [testObj testString];
+                  const static int len = 4;
+                  if (suffix.length > len) {
+                      suffix = [suffix substringToIndex:len];
+                  }
+              }
+        }
+    });
 }
 @end

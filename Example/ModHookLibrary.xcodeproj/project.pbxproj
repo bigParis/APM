@@ -25,6 +25,10 @@
 		2FAB9A6527579070008BF04F /* BPLeakHoldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FAB9A6427579070008BF04F /* BPLeakHoldView.m */; };
 		2FAB9A6827579C48008BF04F /* BPLeakShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FAB9A6727579C48008BF04F /* BPLeakShowView.m */; };
 		2FB06E90277B113F00C5CD22 /* d8ab2f92559a5b73af0c11437.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2FB06E8F277B113E00C5CD22 /* d8ab2f92559a5b73af0c11437.gif */; };
+		2FB1614827A27DA2001F638E /* BPListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB1614727A27DA2001F638E /* BPListViewController.m */; };
+		2FB1614B27A27E49001F638E /* BPTableViewDiffableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB1614A27A27E49001F638E /* BPTableViewDiffableDataSource.m */; };
+		2FB1655B27A28B24001F638E /* BPOldTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB1655A27A28B24001F638E /* BPOldTableViewDataSource.m */; };
+		2FB1655E27A28C80001F638E /* BPDiffableModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB1655D27A28C80001F638E /* BPDiffableModel.m */; };
 		2FB23E8E277D9D6A00C897E9 /* BPBlockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB23E8D277D9D6900C897E9 /* BPBlockViewController.m */; };
 		2FB24744277DB26500C897E9 /* YmEzZjdhMjgtNmY1MC00MWQyLWE5NjEtMzZhN2M2ZTRlODJl.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2FB24743277DB26500C897E9 /* YmEzZjdhMjgtNmY1MC00MWQyLWE5NjEtMzZhN2M2ZTRlODJl.gif */; };
 		2FB78B8E2761C39C00E1365D /* BPContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB78B8D2761C39C00E1365D /* BPContainer.m */; };
@@ -43,6 +47,7 @@
 		2FD773232754F8D100C62981 /* YYBubbleTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FD773222754F8D100C62981 /* YYBubbleTask.m */; };
 		2FDB238D272F7C6D005DF5C5 /* BPMultiThreadSafeObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB238C272F7C6D005DF5C5 /* BPMultiThreadSafeObject.m */; };
 		2FDB2390272F7E99005DF5C5 /* BPMutableArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB238F272F7E99005DF5C5 /* BPMutableArray.m */; };
+		2FF1B17227911904006037C7 /* BPMachOViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FF1B17127911904006037C7 /* BPMachOViewController.m */; };
 		545F40E71056993860B1842C /* Pods_ModHookLibrary_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55595D1FDF89645129853311 /* Pods_ModHookLibrary_Example.framework */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
@@ -111,6 +116,14 @@
 		2FAB9A6627579C48008BF04F /* BPLeakShowView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPLeakShowView.h; sourceTree = "<group>"; };
 		2FAB9A6727579C48008BF04F /* BPLeakShowView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPLeakShowView.m; sourceTree = "<group>"; };
 		2FB06E8F277B113E00C5CD22 /* d8ab2f92559a5b73af0c11437.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = d8ab2f92559a5b73af0c11437.gif; sourceTree = "<group>"; };
+		2FB1614627A27DA2001F638E /* BPListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPListViewController.h; sourceTree = "<group>"; };
+		2FB1614727A27DA2001F638E /* BPListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPListViewController.m; sourceTree = "<group>"; };
+		2FB1614927A27E49001F638E /* BPTableViewDiffableDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPTableViewDiffableDataSource.h; sourceTree = "<group>"; };
+		2FB1614A27A27E49001F638E /* BPTableViewDiffableDataSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPTableViewDiffableDataSource.m; sourceTree = "<group>"; };
+		2FB1655927A28B24001F638E /* BPOldTableViewDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPOldTableViewDataSource.h; sourceTree = "<group>"; };
+		2FB1655A27A28B24001F638E /* BPOldTableViewDataSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPOldTableViewDataSource.m; sourceTree = "<group>"; };
+		2FB1655C27A28C80001F638E /* BPDiffableModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPDiffableModel.h; sourceTree = "<group>"; };
+		2FB1655D27A28C80001F638E /* BPDiffableModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPDiffableModel.m; sourceTree = "<group>"; };
 		2FB23E8C277D9D6900C897E9 /* BPBlockViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPBlockViewController.h; sourceTree = "<group>"; };
 		2FB23E8D277D9D6900C897E9 /* BPBlockViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPBlockViewController.m; sourceTree = "<group>"; };
 		2FB24743277DB26500C897E9 /* YmEzZjdhMjgtNmY1MC00MWQyLWE5NjEtMzZhN2M2ZTRlODJl.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = YmEzZjdhMjgtNmY1MC00MWQyLWE5NjEtMzZhN2M2ZTRlODJl.gif; sourceTree = "<group>"; };
@@ -145,6 +158,8 @@
 		2FDB238C272F7C6D005DF5C5 /* BPMultiThreadSafeObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPMultiThreadSafeObject.m; sourceTree = "<group>"; };
 		2FDB238E272F7E99005DF5C5 /* BPMutableArray.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPMutableArray.h; sourceTree = "<group>"; };
 		2FDB238F272F7E99005DF5C5 /* BPMutableArray.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPMutableArray.m; sourceTree = "<group>"; };
+		2FF1B17027911904006037C7 /* BPMachOViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPMachOViewController.h; sourceTree = "<group>"; };
+		2FF1B17127911904006037C7 /* BPMachOViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPMachOViewController.m; sourceTree = "<group>"; };
 		3FF95F849A1C867389655295 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		55595D1FDF89645129853311 /* Pods_ModHookLibrary_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ModHookLibrary_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58A195388D20070C39A /* ModHookLibrary_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ModHookLibrary_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -294,6 +309,21 @@
 			path = MultiThread;
 			sourceTree = "<group>";
 		};
+		2FB1614527A27D89001F638E /* List */ = {
+			isa = PBXGroup;
+			children = (
+				2FB1614627A27DA2001F638E /* BPListViewController.h */,
+				2FB1614727A27DA2001F638E /* BPListViewController.m */,
+				2FB1614927A27E49001F638E /* BPTableViewDiffableDataSource.h */,
+				2FB1614A27A27E49001F638E /* BPTableViewDiffableDataSource.m */,
+				2FB1655927A28B24001F638E /* BPOldTableViewDataSource.h */,
+				2FB1655A27A28B24001F638E /* BPOldTableViewDataSource.m */,
+				2FB1655C27A28C80001F638E /* BPDiffableModel.h */,
+				2FB1655D27A28C80001F638E /* BPDiffableModel.m */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
 		2FB23E8B277D9D5300C897E9 /* Block */ = {
 			isa = PBXGroup;
 			children = (
@@ -380,6 +410,15 @@
 			path = Resource;
 			sourceTree = "<group>";
 		};
+		2FF1B16F279118EB006037C7 /* Mach-O */ = {
+			isa = PBXGroup;
+			children = (
+				2FF1B17027911904006037C7 /* BPMachOViewController.h */,
+				2FF1B17127911904006037C7 /* BPMachOViewController.m */,
+			);
+			path = "Mach-O";
+			sourceTree = "<group>";
+		};
 		6003F581195388D10070C39A = {
 			isa = PBXGroup;
 			children = (
@@ -417,6 +456,8 @@
 		6003F593195388D20070C39A /* Example for ModHookLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				2FB1614527A27D89001F638E /* List */,
+				2FF1B16F279118EB006037C7 /* Mach-O */,
 				2FB23E8B277D9D5300C897E9 /* Block */,
 				2FCA4202276092E000D3CED2 /* Resource */,
 				2FCA41FE27608F0200D3CED2 /* SVGA */,
@@ -701,17 +742,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FB1614827A27DA2001F638E /* BPListViewController.m in Sources */,
 				2FC63A88273383340006DE6C /* BPSubView2.m in Sources */,
 				2FC966FF272A92E0008819D1 /* BPTemplateVC.m in Sources */,
 				2FA90D7F2727A2A50099A3F0 /* BPMultiManager.m in Sources */,
+				2FB1655B27A28B24001F638E /* BPOldTableViewDataSource.m in Sources */,
 				2F78C0B72726FCF100C0E335 /* BPPrivateModelVC.m in Sources */,
 				2F78C0BB2726FDD500C0E335 /* BPUserObject.m in Sources */,
+				2FB1655E27A28C80001F638E /* BPDiffableModel.m in Sources */,
 				2F7D7DCA2721B441003EEE74 /* BPPointerArrayVC.m in Sources */,
 				2FC96702272A92F8008819D1 /* BPTemplateBase.m in Sources */,
 				2FDB2390272F7E99005DF5C5 /* BPMutableArray.m in Sources */,
+				2FF1B17227911904006037C7 /* BPMachOViewController.m in Sources */,
 				6003F59E195388D20070C39A /* BPAppDelegate.m in Sources */,
 				2FC63A85273383240006DE6C /* BPSubView1.m in Sources */,
 				2FC0B501273900060042CBB1 /* BPYYModelTestVC.m in Sources */,
+				2FB1614B27A27E49001F638E /* BPTableViewDiffableDataSource.m in Sources */,
 				2FA909EE272791C00099A3F0 /* BPNetworkTestVC.m in Sources */,
 				2FC63A7F2733802F0006DE6C /* BPBaseView.m in Sources */,
 				2FAB9A6827579C48008BF04F /* BPLeakShowView.m in Sources */,

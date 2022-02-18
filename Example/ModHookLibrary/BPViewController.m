@@ -61,6 +61,8 @@ static NSString *kTableViewCellIdentifier = @"TableViewCellIdentifier";
     [tempArray addObject:[self createModelWith:@"YYModel" vcName:@"BPYYModelTestVC"]];
     [tempArray addObject:[self createModelWith:@"SVGA" vcName:@"BPSVGAViewController"]];
     [tempArray addObject:[self createModelWith:@"Block" vcName:@"BPBlockViewController"]];
+    [tempArray addObject:[self createModelWith:@"Mach-O" vcName:@"BPMachOViewController"]];
+    [tempArray addObject:[self createModelWith:@"列表" vcName:@"BPListViewController"]];
     self.dataSource = tempArray;
 }
 
