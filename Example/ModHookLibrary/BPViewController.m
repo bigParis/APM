@@ -63,6 +63,8 @@ static NSString *kTableViewCellIdentifier = @"TableViewCellIdentifier";
     [tempArray addObject:[self createModelWith:@"Block" vcName:@"BPBlockViewController"]];
     [tempArray addObject:[self createModelWith:@"Mach-O" vcName:@"BPMachOViewController"]];
     [tempArray addObject:[self createModelWith:@"列表" vcName:@"BPListViewController"]];
+    [tempArray addObject:[self createModelWith:@"运行时" vcName:@"BPRuntimeViewController"]];
+    [tempArray addObject:[self createModelWith:@"WebView" vcName:@"BPWebViewController"]];
     self.dataSource = tempArray;
 }
 
