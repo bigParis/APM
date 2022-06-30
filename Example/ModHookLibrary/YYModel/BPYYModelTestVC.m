@@ -18,6 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     /*
 //    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     NSMutableArray *temp = [NSMutableArray array];
@@ -68,5 +69,69 @@
     NSArray <YYUnifiedTaskStorageModel *> *models = [NSArray yy_modelArrayWithClass:YYUnifiedTaskStorageModel.class json:writedData];
     NSLog(@"%@", @(models[1].item.lastUpdateTime));
    */
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+//    NSString *ip = @"sdasfasdf23easdfasdfadsfdf[dyimg]0dfasdfasdfasdfadsfas asdfasdfasdf s dfadsf asdf asd fasdf 0[/dyimg] sdfasd fasd fas r23e2 efasdf adf asdfasdf adsfadsf asdf adf 2 fdsafadsf ads f";
+//
+//    NSTimeInterval now = [[NSDate date] timeIntervalSince1970];
+//    for (int i = 0; i < 100000; ++i) {
+//        NSRegularExpression *regex = [[NSRegularExpression alloc] initWithPattern:@".*\\[dyimg\\].*\\[/dyimg\\].*"
+//                                                                          options:NSRegularExpressionCaseInsensitive
+//                                                                            error:NULL];
+//        NSArray<NSTextCheckingResult *> *result = [regex matchesInString:ip options:0 range:NSMakeRange(0, ip.length)];
+//        if (result.count) {
+////            NSLog(@"--");
+//        }
+//    }
+    
+//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//        while(1) {
+//            NSRegularExpression *regex = [[NSRegularExpression alloc] initWithPattern:@".*\\[dyimg\\].*\\[/dyimg\\].*"
+//                                                                              options:NSRegularExpressionCaseInsensitive
+//                                                                                error:NULL];
+//            NSArray<NSTextCheckingResult *> *result = [regex matchesInString:ip options:0 range:NSMakeRange(0, ip.length)];
+//            if (result.count) {
+//    //            NSLog(@"--");
+//            }
+//        }
+//    });
+
+    
+//    NSTimeInterval duration = [[NSDate date] timeIntervalSince1970] - now;
+//    NSLog(@"duration:%@, length:%@", @(duration), @(ip.length));
+        NSOperationQueue *operationQueue= [[NSOperationQueue alloc]init];
+        if (@available(iOS 13.0, *)) {
+            operationQueue.progress.totalUnitCount = 100;
+        } else {
+            // Fallback on earlier versions
+        }
+        operationQueue.maxConcurrentOperationCount = 1;
+        
+        for (int i = 0; i < 50; ++i) {
+            NSBlockOperation *blockOperation1 = [NSBlockOperation blockOperationWithBlock:^{
+                NSLog(@"低优先级任务:%@", @(i+1));
+            }];
+            blockOperation1.queuePriority = NSOperationQueuePriorityVeryLow;
+            [operationQueue addOperation:blockOperation1];
+        }
+        [operationQueue addBarrierBlock:^{
+            NSLog(@"7:%@ progress:%@", [NSThread currentThread] ,operationQueue.progress);
+        }];
+        for (int i = 0; i < 50; ++i) {
+            NSBlockOperation *blockOperation2=[NSBlockOperation blockOperationWithBlock:^{
+                NSLog(@"高优先级任务:%@", @(i+1));
+            }];
+            blockOperation2.queuePriority = NSOperationQueuePriorityHigh;
+            [operationQueue addOperation:blockOperation2];
+        }
+        
+        NSBlockOperation *blockOperation3=[NSBlockOperation blockOperationWithBlock:^{
+            NSLog(@"超高优先级任务");
+        }];
+        blockOperation3.queuePriority = NSOperationQueuePriorityVeryHigh;
+        [operationQueue addOperation:blockOperation3];
+
 }
 @end

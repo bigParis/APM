@@ -113,13 +113,15 @@ DefineGetNameInst(int, Fruit)
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
+    NSString *test = [[NSString alloc] initWithFormat:@"%@ori-%p", @"ylk_play", self];
+    NSLog(@"test:%@", test);
     [self getASLR1];
-    [self getASLR2];
-    BOOL res = checkMethodBeHooked([self class], @selector(loadData));
-    NSLog(@"res:%@", @(res));
-    [self loadData];
-    ABC(@"I", @"Love");
-    NSLog(@"%s", testData);
+//    [self getASLR2];
+//    BOOL res = checkMethodBeHooked([self class], @selector(loadData));
+//    NSLog(@"res:%@", @(res));
+//    [self loadData];
+//    ABC(@"I", @"Love");
+//    NSLog(@"%s", testData);
 }
 
 - (void)loadData

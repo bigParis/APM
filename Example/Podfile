@@ -10,6 +10,8 @@ target 'ModHookLibrary_Example' do
   pod 'YYModel', '1.0.4'
   pod 'SVGAPlayer', '~> 2.5'
   pod 'FLAnimatedImage', '~> 1.0'
+  pod 'matrix-wechat'
+  
   target 'ModHookLibrary_Tests' do
     inherit! :search_paths
 

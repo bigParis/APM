@@ -12,6 +12,7 @@
 @interface BPMultiThreadVC ()
 @property (nonatomic, weak) UIButton *beginBtn;
 @property (nonatomic, weak) UIButton *endBtn;
+@property (nonatomic, strong) NSMutableArray *threads;
 @end
 
 @implementation BPMultiThreadVC
@@ -51,7 +52,19 @@
 
 - (void)onBeginBtnClicked:(UIButton *)sender
 {
-    [[BPMultiManager sharedManager] beginTask];
+//    [[BPMultiManager sharedManager] beginTask];
+    for (int i = 0; i < 100; ++i) {
+        NSThread *td = [[NSThread alloc] initWithBlock:^{
+            while (1) {
+                sleep(3);
+//                NSLog(@"thread:%@", [NSThread currentThread]);
+//                NSLog(@"i:%@", @(i));
+            }
+        
+        }];
+        [td start];
+        [self.threads addObject:td];
+    }
 }
 
 - (void)onEndBtnClicked:(UIButton *)sender
@@ -61,5 +74,13 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
+}
+
+- (NSMutableArray *)threads
+{
+    if (_threads == nil) {
+        _threads = [NSMutableArray array];
+    }
+    return _threads;
 }
 @end

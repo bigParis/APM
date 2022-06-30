@@ -11,11 +11,16 @@
 		2F102B892720731600433099 /* BPAPMTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F102B882720731600433099 /* BPAPMTestViewController.m */; };
 		2F102B8D272073AC00433099 /* BPPodLibraryTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F102B8C272073AC00433099 /* BPPodLibraryTestViewController.m */; };
 		2F102B902720779E00433099 /* BPTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F102B8F2720779E00433099 /* BPTableViewCell.m */; };
+		2F14E50A284604AD007E6503 /* tianaiwebp.webp in Resources */ = {isa = PBXBuildFile; fileRef = 2F14E509284604AD007E6503 /* tianaiwebp.webp */; };
+		2F14E50C28460B5B007E6503 /* tianai2webp.webp in Resources */ = {isa = PBXBuildFile; fileRef = 2F14E50B28460B5B007E6503 /* tianai2webp.webp */; };
 		2F78C0B72726FCF100C0E335 /* BPPrivateModelVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F78C0B62726FCF100C0E335 /* BPPrivateModelVC.m */; };
 		2F78C0BB2726FDD500C0E335 /* BPUserObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F78C0BA2726FDD500C0E335 /* BPUserObject.m */; };
 		2F7D7DCA2721B441003EEE74 /* BPPointerArrayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F7D7DC92721B441003EEE74 /* BPPointerArrayVC.m */; };
 		2F7D7DCD2721B460003EEE74 /* BPPointArrayMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F7D7DCC2721B460003EEE74 /* BPPointArrayMgr.m */; };
 		2F7D7DD02721B586003EEE74 /* BPPointerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F7D7DCF2721B586003EEE74 /* BPPointerModel.m */; };
+		2F855B1B282CE91500DA73ED /* NSTimer+hook.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F855B1A282CE91500DA73ED /* NSTimer+hook.m */; };
+		2F855D36282D198500DA73ED /* BPTimerMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F855D35282D198500DA73ED /* BPTimerMonitor.m */; };
+		2F9EA7C9283B697B00ADE60F /* BPTaggedPointerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9EA7C8283B697B00ADE60F /* BPTaggedPointerViewController.m */; };
 		2FA24B4B27D6172D00E0A6C9 /* BPWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA24B4A27D6172D00E0A6C9 /* BPWebViewController.m */; };
 		2FA909EE272791C00099A3F0 /* BPNetworkTestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA909EC272791C00099A3F0 /* BPNetworkTestVC.m */; };
 		2FA90D7C2727A2520099A3F0 /* BPMultiThreadVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA90D7B2727A2520099A3F0 /* BPMultiThreadVC.m */; };
@@ -83,6 +88,7 @@
 
 /* Begin PBXFileReference section */
 		12681349A1680BC2EE4B8104 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		2F07E4712817E4C700ACF8E2 /* Matrix.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Matrix.framework; path = "../../../../matrix/matrix/matrix-iOS/build_ios/Matrix.framework"; sourceTree = "<group>"; };
 		2F102B832720728900433099 /* BPTaskTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPTaskTestViewController.h; sourceTree = "<group>"; };
 		2F102B842720728900433099 /* BPTaskTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPTaskTestViewController.m; sourceTree = "<group>"; };
 		2F102B872720731600433099 /* BPAPMTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPAPMTestViewController.h; sourceTree = "<group>"; };
@@ -91,6 +97,8 @@
 		2F102B8C272073AC00433099 /* BPPodLibraryTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPPodLibraryTestViewController.m; sourceTree = "<group>"; };
 		2F102B8E2720779E00433099 /* BPTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPTableViewCell.h; sourceTree = "<group>"; };
 		2F102B8F2720779E00433099 /* BPTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPTableViewCell.m; sourceTree = "<group>"; };
+		2F14E509284604AD007E6503 /* tianaiwebp.webp */ = {isa = PBXFileReference; lastKnownFileType = file; path = tianaiwebp.webp; sourceTree = "<group>"; };
+		2F14E50B28460B5B007E6503 /* tianai2webp.webp */ = {isa = PBXFileReference; lastKnownFileType = file; path = tianai2webp.webp; sourceTree = "<group>"; };
 		2F78C0B52726FCF100C0E335 /* BPPrivateModelVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPPrivateModelVC.h; sourceTree = "<group>"; };
 		2F78C0B62726FCF100C0E335 /* BPPrivateModelVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPPrivateModelVC.m; sourceTree = "<group>"; };
 		2F78C0B82726FD6D00C0E335 /* IBPPrivateModelProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IBPPrivateModelProtocol.h; sourceTree = "<group>"; };
@@ -103,6 +111,12 @@
 		2F7D7DCE2721B586003EEE74 /* BPPointerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPPointerModel.h; sourceTree = "<group>"; };
 		2F7D7DCF2721B586003EEE74 /* BPPointerModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPPointerModel.m; sourceTree = "<group>"; };
 		2F7D7DD12721B5DD003EEE74 /* IBPPointerProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IBPPointerProtocol.h; sourceTree = "<group>"; };
+		2F855B19282CE91500DA73ED /* NSTimer+hook.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSTimer+hook.h"; sourceTree = "<group>"; };
+		2F855B1A282CE91500DA73ED /* NSTimer+hook.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+hook.m"; sourceTree = "<group>"; };
+		2F855D34282D198500DA73ED /* BPTimerMonitor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPTimerMonitor.h; sourceTree = "<group>"; };
+		2F855D35282D198500DA73ED /* BPTimerMonitor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPTimerMonitor.m; sourceTree = "<group>"; };
+		2F9EA7C7283B697B00ADE60F /* BPTaggedPointerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPTaggedPointerViewController.h; sourceTree = "<group>"; };
+		2F9EA7C8283B697B00ADE60F /* BPTaggedPointerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPTaggedPointerViewController.m; sourceTree = "<group>"; };
 		2FA24B4927D6172D00E0A6C9 /* BPWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPWebViewController.h; sourceTree = "<group>"; };
 		2FA24B4A27D6172D00E0A6C9 /* BPWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPWebViewController.m; sourceTree = "<group>"; };
 		2FA909EC272791C00099A3F0 /* BPNetworkTestVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPNetworkTestVC.m; sourceTree = "<group>"; };
@@ -297,6 +311,15 @@
 			path = NSPointerArray;
 			sourceTree = "<group>";
 		};
+		2F9EA7C6283B696000ADE60F /* TaggedPointer */ = {
+			isa = PBXGroup;
+			children = (
+				2F9EA7C7283B697B00ADE60F /* BPTaggedPointerViewController.h */,
+				2F9EA7C8283B697B00ADE60F /* BPTaggedPointerViewController.m */,
+			);
+			path = TaggedPointer;
+			sourceTree = "<group>";
+		};
 		2FA24B4827D6171900E0A6C9 /* WebView */ = {
 			isa = PBXGroup;
 			children = (
@@ -406,6 +429,10 @@
 				2FC7377F27CF68D90041A89B /* BPRuntimeViewController.m */,
 				2FC7378127CF69030041A89B /* BPRuntimeExcutor.h */,
 				2FC7378227CF69030041A89B /* BPRuntimeExcutor.m */,
+				2F855B19282CE91500DA73ED /* NSTimer+hook.h */,
+				2F855B1A282CE91500DA73ED /* NSTimer+hook.m */,
+				2F855D34282D198500DA73ED /* BPTimerMonitor.h */,
+				2F855D35282D198500DA73ED /* BPTimerMonitor.m */,
 			);
 			path = Runtime;
 			sourceTree = "<group>";
@@ -484,6 +511,7 @@
 		6003F58C195388D20070C39A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2F07E4712817E4C700ACF8E2 /* Matrix.framework */,
 				6003F58D195388D20070C39A /* Foundation.framework */,
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
@@ -497,6 +525,7 @@
 		6003F593195388D20070C39A /* Example for ModHookLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				2F9EA7C6283B696000ADE60F /* TaggedPointer */,
 				2FD3D5BA27D7364F0045B4D8 /* Tabbar */,
 				2FA24B4827D6171900E0A6C9 /* WebView */,
 				2FC7377D27CF68C20041A89B /* Runtime */,
@@ -534,6 +563,8 @@
 		6003F594195388D20070C39A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2F14E50B28460B5B007E6503 /* tianai2webp.webp */,
+				2F14E509284604AD007E6503 /* tianaiwebp.webp */,
 				6003F595195388D20070C39A /* ModHookLibrary-Info.plist */,
 				6003F596195388D20070C39A /* InfoPlist.strings */,
 				6003F599195388D20070C39A /* main.m */,
@@ -658,11 +689,13 @@
 			files = (
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
+				2F14E50C28460B5B007E6503 /* tianai2webp.webp in Resources */,
 				2FB06E90277B113F00C5CD22 /* d8ab2f92559a5b73af0c11437.gif in Resources */,
 				2FB24744277DB26500C897E9 /* YmEzZjdhMjgtNmY1MC00MWQyLWE5NjEtMzZhN2M2ZTRlODJl.gif in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 				2FCA4204276092E100D3CED2 /* index_anchor_info_live_animation.svga in Resources */,
+				2F14E50A284604AD007E6503 /* tianaiwebp.webp in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -715,6 +748,7 @@
 				"${BUILT_PRODUCTS_DIR}/SSZipArchive/SSZipArchive.framework",
 				"${BUILT_PRODUCTS_DIR}/SVGAPlayer/SVGAPlayer.framework",
 				"${BUILT_PRODUCTS_DIR}/YYModel/YYModel.framework",
+				"${BUILT_PRODUCTS_DIR}/matrix-wechat/Matrix.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -727,6 +761,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SSZipArchive.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGAPlayer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYModel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Matrix.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -811,6 +846,7 @@
 				2FC63A82273382BD0006DE6C /* BPDeriveTestVC.m in Sources */,
 				2FDB238D272F7C6D005DF5C5 /* BPMultiThreadSafeObject.m in Sources */,
 				2FC7378327CF69030041A89B /* BPRuntimeExcutor.m in Sources */,
+				2F855D36282D198500DA73ED /* BPTimerMonitor.m in Sources */,
 				2FAB9A5F275781BB008BF04F /* BPHoldModel.m in Sources */,
 				2FC64FCB27353C3D0006DE6C /* BPMemoryTestVC.m in Sources */,
 				2FA90D7C2727A2520099A3F0 /* BPMultiThreadVC.m in Sources */,
@@ -819,11 +855,13 @@
 				2FAB9A5C27577267008BF04F /* BPLeakModel.m in Sources */,
 				2FB78B8E2761C39C00E1365D /* BPContainer.m in Sources */,
 				2FAB9A6227578258008BF04F /* BPLeakModelManager.m in Sources */,
+				2F855B1B282CE91500DA73ED /* NSTimer+hook.m in Sources */,
 				2FD76E7E2754F85800C62981 /* BPTaskView.m in Sources */,
 				2F7D7DCD2721B460003EEE74 /* BPPointArrayMgr.m in Sources */,
 				6003F5A7195388D20070C39A /* BPViewController.m in Sources */,
 				2F102B892720731600433099 /* BPAPMTestViewController.m in Sources */,
 				2FC96705272A9314008819D1 /* BPTemplateSub.m in Sources */,
+				2F9EA7C9283B697B00ADE60F /* BPTaggedPointerViewController.m in Sources */,
 				2F102B902720779E00433099 /* BPTableViewCell.m in Sources */,
 				2FAB9A6527579070008BF04F /* BPLeakHoldView.m in Sources */,
 				2FA24B4B27D6172D00E0A6C9 /* BPWebViewController.m in Sources */,
@@ -960,11 +998,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = T6N2P4ST65;
 				EXCLUDED_ARCHS = "";
+				GCC_C_LANGUAGE_STANDARD = gnu89;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ModHookLibrary/ModHookLibrary-Prefix.pch";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				INFOPLIST_FILE = "ModHookLibrary/ModHookLibrary-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -981,13 +1021,15 @@
 				DEVELOPMENT_TEAM = T6N2P4ST65;
 				EXCLUDED_ARCHS = "";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
+				GCC_C_LANGUAGE_STANDARD = gnu89;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ModHookLibrary/ModHookLibrary-Prefix.pch";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				INFOPLIST_FILE = "ModHookLibrary/ModHookLibrary-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.ModHookLibrary-Example.wangfei5";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				WRAPPER_EXTENSION = app;

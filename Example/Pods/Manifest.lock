@@ -26,6 +26,15 @@ PODS:
     - FBSnapshotTestCase/Core
   - FLAnimatedImage (1.0.16)
   - Masonry (1.1.0)
+  - matrix-wechat (1.0.1):
+    - matrix-wechat/matrixARC (= 1.0.1)
+    - matrix-wechat/matrixNonARC1 (= 1.0.1)
+    - matrix-wechat/matrixNonARC2 (= 1.0.1)
+  - matrix-wechat/matrixARC (1.0.1):
+    - matrix-wechat/matrixNonARC1
+  - matrix-wechat/matrixNonARC1 (1.0.1)
+  - matrix-wechat/matrixNonARC2 (1.0.1):
+    - matrix-wechat/matrixARC
   - ModHookLibrary (0.0.16):
     - ModHookLibrary/APM1 (= 0.0.16)
     - ModHookLibrary/APM2 (= 0.0.16)
@@ -65,6 +74,7 @@ DEPENDENCIES:
   - FBSnapshotTestCase
   - FLAnimatedImage (~> 1.0)
   - Masonry (= 1.1.0)
+  - matrix-wechat
   - ModHookLibrary (from `../`)
   - SDWebImage (~> 5.0)
   - Specta
@@ -79,6 +89,7 @@ SPEC REPOS:
     - FBSnapshotTestCase
     - FLAnimatedImage
     - Masonry
+    - matrix-wechat
     - Protobuf
     - SDWebImage
     - Specta
@@ -97,6 +108,7 @@ SPEC CHECKSUMS:
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
   FLAnimatedImage: 8f3e854ebf9680b71f0b6e700939687fc4d82b4b
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  matrix-wechat: db0ef2c0bfe982aa9c2c42aa409c48724bedc507
   ModHookLibrary: 3a86bdd88aa505baec8a317dfe8572dadcd3fe88
   Protobuf: 3724efa50cb2846d7ccebc8691c574e85fd74471
   SDWebImage: 4dc3e42d9ec0c1028b960a33ac6b637bb432207b
@@ -105,6 +117,6 @@ SPEC CHECKSUMS:
   SVGAPlayer: 318b85a78b61292d6ae9dfcd651f3f0d1cdadd86
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: e38474e53e428b40b89bbcd07ec79a1a157e63b2
+PODFILE CHECKSUM: ef23dbe8576f87b6423833e32e4983f89e4d2e1e
 
 COCOAPODS: 1.11.2

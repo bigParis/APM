@@ -88,7 +88,6 @@ typedef NS_ENUM(NSUInteger, MyType) {
         }
         
     }];
-    
 }
 
 - (void)doSomeThingOnLowVersion

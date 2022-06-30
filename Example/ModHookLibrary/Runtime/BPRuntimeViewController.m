@@ -41,7 +41,7 @@ void testCovid() {
 }
 
 @interface BPRuntimeViewController ()
-
+@property (nonatomic, strong) NSTimer *timer;
 @end
 
 @implementation BPRuntimeViewController
@@ -51,11 +51,14 @@ void testCovid() {
     // Do any additional setup after loading the view.
     int x = 1 << 12;
     NSLog(@"x=%@", @(x));
-    
+}
+
++ (void)test
+{
     
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+- (void)test1
 {
     NSUInteger tabIndex = 1;
     BOOL animated = NO;
@@ -68,5 +71,25 @@ void testCovid() {
     [invocation setArgument:&tabIndex atIndex:2];
     [invocation setArgument:&animated atIndex:3];
     [invocation invoke];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [NSTimer scheduledTimerWithTimeInterval:1.f repeats:YES block:^(NSTimer * _Nonnull timer) {
+        NSLog(@"%@ running", timer);
+    }];
+    
+    [NSTimer scheduledTimerWithTimeInterval:1.f target:self selector:@selector(onTimeout:) userInfo:nil repeats:YES];
+//    self.timer = [NSTimer timerWithTimeInterval:1.f repeats:YES block:^(NSTimer * _Nonnull timer) {
+//        NSLog(@"%@ running", timer);
+//    }];
+//    [self.timer fire];
+//    [self.timer fire];
+//    [BPRuntimeViewController test];
+}
+
+- (void)onTimeout:(NSTimer *)timer
+{
+    NSLog(@"%@ running", timer);
 }
 @end

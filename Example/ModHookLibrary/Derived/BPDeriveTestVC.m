@@ -10,6 +10,8 @@
 #import "BPSubView1.h"
 #import "BPSubView2.h"
 
+#import <sys/kdebug_signpost.h>
+
 @interface BPDeriveTestVC ()
 @property (nonatomic, weak) BPSubView1 *testView1;
 @property (nonatomic, weak) BPSubView2 *testView2;
@@ -20,7 +22,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    kdebug_signpost_start(20,0,0,0,3);
     [self initViews];
+    kdebug_signpost_end(20,0,0,0,3);
 }
 
 - (void)initViews
