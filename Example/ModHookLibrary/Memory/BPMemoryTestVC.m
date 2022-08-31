@@ -15,6 +15,12 @@
 #import "BPContainer.h"
 #import "BPLeakModel.h"
 #import <objc/runtime.h>
+#import "NSObject+DataRaceScaner.h"
+#import <Masonry/Masonry.h>
+
+//#define VIEW_LEAK 1
+//#define THREAD_LEAK 1
+//#define BLOCK_LEAK 1
 
 @interface NSTestObjc : NSObject
 @end
@@ -30,17 +36,31 @@
 
 @interface BPMemoryTestVC ()
 
+/// 图片泄漏
 @property (nonatomic, weak) UIImageView *imageView;
-@property (nonatomic, weak)  UIButton *leakBtn;
-@property (nonatomic, strong) BPLeakModel *leakModel;
+@property (nonatomic, weak) UIImageView *imageView2;
+@property (nonatomic, assign) BOOL imageLeakOpen;
+@property (nonatomic, weak) UIButton *imageLeakBtn;
+
+/// Block泄漏
+#ifdef BLOCK_LEAK
+@property (nonatomic, weak) UIButton *blockLeakBtn;
+@property (nonatomic, assign) int testCount;
+#endif
+/// thread泄漏
+#ifdef THREAD_LEAK
+@property (nonatomic, weak) UIButton *threadLeakBtn;
+@property (nonatomic, strong) NSThread *thread;
+@property (nonatomic, strong) NSMutableArray *testArray;
+@property (nonatomic, strong) BPContainer *container;
+#endif
+/// view引用泄漏
+#ifdef VIEW_LEAK
+@property (nonatomic, weak) UIButton *viewLeakBtn;
 @property (nonatomic, strong) BPLeakHoldView *holdView;
 @property (nonatomic, strong) BPLeakShowView *showView;
-@property (nonatomic, strong) NSTimer *timer;
-@property (nonatomic, strong) BPContainer *container;
-@property (nonatomic, strong) NSThread *thread;
-@property (nonatomic, weak) UIImageView *imageView2;
-@property (nonatomic, weak) UISwitch *switchView;
-@property (nonatomic, weak) UIButton *lanscapeBtn;
+@property (nonatomic, assign) BOOL viewLeakOpen;
+#endif
 @end
 
 @implementation BPMemoryTestVC
@@ -50,27 +70,175 @@
 - (void)dealloc
 {
     NSLog(@"%s", __func__);
-//    [[BPLeakModelManager sharedManager] unRegisterModel:@"BPLeakHoldView"];
-//    [[BPLeakModelManager sharedManager] unRegisterModel:@"BPLeakShowView"];
+#ifdef VIEW_LEAK
+    if (self.viewLeakOpen) {
+        [[BPLeakModelManager sharedManager] unRegisterModel:@"BPLeakHoldView"];
+        [[BPLeakModelManager sharedManager] unRegisterModel:@"BPLeakShowView"];
+    }
+#endif
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 //    _dispatchQueue = dispatch_queue_create("bptest.queue", DISPATCH_QUEUE_SERIAL);
-//    [self initManager];
+#ifdef VIEW_LEAK
+    [self initManager];
+#endif
     [self initViews];
-    self.container = [[BPContainer alloc] init];
+#ifdef BLOCK_LEAK
+    self.testCount = 0;
+#endif
+}
 
-//    for (int i = 0; i < 10; i++) {
-//        @autoreleasepool {
-//            [self.container addModel:[[BPLeakModel alloc] initWithCount:i]];
-//        }
-//    }
-
-//    self.thread = [[NSThread alloc] initWithTarget:self selector:@selector(loop) object:nil];
-//    [self.thread setName:@"com.walle.test"];
-//    [self.thread start];
+- (void)setupLeakImageView
+{
+    UIImageView *imageView = [[UIImageView alloc] init];
+//    imageView.image = [self getCompressedImage];
+//    imageView.image = [UIImage imageNamed:@"tianaijpeg2.jpeg"];
+    imageView.image = [UIImage imageNamed:@"memory_test"];
+//    imageView.image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"memory_test.jpeg" ofType:nil]];
+    self.imageView = imageView;
+    [self.view addSubview:imageView];
     
+    UIImageView *imageView2 = [[UIImageView alloc] init];
+//    imageView2.image = [UIImage imageNamed:@"tianai"];
+//    imageView2.image = [UIImage imageNamed:@"tianai2webp.webp"];
+//    imageView2.image = [UIImage imageNamed:@"tianaijpeg2.jpeg"];
+    imageView2.image = [UIImage imageNamed:@"tianai2png.png"];
+    self.imageView2 = imageView2;
+    [self.view addSubview:self.imageView2];
+}
+
+- (void)initViews
+{
+    self.view.backgroundColor = [UIColor yellowColor];
+
+    UIButton *imageLeakBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [imageLeakBtn setTitle:@"图片泄漏按钮" forState:UIControlStateNormal];
+    [imageLeakBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
+    [imageLeakBtn setBackgroundColor:UIColor.cyanColor];
+    [imageLeakBtn addTarget:self action:@selector(onImageLeakClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:imageLeakBtn];
+    self.imageLeakBtn = imageLeakBtn;
+
+#ifdef BLOCK_LEAK
+    UIButton *blockLeakBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [blockLeakBtn setTitle:@"block泄漏" forState:UIControlStateNormal];
+    [blockLeakBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
+    [blockLeakBtn setBackgroundColor:UIColor.cyanColor];
+    [blockLeakBtn addTarget:self action:@selector(onBlockLeakClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:blockLeakBtn];
+    self.blockLeakBtn = blockLeakBtn;
+#endif
+    
+#ifdef THREAD_LEAK
+    UIButton *threadLeakBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [threadLeakBtn setTitle:@"thread内存泄漏" forState:UIControlStateNormal];
+    [threadLeakBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
+    [threadLeakBtn setBackgroundColor:UIColor.cyanColor];
+    [threadLeakBtn addTarget:self action:@selector(onThreadLeakClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:threadLeakBtn];
+    self.threadLeakBtn = threadLeakBtn;
+#endif
+    
+    [self setupLeakImageView];
+#ifdef VIEW_LEAK
+    UIButton *viewLeakBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [viewLeakBtn setTitle:@"view泄漏按钮" forState:UIControlStateNormal];
+    [viewLeakBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
+    [viewLeakBtn setBackgroundColor:UIColor.cyanColor];
+    [viewLeakBtn addTarget:self action:@selector(onViewLeakClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:viewLeakBtn];
+    self.viewLeakBtn = viewLeakBtn;
+    [self setupViewLeakView];
+#endif
+    
+}
+
+- (void)layoutImageLeakView
+{
+    self.imageView.frame = CGRectMake(0, 64, self.view.bounds.size.width * 0.5, 200);
+    self.imageView2.frame = CGRectMake(self.view.bounds.size.width * 0.5, 64, self.view.bounds.size.width * 0.5, 200);
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    
+    self.imageLeakBtn.frame = CGRectMake((self.view.bounds.size.width - 200) * 0.5, 210 + 64, 200, 30);
+#ifdef BLOCK_LEAK
+    self.blockLeakBtn.frame = CGRectMake((self.view.bounds.size.width - 200) * 0.5, CGRectGetMaxY(self.imageLeakBtn.frame) + 10, 200, 30);
+#endif
+#ifdef THREAD_LEAK
+    self.threadLeakBtn.frame = CGRectMake((self.view.bounds.size.width - 200) * 0.5, CGRectGetMaxY(self.blockLeakBtn.frame) + 10, 200, 30);
+#endif
+    
+#ifdef VIEW_LEAK
+    self.viewLeakBtn.frame = CGRectMake((self.view.bounds.size.width - 200) * 0.5, CGRectGetMaxY(self.threadLeakBtn.frame) + 10, 200, 30);
+#endif
+    if (self.imageLeakOpen) {
+        [self layoutImageLeakView];
+    }
+}
+
+#ifdef VIEW_LEAK
+- (void)initManager
+{
+    BPLeakHoldView *holdView = [[BPLeakHoldView alloc] init];
+    [[BPLeakModelManager sharedManager] registerModel:holdView forKey:@"BPLeakHoldView"];
+    
+    BPLeakShowView *showView = [[BPLeakShowView alloc] init];
+    [[BPLeakModelManager sharedManager] registerModel:showView forKey:@"BPLeakShowView"];
+}
+
+- (void)setupViewLeakView
+{
+    self.showView = [[BPLeakModelManager sharedManager] getModelForKey:@"BPLeakShowView"];
+    BPLeakHoldView *holdView = [[BPLeakModelManager sharedManager] getModelForKey:@"BPLeakHoldView"];
+    self.showView.leakBlock = ^{
+        NSLog(@"%@", holdView.name);
+    };
+    [self.view addSubview:self.showView];
+}
+
+- (void)onViewLeakClicked
+{
+    NSLog(@"%s", __func__);
+    self.viewLeakOpen = YES;
+    [self.showView testLeak];
+}
+#endif
+
+#ifdef THREAD_LEAK
+- (NSMutableArray *)testArray
+{
+    if (_testArray == nil) {
+        _testArray = [NSMutableArray array];
+    }
+    return _testArray;
+}
+
+- (void)onThreadLeakClicked
+{
+    NSLog(@"%s", __func__);
+    /* 内存升高，不是堆泄漏
+    for (int i = 0; i < 1000000; i++) {
+        [self.testArray addObject:@(i)];
+    }
+     */
+    
+    /*
+     self.container = [[BPContainer alloc] init];
+    for (int i = 0; i < 1000; i++) {
+        @autoreleasepool {
+            [self.container addModel:[[BPLeakModel alloc] initWithCount:i]];
+        }
+    }
+//    执行thread会导致内存泄漏
+    self.thread = [[NSThread alloc] initWithTarget:self selector:@selector(loop) object:nil];
+    [self.thread setName:@"com.walle.test"];
+    [self.thread start];
+     */
 }
 
 - (void)loop
@@ -85,144 +253,48 @@
         }
     }
 }
+#endif
 
-- (void)initViews
+#ifdef BLOCK_LEAK
+- (void)onBlockLeakClicked
 {
-//    UISwitch *switchView = [[UISwitch alloc] init];
-////    switchView.layer.cornerRadius = 20.f;
-//    switchView.layer.masksToBounds = YES;
-//    switchView.tintColor = [UIColor greenColor];
-//    switchView.onTintColor = [UIColor redColor];
-//    switchView.thumbTintColor = [UIColor whiteColor];
-//    switchView.backgroundColor = [UIColor yellowColor];
-//    switchView.transform = CGAffineTransformMakeScale(25/51.f, 14/31.f);
+    NSLog(@"%s", __func__);
     
-//    self.switchView = switchView;
-//    [self.view addSubview:switchView];
-    UIImageView *imageView = [[UIImageView alloc] init];
-//    imageView.image = [self getCompressedImage];
-//    imageView.image = [UIImage imageNamed:@"tianaijpeg2.jpeg"];
-    imageView.image = [UIImage imageNamed:@"memory_test.jpeg"];
-    self.imageView = imageView;
-    [self.view addSubview:self.imageView];
+//    NSLog(@"DEMO1: 以下操作会导致内存泄漏");
+//    for (int i = 0; i < 10000; ++i) {
+//        self.testCount++;
+//        BPLeakModel *model = [[BPLeakModel alloc] init];
+//        model.leakBlock = ^{
+//            NSLog(@"model:%@", model);
+//        };
+//    }
     
-    UIImageView *imageView2 = [[UIImageView alloc] init];
-//    imageView2.image = [UIImage imageNamed:@"tianai"];
-//    imageView2.image = [UIImage imageNamed:@"tianai2webp.webp"];
-    imageView2.image = [UIImage imageNamed:@"tianaijpeg2.jpeg"];
-//    imageView2.image = [UIImage imageNamed:@"tianai2png.png"];
-    self.imageView2 = imageView2;
-    [self.view addSubview:self.imageView2];
+    NSLog(@"DEMO2: 以下操作不会内存泄漏, 但leakblock回调数据为空");
+    for (int i = 0; i < 10000; ++i) {
+        BPLeakModel *model = [[BPLeakModel alloc] init];
+        __weak __typeof(model) weak_model = model;
+        model.leakBlock = ^{
+            NSLog(@"model:%@", weak_model);
+        };
+    }
     
-    UIButton *leakBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    [leakBtn setTitle:@"泄漏按钮" forState:UIControlStateNormal];
-    [leakBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
-    [leakBtn setBackgroundColor:UIColor.cyanColor];
-    [leakBtn addTarget:self action:@selector(onLeakClicked) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:leakBtn];
-    self.leakBtn = leakBtn;
-    
-    self.showView = [[BPLeakModelManager sharedManager] getModelForKey:@"BPLeakShowView"];
-    BPLeakHoldView *holdView = [[BPLeakModelManager sharedManager] getModelForKey:@"BPLeakHoldView"];
-    self.showView.leakBlock = ^{
-        NSLog(@"%@", holdView.name);
-    };
-    [self.view addSubview:self.showView];
-    
-    UIButton *lanscapeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    lanscapeBtn.backgroundColor = [UIColor redColor];
-    [lanscapeBtn setTitle:@"泄\n漏" forState:UIControlStateNormal];
-    lanscapeBtn.titleLabel.numberOfLines = 0;
-    lanscapeBtn.titleLabel.font = [UIFont systemFontOfSize:12.f];
-    [self.view addSubview:lanscapeBtn];
-    self.lanscapeBtn = lanscapeBtn;
-    
-    UILabel *shadowLabel = [[UILabel alloc] init];
-    shadowLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:14.f];
-//    shadowLabel.layer.shadowRadius = 20;
-    shadowLabel.text = @"layer层设置阴影";
-//    shadowLabel.backgroundColor = [UIColor blackColor];
-//    shadowLabel.textColor = [UIColor redColor];
-    shadowLabel.shadowColor = [UIColor redColor];
-    shadowLabel.shadowOffset = CGSizeMake(0, -3);
-    shadowLabel.frame = CGRectMake(200, 500, 100, 30);
-    [self.view addSubview:shadowLabel];
-    
-    UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(100, 150, 200, 50)];
-        label2.text = @"layer层设置阴影";
-    label2.layer.shadowOffset = CGSizeMake(0.0f, 2.0f);
-    label2.layer.shadowColor = [[UIColor blackColor] colorWithAlphaComponent:0.7].CGColor;
-    label2.layer.shadowOpacity = 0.6f;
-    label2.font = [UIFont fontWithName:@"PingFangSC-Regular" size:14.f];
-    [self.view addSubview:label2];
-    
-    UILabel *label3 = [[UILabel alloc] initWithFrame:CGRectMake(100, 250, 200, 50)];
-    label3.text = @"layer层设置阴影-无模糊半径";
-    label3.shadowOffset = CGSizeMake(0.0f, -8.0f);
-//    label3.layer.shadowRadius  = 2.f;
-    label3.layer.shadowColor = [UIColor redColor].CGColor;
-    label3.layer.shadowOpacity = 0.5f;
-    label3.font = [UIFont fontWithName:@"PingFangSC-Regular" size:14.f];
-    [self.view addSubview:label3];
-    
-    UILabel *label4 = [[UILabel alloc] initWithFrame:CGRectMake(100, 350, 200, 50)];
-    label4.text = @"layer层设置阴影-无模糊半径-透明度0.1";
-    label4.shadowOffset = CGSizeMake(0.0f, 1.0f);
-//    label3.layer.shadowRadius  = 2.f;
-    label4.layer.shadowColor = [[UIColor blackColor] colorWithAlphaComponent:0.5].CGColor;
-    label4.layer.shadowOpacity = 0.1f;
-    label4.font = [UIFont fontWithName:@"PingFangSC-Regular" size:14.f];
-    [self.view addSubview:label4];
-}
-
-- (void)initManager
-{
-    BPLeakHoldView *holdView = [[BPLeakHoldView alloc] init];
-    [[BPLeakModelManager sharedManager] registerModel:holdView forKey:@"BPLeakHoldView"];
-    
-    BPLeakShowView *showView = [[BPLeakShowView alloc] init];
-    [[BPLeakModelManager sharedManager] registerModel:showView forKey:@"BPLeakShowView"];
-}
-
-- (void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
-//    self.imageView.frame = CGRectMake(0, 64, self.view.bounds.size.width * 0.5, 200);
-//    self.leakBtn.frame = CGRectMake((self.view.bounds.size.width - 120) * 0.5, 120, 120, 30);
-////    self.holdView.frame = CGRectMake(60, 100, 30, 30);
-//    self.showView.frame = CGRectMake(60, 160, 30, 30);
-//
-//    self.imageView2.frame = CGRectMake(self.view.bounds.size.width * 0.5, 64, self.view.bounds.size.width * 0.5, 200);
-    self.switchView.frame = CGRectMake(200, 200, 100, 40);
-    self.lanscapeBtn.frame = CGRectMake(200, 300, 40, 38);
-}
-
-- (void)onLeakClicked
-{
-    /// Demo1
-    
-//    [self.showView testLeak];
-//    _dispatchQueue = dispatch_queue_create("bptest.queue", DISPATCH_QUEUE_SERIAL);
-//    dispatch_async(_dispatchQueue, ^{
-//        NSTestObjc *testModel = [[NSTestObjc alloc] init];
-//        NSLog(@"testModel:%p", testModel);
-//    });
-//    IMP imp = imp_implementationWithBlock(^(id obj, NSString *str) {
-//        NSLog(@"%@", str);
-//    });
-//    class_addMethod(NSTestObjc.class, @selector(testBlock:), imp, "v@:@");
-//
-//    NSTestObjc *runtime = [[NSTestObjc alloc] init];
-//    [runtime performSelector:@selector(testBlock:) withObject:@"hello world!"];
-//    NSString *test = @"1243";
-//    do {
-//        if ([test isEqualToString:@"1243"]) {
-//            break;
-//        } else {
+//    NSLog(@"DEMO3: 以下操作不会内存泄漏, 并且能捕获正确的数据, mallocBlock");
+//    for (int i = 0; i < 10000; ++i) {
+//        self.testCount++;
+//        NSString *test = [NSString stringWithFormat:@"12889989d7fs8df12889989d7fs8df12889989d7fs8df12889989d7fs8df:%@", @(self.testCount)];
+//        BPLeakModel *model = [[BPLeakModel alloc] init];
+//        model.leakBlock = ^{
 //            NSLog(@"test:%@", test);
-//        }
-//    } while(0);
-//    NSLog(@"come here");
+//        };
+//    }
+}
+#endif
+
+- (void)onImageLeakClicked
+{
+    self.imageLeakOpen = !self.imageLeakOpen;
+    [self.view setNeedsLayout];
+    [self.view layoutIfNeeded];
 }
 
 - (UIImage *)getCompressedImage
@@ -248,4 +320,5 @@
 //        }
 //        return image
 }
+
 @end

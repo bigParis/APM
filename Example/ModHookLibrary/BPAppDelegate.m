@@ -11,6 +11,11 @@
 #include <mach-o/dyld.h>
 #import <sys/kdebug_signpost.h>
 #import <Matrix/Matrix.h>
+#ifdef DEBUG
+#import <EchoSDK/ECOClient.h>
+#import <DoraemonKit/DoraemonManager.h>
+#endif
+#import "NSMutableArray+hook.h"
 
 @interface BPAppDelegate ()<MatrixPluginListenerDelegate, MatrixAdapterDelegate,  WCCrashBlockMonitorPluginReportDelegate>
 
@@ -18,18 +23,39 @@
 
 @implementation BPAppDelegate
 #define SECOND 1000000
+// 指定一个cleanup方法，注意入参是所修饰变量的地址，类型要一样
+// 对于指向objc对象的指针(id *)，如果不强制声明__strong默认是__autoreleasing，造成类型不匹配
+static void stringCleanUp(__strong NSString **string) {
+    NSLog(@"stringCleanUp:%@", *string);
+}
+//// 在某个方法中：
+//{
+//    __strong NSString *string __attribute__((cleanup(stringCleanUp))) = @"sunnyxx";
+//} // 当运行到这个作用域结束时，自动调用stringCleanUp
+
 static void add_image_callback(const struct mach_header *mhp, intptr_t slide)
 {
     kdebug_signpost_start(20,0,0,0,3);
     usleep(0.01 *SECOND);
     kdebug_signpost_end(20,0,0,0,3);
 }
+// void(^block)(void)的指针是void(^*block)(void)
+static void blockCleanUp(__strong void(^*block)(void)) {
+    (*block)();
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-//        _dyld_register_func_for_add_image(add_image_callback);
-//    });
+    __strong NSString *string __attribute__((cleanup(stringCleanUp))) = @"sunnyxx";
+    // 加了个`unused`的attribute用来消除`unused variable`的warning
+     __strong void(^block)(void) __attribute__((cleanup(blockCleanUp), unused)) = ^{
+         NSLog(@"I'm dying...");
+     };
+    [NSMutableArray startHook];
+#ifdef DEBUG
+    [[ECOClient sharedClient] start];
+    [[DoraemonManager shareInstance] installWithPid:@"productId"];//productId为在“平台端操作指南”中申请的产品id
+#endif
     BPMainTabBarController *root = [[BPMainTabBarController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:root];
     if (!self.window) {

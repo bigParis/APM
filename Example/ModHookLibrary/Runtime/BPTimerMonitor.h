@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BPTimerMonitor : NSObject
 + (instancetype)sharedManager;
+- (void)enableLog;
 - (void)addTimer:(NSTimer *)timer block:(void (^)(NSTimer *timer))block;
 - (void)addTimer:(NSTimer *)timer aSelector:(SEL)aSelector;
 - (void)removeTimer:(NSTimer *)timer;

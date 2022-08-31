@@ -51,6 +51,7 @@ static NSString *kTableViewCellIdentifier = @"TableViewCellIdentifier";
     [tempArray addObject:[self createModelWith:@"任务管理" vcName:@"BPTaskTestViewController"]];
     [tempArray addObject:[self createModelWith:@"AMP测试" vcName:@"BPAPMTestViewController"]];
     [tempArray addObject:[self createModelWith:@"Pod库测试" vcName:@"BPPodLibraryTestViewController"]];
+    [tempArray addObject:[self createModelWith:@"动画&特效" vcName:@"BPAnimationVC"]];
     [tempArray addObject:[self createModelWith:@"NSPointerArray" vcName:@"BPPointerArrayVC"]];
     [tempArray addObject:[self createModelWith:@"PrivateModel" vcName:@"BPPrivateModelVC"]];
     [tempArray addObject:[self createModelWith:@"Net" vcName:@"BPNetworkTestVC"]];
@@ -66,6 +67,7 @@ static NSString *kTableViewCellIdentifier = @"TableViewCellIdentifier";
     [tempArray addObject:[self createModelWith:@"运行时" vcName:@"BPRuntimeViewController"]];
     [tempArray addObject:[self createModelWith:@"WebView" vcName:@"BPWebViewController"]];
     [tempArray addObject:[self createModelWith:@"TaggedPointer" vcName:@"BPTaggedPointerViewController"]];
+    [tempArray addObject:[self createModelWith:@"CollectionView旋转" vcName:@"BPCollectionRotateVC"]];
     self.dataSource = tempArray;
 }
 

@@ -19,7 +19,7 @@
 @implementation BPLeakModel
 - (void)dealloc
 {
-    NSLog(@"%s", __func__);
+    NSLog(@"%s:%p", __func__, self);
 }
 
 - (instancetype)initWithView:(UIView *)view
@@ -39,6 +39,17 @@
     if (self.leakBlock) {
         self.leakBlock();
     }
+}
+
+- (void)setLeakBlock:(dispatch_block_t)leakBlock
+{
+    _leakBlock = leakBlock;
+    NSLog(@"%s:%@", __func__, leakBlock);
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if (leakBlock) {
+            leakBlock();
+        }
+    });
 }
 
 - (instancetype)initWithCount:(int)count

@@ -9,9 +9,13 @@
 #import "BPLeakModelManager.h"
 
 @interface BPLeakModelManager()
+
 @property (nonatomic, strong) NSMutableDictionary *modelMap;
+
 @end
+
 @implementation BPLeakModelManager
+
 + (instancetype)sharedManager
 {
     static BPLeakModelManager *instance = nil;

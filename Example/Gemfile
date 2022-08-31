@@ -1,0 +1,25 @@
+source "https://gems.ruby-china.com/"
+# gem 'cocoapods-hmap-prebuilt'
+gem 'cocoapods-timeconsuming'
+gem 'cocoapods-mapfile'
+# gems for cocoapods
+gem 'cocoapods', '1.11.2'
+
+# 快速打开 xcode 工程： pod open
+gem 'cocoapods-open'
+
+# gems for fastlane
+gem 'fastlane', '2.179.0'
+
+# 二进制插件
+gem 'cocoapods-imy-bin', git: 'https://git.yy.com/autotest/ci_team/cocoapods/cocoapods-imy-bin.git', tag: '0.6.3'
+
+# 自动判断是否需要执行 repo update
+gem 'cocoapods-repo-update', git: 'https://git.yy.com/opensource/ios_team/cocoapods-repo-update.git', tag: '0.0.5'
+
+gem 'cocoapods-pkg-framework', git: 'https://git.yy.com/opensource/ios_team/cocoapods-pkg-framework.git', branch: 'master'
+
+plugins_path = File.join(File.dirname(__FILE__), 'fastlane', 'Pluginfile')
+eval_gemfile(plugins_path) if File.exist?(plugins_path)
+
+# gems for xxx

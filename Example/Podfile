@@ -1,7 +1,8 @@
 use_frameworks!
 
 platform :ios, '9.0'
-
+#plugin 'cocoapods-hmap-prebuilt'
+plugin 'cocoapods-mapfile'
 target 'ModHookLibrary_Example' do
   pod 'ModHookLibrary', :path => '../'
   pod 'AFNetworking', '3.2.1'
@@ -11,7 +12,14 @@ target 'ModHookLibrary_Example' do
   pod 'SVGAPlayer', '~> 2.5'
   pod 'FLAnimatedImage', '~> 1.0'
   pod 'matrix-wechat'
-  
+  pod 'EchoSDK', :configurations => ["Debug"]
+  pod 'DoraemonKit/Core', '~> 3.0.4', :configurations => ['Debug'] #必选
+  pod 'DoraemonKit/WithGPS', '~> 3.0.4', :configurations => ['Debug'] #可选
+  pod 'DoraemonKit/WithLoad', '~> 3.0.4', :configurations => ['Debug'] #可选
+  pod 'DoraemonKit/WithLogger', '~> 3.0.4', :configurations => ['Debug'] #可选
+  pod 'DoraemonKit/WithDatabase', '~> 3.0.4', :configurations => ['Debug'] #可选
+  #pod 'DoraemonKit/WithMLeaksFinder', '~> 3.0.4', :configurations => ['Debug'] #可选
+  pod 'DoraemonKit/WithWeex', '~> 3.0.4', :configurations => ['Debug'] #可选
   target 'ModHookLibrary_Tests' do
     inherit! :search_paths
 

@@ -11,8 +11,12 @@
 		2F102B892720731600433099 /* BPAPMTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F102B882720731600433099 /* BPAPMTestViewController.m */; };
 		2F102B8D272073AC00433099 /* BPPodLibraryTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F102B8C272073AC00433099 /* BPPodLibraryTestViewController.m */; };
 		2F102B902720779E00433099 /* BPTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F102B8F2720779E00433099 /* BPTableViewCell.m */; };
+		2F10914728730BD900B01131 /* memory_test.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2F10914628730BD900B01131 /* memory_test.jpeg */; };
 		2F14E50A284604AD007E6503 /* tianaiwebp.webp in Resources */ = {isa = PBXBuildFile; fileRef = 2F14E509284604AD007E6503 /* tianaiwebp.webp */; };
 		2F14E50C28460B5B007E6503 /* tianai2webp.webp in Resources */ = {isa = PBXBuildFile; fileRef = 2F14E50B28460B5B007E6503 /* tianai2webp.webp */; };
+		2F2660432892A3B7004EC410 /* BPCollectionRotateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2660422892A3B7004EC410 /* BPCollectionRotateVC.m */; };
+		2F595D0A287D68DA00F0F5AD /* NSMutableArray+hook.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F595D09287D68DA00F0F5AD /* NSMutableArray+hook.m */; };
+		2F595D0D287D6A4600F0F5AD /* NSObject+DataRaceScaner.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F595D0C287D6A4600F0F5AD /* NSObject+DataRaceScaner.m */; };
 		2F78C0B72726FCF100C0E335 /* BPPrivateModelVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F78C0B62726FCF100C0E335 /* BPPrivateModelVC.m */; };
 		2F78C0BB2726FDD500C0E335 /* BPUserObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F78C0BA2726FDD500C0E335 /* BPUserObject.m */; };
 		2F7D7DCA2721B441003EEE74 /* BPPointerArrayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F7D7DC92721B441003EEE74 /* BPPointerArrayVC.m */; };
@@ -22,6 +26,9 @@
 		2F855D36282D198500DA73ED /* BPTimerMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F855D35282D198500DA73ED /* BPTimerMonitor.m */; };
 		2F9EA7C9283B697B00ADE60F /* BPTaggedPointerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9EA7C8283B697B00ADE60F /* BPTaggedPointerViewController.m */; };
 		2FA24B4B27D6172D00E0A6C9 /* BPWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA24B4A27D6172D00E0A6C9 /* BPWebViewController.m */; };
+		2FA342B328BF02B7000B3D4E /* BPAnimationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA342B228BF02B7000B3D4E /* BPAnimationVC.m */; };
+		2FA342B628BF040F000B3D4E /* BPLandscapeUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA342B528BF040F000B3D4E /* BPLandscapeUIView.m */; };
+		2FA342B928BF0C0D000B3D4E /* BPAnimationUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA342B828BF0C0D000B3D4E /* BPAnimationUIView.m */; };
 		2FA909EE272791C00099A3F0 /* BPNetworkTestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA909EC272791C00099A3F0 /* BPNetworkTestVC.m */; };
 		2FA90D7C2727A2520099A3F0 /* BPMultiThreadVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA90D7B2727A2520099A3F0 /* BPMultiThreadVC.m */; };
 		2FA90D7F2727A2A50099A3F0 /* BPMultiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA90D7E2727A2A50099A3F0 /* BPMultiManager.m */; };
@@ -97,8 +104,15 @@
 		2F102B8C272073AC00433099 /* BPPodLibraryTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPPodLibraryTestViewController.m; sourceTree = "<group>"; };
 		2F102B8E2720779E00433099 /* BPTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPTableViewCell.h; sourceTree = "<group>"; };
 		2F102B8F2720779E00433099 /* BPTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPTableViewCell.m; sourceTree = "<group>"; };
+		2F10914628730BD900B01131 /* memory_test.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = memory_test.jpeg; path = Images.xcassets/memory_test.imageset/memory_test.jpeg; sourceTree = "<group>"; };
 		2F14E509284604AD007E6503 /* tianaiwebp.webp */ = {isa = PBXFileReference; lastKnownFileType = file; path = tianaiwebp.webp; sourceTree = "<group>"; };
 		2F14E50B28460B5B007E6503 /* tianai2webp.webp */ = {isa = PBXFileReference; lastKnownFileType = file; path = tianai2webp.webp; sourceTree = "<group>"; };
+		2F2660412892A3B7004EC410 /* BPCollectionRotateVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPCollectionRotateVC.h; sourceTree = "<group>"; };
+		2F2660422892A3B7004EC410 /* BPCollectionRotateVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPCollectionRotateVC.m; sourceTree = "<group>"; };
+		2F595D08287D68D900F0F5AD /* NSMutableArray+hook.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+hook.h"; sourceTree = "<group>"; };
+		2F595D09287D68DA00F0F5AD /* NSMutableArray+hook.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+hook.m"; sourceTree = "<group>"; };
+		2F595D0B287D6A4600F0F5AD /* NSObject+DataRaceScaner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+DataRaceScaner.h"; sourceTree = "<group>"; };
+		2F595D0C287D6A4600F0F5AD /* NSObject+DataRaceScaner.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+DataRaceScaner.m"; sourceTree = "<group>"; };
 		2F78C0B52726FCF100C0E335 /* BPPrivateModelVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPPrivateModelVC.h; sourceTree = "<group>"; };
 		2F78C0B62726FCF100C0E335 /* BPPrivateModelVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPPrivateModelVC.m; sourceTree = "<group>"; };
 		2F78C0B82726FD6D00C0E335 /* IBPPrivateModelProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IBPPrivateModelProtocol.h; sourceTree = "<group>"; };
@@ -119,6 +133,12 @@
 		2F9EA7C8283B697B00ADE60F /* BPTaggedPointerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPTaggedPointerViewController.m; sourceTree = "<group>"; };
 		2FA24B4927D6172D00E0A6C9 /* BPWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPWebViewController.h; sourceTree = "<group>"; };
 		2FA24B4A27D6172D00E0A6C9 /* BPWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPWebViewController.m; sourceTree = "<group>"; };
+		2FA342B128BF02B7000B3D4E /* BPAnimationVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPAnimationVC.h; sourceTree = "<group>"; };
+		2FA342B228BF02B7000B3D4E /* BPAnimationVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPAnimationVC.m; sourceTree = "<group>"; };
+		2FA342B428BF040F000B3D4E /* BPLandscapeUIView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPLandscapeUIView.h; sourceTree = "<group>"; };
+		2FA342B528BF040F000B3D4E /* BPLandscapeUIView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPLandscapeUIView.m; sourceTree = "<group>"; };
+		2FA342B728BF0C0D000B3D4E /* BPAnimationUIView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPAnimationUIView.h; sourceTree = "<group>"; };
+		2FA342B828BF0C0D000B3D4E /* BPAnimationUIView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPAnimationUIView.m; sourceTree = "<group>"; };
 		2FA909EC272791C00099A3F0 /* BPNetworkTestVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPNetworkTestVC.m; sourceTree = "<group>"; };
 		2FA909ED272791C00099A3F0 /* BPNetworkTestVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPNetworkTestVC.h; sourceTree = "<group>"; };
 		2FA90D7A2727A2520099A3F0 /* BPMultiThreadVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPMultiThreadVC.h; sourceTree = "<group>"; };
@@ -285,6 +305,15 @@
 			path = PodLibrary;
 			sourceTree = "<group>";
 		};
+		2F2660402892A395004EC410 /* CollectionViewRotate */ = {
+			isa = PBXGroup;
+			children = (
+				2F2660412892A3B7004EC410 /* BPCollectionRotateVC.h */,
+				2F2660422892A3B7004EC410 /* BPCollectionRotateVC.m */,
+			);
+			path = CollectionViewRotate;
+			sourceTree = "<group>";
+		};
 		2F78C0B42726FCD400C0E335 /* PrivateModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -327,6 +356,19 @@
 				2FA24B4A27D6172D00E0A6C9 /* BPWebViewController.m */,
 			);
 			path = WebView;
+			sourceTree = "<group>";
+		};
+		2FA342B028BF0290000B3D4E /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				2FA342B128BF02B7000B3D4E /* BPAnimationVC.h */,
+				2FA342B228BF02B7000B3D4E /* BPAnimationVC.m */,
+				2FA342B428BF040F000B3D4E /* BPLandscapeUIView.h */,
+				2FA342B528BF040F000B3D4E /* BPLandscapeUIView.m */,
+				2FA342B728BF0C0D000B3D4E /* BPAnimationUIView.h */,
+				2FA342B828BF0C0D000B3D4E /* BPAnimationUIView.m */,
+			);
+			path = Animation;
 			sourceTree = "<group>";
 		};
 		2FA909EB272791C00099A3F0 /* Net */ = {
@@ -418,6 +460,10 @@
 				2FAB9A6727579C48008BF04F /* BPLeakShowView.m */,
 				2FB78B8C2761C39C00E1365D /* BPContainer.h */,
 				2FB78B8D2761C39C00E1365D /* BPContainer.m */,
+				2F595D08287D68D900F0F5AD /* NSMutableArray+hook.h */,
+				2F595D09287D68DA00F0F5AD /* NSMutableArray+hook.m */,
+				2F595D0B287D6A4600F0F5AD /* NSObject+DataRaceScaner.h */,
+				2F595D0C287D6A4600F0F5AD /* NSObject+DataRaceScaner.m */,
 			);
 			path = Memory;
 			sourceTree = "<group>";
@@ -525,6 +571,8 @@
 		6003F593195388D20070C39A /* Example for ModHookLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				2FA342B028BF0290000B3D4E /* Animation */,
+				2F2660402892A395004EC410 /* CollectionViewRotate */,
 				2F9EA7C6283B696000ADE60F /* TaggedPointer */,
 				2FD3D5BA27D7364F0045B4D8 /* Tabbar */,
 				2FA24B4827D6171900E0A6C9 /* WebView */,
@@ -563,6 +611,7 @@
 		6003F594195388D20070C39A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2F10914628730BD900B01131 /* memory_test.jpeg */,
 				2F14E50B28460B5B007E6503 /* tianai2webp.webp */,
 				2F14E509284604AD007E6503 /* tianaiwebp.webp */,
 				6003F595195388D20070C39A /* ModHookLibrary-Info.plist */,
@@ -610,9 +659,11 @@
 			buildConfigurationList = 6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "ModHookLibrary_Example" */;
 			buildPhases = (
 				72FFD5625E15A672FE88B390 /* [CP] Check Pods Manifest.lock */,
+				2FA71C90286D3E48004E0D00 /* Profiler Framework Integration */,
 				6003F586195388D20070C39A /* Sources */,
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
+				2FA71C92286D3F77004E0D00 /* Profiler Framework Info.plist Integration */,
 				6DC9C07C367E74005A1D5F82 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
@@ -695,6 +746,7 @@
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 				2FCA4204276092E100D3CED2 /* index_anchor_info_live_animation.svga in Resources */,
+				2F10914728730BD900B01131 /* memory_test.jpeg in Resources */,
 				2F14E50A284604AD007E6503 /* tianaiwebp.webp in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -732,6 +784,42 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		2FA71C90286D3E48004E0D00 /* Profiler Framework Integration */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Profiler Framework Integration";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Only integrate the framework for the Debug configuration by default. Edit this section to integrate with additional configurations. For example, to add the \"Debug_Another\" and \"Release\" configurations, set the following line to:\n#       ALLOWED_CONFIGURATIONS=\"Debug,Debug_Another,Release\"\nALLOWED_CONFIGURATIONS=\"Debug\"\n\n# Leave this section empty to dynamically determine the path of the Detox Instruments app. If you are seeing issues, point explicitly to the app here.\nEXPLICIT_INSTRUMENTS_APP_PATH=\n\nif [ -z \"$EXPLICIT_INSTRUMENTS_APP_PATH\" ]; then\n  # Find where the Detox Instruments app is installed\n  INSTRUMENTS_APP_PATH=$(mdfind kMDItemCFBundleIdentifier=\"com.wix.DetoxInstruments\" | head -n 1)\nelse\n  INSTRUMENTS_APP_PATH=\"$EXPLICIT_INSTRUMENTS_APP_PATH\"\nfi\nPROFILER_BUILD_SCRIPT_PATH=\"${INSTRUMENTS_APP_PATH}/Contents/SharedSupport/Scripts/profiler_build_phase.sh\"\nif [ \"${INSTRUMENTS_APP_PATH}\" -a -e \"${PROFILER_BUILD_SCRIPT_PATH}\" ]; then\n  echo Found integration script at \"${PROFILER_BUILD_SCRIPT_PATH}\"\n  # Run the Profiler framework integration script\n  \"${PROFILER_BUILD_SCRIPT_PATH}\" \"${CONFIGURATION}\" \"${ALLOWED_CONFIGURATIONS}\"\nelse\n  echo \"Profiler not included: Cannot find an installed Detox Instruments app.\"\nfi\n";
+		};
+		2FA71C92286D3F77004E0D00 /* Profiler Framework Info.plist Integration */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Profiler Framework Info.plist Integration";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Only integrate the framework for the Debug configuration by default. Edit this section to integrate with additional configurations. For example, to add the \"Debug_Another\" and \"Release\" configurations, set the following line to:\n#       ALLOWED_CONFIGURATIONS=\"Debug,Debug_Another,Release\"\nALLOWED_CONFIGURATIONS=\"Debug\"\n\n# Leave this section empty to dynamically determine the path of the Detox Instruments app. If you are seeing issues, point explicitly to the app here.\nEXPLICIT_INSTRUMENTS_APP_PATH=\n\nif [ -z \"$EXPLICIT_INSTRUMENTS_APP_PATH\" ]; then\n  # Find where the Detox Instruments app is installed\n  INSTRUMENTS_APP_PATH=$(mdfind kMDItemCFBundleIdentifier=\"com.wix.DetoxInstruments\" | head -n 1)\nelse\n  INSTRUMENTS_APP_PATH=\"$EXPLICIT_INSTRUMENTS_APP_PATH\"\nfi\nPROFILER_BUILD_SCRIPT_PATH=\"${INSTRUMENTS_APP_PATH}/Contents/SharedSupport/Scripts/profiler_info_plist_phase.sh\"\nif [ \"${INSTRUMENTS_APP_PATH}\" -a -e \"${PROFILER_BUILD_SCRIPT_PATH}\" ]; then\n  echo Found integration script at \"${PROFILER_BUILD_SCRIPT_PATH}\"\n  # Run the Profiler framework integration script\n  \"${PROFILER_BUILD_SCRIPT_PATH}\" \"${CONFIGURATION}\" \"${ALLOWED_CONFIGURATIONS}\"\nelse\n  echo \"Profiler not included: Cannot find an installed Detox Instruments app.\"\nfi\n";
+		};
 		6DC9C07C367E74005A1D5F82 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -740,26 +828,52 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ModHookLibrary_Example/Pods-ModHookLibrary_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/BSBacktraceLogger/BSBacktraceLogger.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/DoraemonKit/DoraemonKit.framework",
+				"${PODS_ROOT}/DoraemonKit/iOS/DoraemonKit/Framework/DoraemonLoadAnalyze.framework",
+				"${BUILT_PRODUCTS_DIR}/EchoSDK/EchoSDK.framework",
 				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
+				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
+				"${BUILT_PRODUCTS_DIR}/GCDWebServer/GCDWebServer.framework",
+				"${BUILT_PRODUCTS_DIR}/JZLocationConverter/JZLocationConverter.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/ModHookLibrary/APM01.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SSZipArchive/SSZipArchive.framework",
 				"${BUILT_PRODUCTS_DIR}/SVGAPlayer/SVGAPlayer.framework",
+				"${BUILT_PRODUCTS_DIR}/SocketRocket/SocketRocket.framework",
+				"${BUILT_PRODUCTS_DIR}/WXDevtool/WXDevtool.framework",
+				"${BUILT_PRODUCTS_DIR}/WeexSDK/WeexSDK.framework",
+				"${BUILT_PRODUCTS_DIR}/YYDebugDatabase/YYDebugDatabase.framework",
 				"${BUILT_PRODUCTS_DIR}/YYModel/YYModel.framework",
 				"${BUILT_PRODUCTS_DIR}/matrix-wechat/Matrix.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BSBacktraceLogger.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaAsyncSocket.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DoraemonKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DoraemonLoadAnalyze.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EchoSDK.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GCDWebServer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JZLocationConverter.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/APM01.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SSZipArchive.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGAPlayer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketRocket.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WXDevtool.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WeexSDK.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYDebugDatabase.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYModel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Matrix.framework",
 			);
@@ -837,6 +951,7 @@
 				2FD3D5BD27D736830045B4D8 /* BPMainTabBarController.m in Sources */,
 				2FC63A85273383240006DE6C /* BPSubView1.m in Sources */,
 				2FC0B501273900060042CBB1 /* BPYYModelTestVC.m in Sources */,
+				2F595D0D287D6A4600F0F5AD /* NSObject+DataRaceScaner.m in Sources */,
 				2FB1614B27A27E49001F638E /* BPTableViewDiffableDataSource.m in Sources */,
 				2FA909EE272791C00099A3F0 /* BPNetworkTestVC.m in Sources */,
 				2FC63A7F2733802F0006DE6C /* BPBaseView.m in Sources */,
@@ -845,6 +960,7 @@
 				2F102B852720728900433099 /* BPTaskTestViewController.m in Sources */,
 				2FC63A82273382BD0006DE6C /* BPDeriveTestVC.m in Sources */,
 				2FDB238D272F7C6D005DF5C5 /* BPMultiThreadSafeObject.m in Sources */,
+				2FA342B328BF02B7000B3D4E /* BPAnimationVC.m in Sources */,
 				2FC7378327CF69030041A89B /* BPRuntimeExcutor.m in Sources */,
 				2F855D36282D198500DA73ED /* BPTimerMonitor.m in Sources */,
 				2FAB9A5F275781BB008BF04F /* BPHoldModel.m in Sources */,
@@ -853,22 +969,26 @@
 				2F102B8D272073AC00433099 /* BPPodLibraryTestViewController.m in Sources */,
 				2FCA420127608F1800D3CED2 /* BPSVGAViewController.m in Sources */,
 				2FAB9A5C27577267008BF04F /* BPLeakModel.m in Sources */,
+				2F2660432892A3B7004EC410 /* BPCollectionRotateVC.m in Sources */,
 				2FB78B8E2761C39C00E1365D /* BPContainer.m in Sources */,
 				2FAB9A6227578258008BF04F /* BPLeakModelManager.m in Sources */,
 				2F855B1B282CE91500DA73ED /* NSTimer+hook.m in Sources */,
 				2FD76E7E2754F85800C62981 /* BPTaskView.m in Sources */,
 				2F7D7DCD2721B460003EEE74 /* BPPointArrayMgr.m in Sources */,
+				2F595D0A287D68DA00F0F5AD /* NSMutableArray+hook.m in Sources */,
 				6003F5A7195388D20070C39A /* BPViewController.m in Sources */,
 				2F102B892720731600433099 /* BPAPMTestViewController.m in Sources */,
 				2FC96705272A9314008819D1 /* BPTemplateSub.m in Sources */,
 				2F9EA7C9283B697B00ADE60F /* BPTaggedPointerViewController.m in Sources */,
 				2F102B902720779E00433099 /* BPTableViewCell.m in Sources */,
 				2FAB9A6527579070008BF04F /* BPLeakHoldView.m in Sources */,
+				2FA342B928BF0C0D000B3D4E /* BPAnimationUIView.m in Sources */,
 				2FA24B4B27D6172D00E0A6C9 /* BPWebViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				2FD773232754F8D100C62981 /* YYBubbleTask.m in Sources */,
 				2FB23E8E277D9D6A00C897E9 /* BPBlockViewController.m in Sources */,
 				2F7D7DD02721B586003EEE74 /* BPPointerModel.m in Sources */,
+				2FA342B628BF040F000B3D4E /* BPLandscapeUIView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1006,6 +1126,52 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-l\"c++\"",
+					"-l\"iconv\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AFNetworking\"",
+					"-framework",
+					"\"APM01\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"CoreFoundation\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"FLAnimatedImage\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"Masonry\"",
+					"-framework",
+					"\"Matrix\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"Protobuf\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"SDWebImage\"",
+					"-framework",
+					"\"SSZipArchive\"",
+					"-framework",
+					"\"SVGAPlayer\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"-framework",
+					"\"YYModel\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -1029,6 +1195,52 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-l\"c++\"",
+					"-l\"iconv\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AFNetworking\"",
+					"-framework",
+					"\"APM01\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"CoreFoundation\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"FLAnimatedImage\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"Masonry\"",
+					"-framework",
+					"\"Matrix\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"Protobuf\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"SDWebImage\"",
+					"-framework",
+					"\"SSZipArchive\"",
+					"-framework",
+					"\"SVGAPlayer\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"-framework",
+					"\"YYModel\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.ModHookLibrary-Example.wangfei5";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
