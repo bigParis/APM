@@ -14,6 +14,7 @@
 #import <mach-o/getsect.h>
 #import <mach-o/dyld.h>
 #import <mach-o/getsect.h>
+#include "crt_externs.h"
 #define YY_CORE_SECTION_NAME "__yy_core_config"
 
 #define YY_CORE_CONCAT2(A, B) A ## B
@@ -45,7 +46,7 @@ typedef struct mach_header yyc_mach_header;
 #define ABC(_param1, _param2) \
 char *testData = (char *)""#_param1"#"#_param2"";\
 
-extern const struct mach_header* _NSGetMachExecuteHeader();
+//extern const struct mach_header* _NSGetMachExecuteHeader();
 typedef void (^YYSectionDataLookupBlock) (const void * _Nullable address);
 
 BOOL checkMethodBeHooked(Class class, SEL selector)
