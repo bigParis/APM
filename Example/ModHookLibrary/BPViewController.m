@@ -32,8 +32,8 @@ static NSString *kTableViewCellIdentifier = @"TableViewCellIdentifier";
     [super viewDidLoad];
     self.title = @"天生我才";
 //    self.view.backgroundColor = [UIColor whiteColor];
-    [self initSubViews];
-    [self initData];
+//    [self initSubViews];
+//    [self initData];
 }
 
 - (void)initSubViews
@@ -68,6 +68,7 @@ static NSString *kTableViewCellIdentifier = @"TableViewCellIdentifier";
     [tempArray addObject:[self createModelWith:@"WebView" vcName:@"BPWebViewController"]];
     [tempArray addObject:[self createModelWith:@"TaggedPointer" vcName:@"BPTaggedPointerViewController"]];
     [tempArray addObject:[self createModelWith:@"CollectionView旋转" vcName:@"BPCollectionRotateVC"]];
+    [tempArray addObject:[self createModelWith:@"wake up" vcName:@"BPWakeupVC"]];
     self.dataSource = tempArray;
 }
 

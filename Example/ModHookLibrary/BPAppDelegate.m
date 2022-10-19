@@ -10,14 +10,14 @@
 #import "BPMainTabBarController.h"
 #include <mach-o/dyld.h>
 #import <sys/kdebug_signpost.h>
-#import <Matrix/Matrix.h>
+//#import <Matrix/Matrix.h>
 #ifdef DEBUG
-#import <EchoSDK/ECOClient.h>
-#import <DoraemonKit/DoraemonManager.h>
+//#import <EchoSDK/ECOClient.h>
+//#import <DoraemonKit/DoraemonManager.h>
 #endif
 #import "NSMutableArray+hook.h"
 
-@interface BPAppDelegate ()<MatrixPluginListenerDelegate, MatrixAdapterDelegate,  WCCrashBlockMonitorPluginReportDelegate>
+@interface BPAppDelegate ()
 
 @end
 
@@ -46,15 +46,15 @@ static void blockCleanUp(__strong void(^*block)(void)) {
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    __strong NSString *string __attribute__((cleanup(stringCleanUp))) = @"sunnyxx";
-    // 加了个`unused`的attribute用来消除`unused variable`的warning
-     __strong void(^block)(void) __attribute__((cleanup(blockCleanUp), unused)) = ^{
-         NSLog(@"I'm dying...");
-     };
-    [NSMutableArray startHook];
+//    __strong NSString *string __attribute__((cleanup(stringCleanUp))) = @"sunnyxx";
+//    // 加了个`unused`的attribute用来消除`unused variable`的warning
+//     __strong void(^block)(void) __attribute__((cleanup(blockCleanUp), unused)) = ^{
+//         NSLog(@"I'm dying...");
+//     };
+//    [NSMutableArray startHook];
 #ifdef DEBUG
-    [[ECOClient sharedClient] start];
-    [[DoraemonManager shareInstance] installWithPid:@"productId"];//productId为在“平台端操作指南”中申请的产品id
+//    [[ECOClient sharedClient] start];
+//    [[DoraemonManager shareInstance] installWithPid:@"productId"];//productId为在“平台端操作指南”中申请的产品id
 #endif
     BPMainTabBarController *root = [[BPMainTabBarController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:root];
@@ -66,21 +66,21 @@ static void blockCleanUp(__strong void(^*block)(void)) {
     [self.window makeKeyAndVisible];
     self.window.rootViewController = nav;
     
-    Matrix *matrix = [Matrix sharedInstance];
-    MatrixBuilder *curBuilder = [[MatrixBuilder alloc] init];
-    curBuilder.pluginListener = self; // pluginListener 回调 plugin 的相关事件
-    [MatrixAdapter sharedInstance].delegate = self;
-    WCCrashBlockMonitorPlugin *crashBlockPlugin = [[WCCrashBlockMonitorPlugin alloc] init];
-    [crashBlockPlugin startTrackCPU];
-    [curBuilder addPlugin:crashBlockPlugin]; // 添加卡顿和崩溃监控
+//    Matrix *matrix = [Matrix sharedInstance];
+//    MatrixBuilder *curBuilder = [[MatrixBuilder alloc] init];
+//    curBuilder.pluginListener = self; // pluginListener 回调 plugin 的相关事件
+//    [MatrixAdapter sharedInstance].delegate = self;
+//    WCCrashBlockMonitorPlugin *crashBlockPlugin = [[WCCrashBlockMonitorPlugin alloc] init];
+//    [crashBlockPlugin startTrackCPU];
+//    [curBuilder addPlugin:crashBlockPlugin]; // 添加卡顿和崩溃监控
         
-    WCMemoryStatPlugin *memoryStatPlugin = [[WCMemoryStatPlugin alloc] init];
-    [curBuilder addPlugin:memoryStatPlugin]; // 添加内存监控功能
+//    WCMemoryStatPlugin *memoryStatPlugin = [[WCMemoryStatPlugin alloc] init];
+//    [curBuilder addPlugin:memoryStatPlugin]; // 添加内存监控功能
 
 //    WCFPSMonitorPlugin *fpsMonitorPlugin = [[WCFPSMonitorPlugin alloc] init];
 //    [curBuilder addPlugin:fpsMonitorPlugin]; // 添加 fps 监控功能
         
-    [matrix addMatrixBuilder:curBuilder];
+//    [matrix addMatrixBuilder:curBuilder];
         
 //    [crashBlockPlugin start]; // 开启卡顿和崩溃监控
 //    [memoryStatPlugin start]; // 开启内存监控
@@ -90,20 +90,20 @@ static void blockCleanUp(__strong void(^*block)(void)) {
     return YES;
 }
 
-- (void)onReportIssue:(MatrixIssue *)issue
-{
-    NSLog(@"");
-}
+//- (void)onReportIssue:(MatrixIssue *)issue
+//{
+//    NSLog(@"");
+//}
 
-- (BOOL)matrixShouldLog:(MXLogLevel)level
-{
-    return YES;
-}
+//- (BOOL)matrixShouldLog:(MXLogLevel)level
+//{
+//    return YES;
+//}
 
-- (void)matrixLog:(MXLogLevel)logLevel module:(const char *)module file:(const char *)file line:(int)line funcName:(const char *)funcName message:(NSString *)message
-{
-    NSLog(@"%@", message);
-}
+//- (void)matrixLog:(MXLogLevel)logLevel module:(const char *)module file:(const char *)file line:(int)line funcName:(const char *)funcName message:(NSString *)message
+//{
+//    NSLog(@"%@", message);
+//}
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {

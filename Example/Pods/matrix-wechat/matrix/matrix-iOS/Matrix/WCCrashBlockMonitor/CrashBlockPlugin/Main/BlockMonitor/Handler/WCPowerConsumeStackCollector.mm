@@ -611,30 +611,14 @@ static float *g_cpuHighThreadValueArray = NULL;
     for (int j = 0; j < thread_count; j++) {
         thread_info_data_t thinfo;
         mach_msg_type_number_t thread_info_count = THREAD_INFO_MAX;
-        kr = thread_info(thread_list[j], THREAD_EXTENDED_INFO, (thread_info_t)thinfo, &thread_info_count);
+        kr = thread_info(thread_list[j], THREAD_BASIC_INFO, (thread_info_t)thinfo, &thread_info_count);
         if (kr != KERN_SUCCESS) {
             return -1;
         }
-//        integer_t infoBuffer[THREAD_IDENTIFIER_INFO_COUNT] = { 0 };
-//        thread_info_t info = infoBuffer;
-//        mach_msg_type_number_t inOutSize = THREAD_IDENTIFIER_INFO_COUNT;
-//        kr = thread_info(thread_list[j], THREAD_IDENTIFIER_INFO, info, &inOutSize);
-//
-//        if (kr != KERN_SUCCESS) {
-//            return -1;
-//        }
-//        thread_identifier_info_t idInfo = (thread_identifier_info_t)info;
-//        thread_basic_info_t basic_info_th = (thread_basic_info_t)thinfo;
-//        if (!(basic_info_th->flags & TH_FLAGS_IDLE)) {
-//            tot_cpu = tot_cpu + basic_info_th->cpu_usage / (float)TH_USAGE_SCALE * 100.0;
-//        }
-        thread_extended_info_t exInfo = (thread_extended_info_t)thinfo;
-        if (!(exInfo->pth_flags & TH_FLAGS_IDLE)) {
-            tot_cpu = tot_cpu + exInfo->pth_cpu_usage / (float)TH_USAGE_SCALE * 100.0;
+        thread_basic_info_t basic_info_th = (thread_basic_info_t)thinfo;
+        if (!(basic_info_th->flags & TH_FLAGS_IDLE)) {
+            tot_cpu = tot_cpu + basic_info_th->cpu_usage / (float)TH_USAGE_SCALE * 100.0;
         }
-        NSLog(@"thread:%s, cup_usage:%@", exInfo->pth_name, @(exInfo->pth_cpu_usage));
-        
-        
     }
 
     kr = vm_deallocate(mach_task_self(), (vm_offset_t)thread_list, thread_count * sizeof(thread_t));

@@ -58,6 +58,7 @@
 		2FC96705272A9314008819D1 /* BPTemplateSub.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC96704272A9313008819D1 /* BPTemplateSub.m */; };
 		2FCA420127608F1800D3CED2 /* BPSVGAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FCA420027608F1800D3CED2 /* BPSVGAViewController.m */; };
 		2FCA4204276092E100D3CED2 /* index_anchor_info_live_animation.svga in Resources */ = {isa = PBXBuildFile; fileRef = 2FCA4203276092E000D3CED2 /* index_anchor_info_live_animation.svga */; };
+		2FD275E028FEA24F00B61266 /* BPWakeupVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FD275DF28FEA24F00B61266 /* BPWakeupVC.m */; };
 		2FD3D5BD27D736830045B4D8 /* BPMainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FD3D5BC27D736830045B4D8 /* BPMainTabBarController.m */; };
 		2FD76E7E2754F85800C62981 /* BPTaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FD76E7D2754F85800C62981 /* BPTaskView.m */; };
 		2FD773232754F8D100C62981 /* YYBubbleTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FD773222754F8D100C62981 /* YYBubbleTask.m */; };
@@ -194,6 +195,8 @@
 		2FCA41FF27608F1800D3CED2 /* BPSVGAViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPSVGAViewController.h; sourceTree = "<group>"; };
 		2FCA420027608F1800D3CED2 /* BPSVGAViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPSVGAViewController.m; sourceTree = "<group>"; };
 		2FCA4203276092E000D3CED2 /* index_anchor_info_live_animation.svga */ = {isa = PBXFileReference; lastKnownFileType = file; path = index_anchor_info_live_animation.svga; sourceTree = "<group>"; };
+		2FD275DE28FEA24F00B61266 /* BPWakeupVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPWakeupVC.h; sourceTree = "<group>"; };
+		2FD275DF28FEA24F00B61266 /* BPWakeupVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPWakeupVC.m; sourceTree = "<group>"; };
 		2FD3D5BB27D736830045B4D8 /* BPMainTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPMainTabBarController.h; sourceTree = "<group>"; };
 		2FD3D5BC27D736830045B4D8 /* BPMainTabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPMainTabBarController.m; sourceTree = "<group>"; };
 		2FD76E7C2754F85800C62981 /* BPTaskView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPTaskView.h; sourceTree = "<group>"; };
@@ -515,6 +518,15 @@
 			path = Resource;
 			sourceTree = "<group>";
 		};
+		2FD275DD28FEA22600B61266 /* Wakeup */ = {
+			isa = PBXGroup;
+			children = (
+				2FD275DE28FEA24F00B61266 /* BPWakeupVC.h */,
+				2FD275DF28FEA24F00B61266 /* BPWakeupVC.m */,
+			);
+			path = Wakeup;
+			sourceTree = "<group>";
+		};
 		2FD3D5BA27D7364F0045B4D8 /* Tabbar */ = {
 			isa = PBXGroup;
 			children = (
@@ -571,6 +583,7 @@
 		6003F593195388D20070C39A /* Example for ModHookLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				2FD275DD28FEA22600B61266 /* Wakeup */,
 				2FA342B028BF0290000B3D4E /* Animation */,
 				2F2660402892A395004EC410 /* CollectionViewRotate */,
 				2F9EA7C6283B696000ADE60F /* TaggedPointer */,
@@ -828,16 +841,12 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ModHookLibrary_Example/Pods-ModHookLibrary_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
-				"${BUILT_PRODUCTS_DIR}/BSBacktraceLogger/BSBacktraceLogger.framework",
-				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
 				"${BUILT_PRODUCTS_DIR}/DoraemonKit/DoraemonKit.framework",
 				"${PODS_ROOT}/DoraemonKit/iOS/DoraemonKit/Framework/DoraemonLoadAnalyze.framework",
-				"${BUILT_PRODUCTS_DIR}/EchoSDK/EchoSDK.framework",
 				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
 				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
 				"${BUILT_PRODUCTS_DIR}/GCDWebServer/GCDWebServer.framework",
-				"${BUILT_PRODUCTS_DIR}/JZLocationConverter/JZLocationConverter.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/ModHookLibrary/APM01.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
@@ -854,16 +863,12 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BSBacktraceLogger.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaAsyncSocket.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DoraemonKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DoraemonLoadAnalyze.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EchoSDK.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GCDWebServer.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JZLocationConverter.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/APM01.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
@@ -947,6 +952,7 @@
 				2FC96702272A92F8008819D1 /* BPTemplateBase.m in Sources */,
 				2FDB2390272F7E99005DF5C5 /* BPMutableArray.m in Sources */,
 				2FF1B17227911904006037C7 /* BPMachOViewController.m in Sources */,
+				2FD275E028FEA24F00B61266 /* BPWakeupVC.m in Sources */,
 				6003F59E195388D20070C39A /* BPAppDelegate.m in Sources */,
 				2FD3D5BD27D736830045B4D8 /* BPMainTabBarController.m in Sources */,
 				2FC63A85273383240006DE6C /* BPSubView1.m in Sources */,
@@ -1150,8 +1156,6 @@
 					"-framework",
 					"\"Masonry\"",
 					"-framework",
-					"\"Matrix\"",
-					"-framework",
 					"\"MobileCoreServices\"",
 					"-framework",
 					"\"Protobuf\"",
@@ -1171,6 +1175,8 @@
 					"\"UIKit\"",
 					"-framework",
 					"\"YYModel\"",
+					"-framework",
+					"\"Matrix\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1219,8 +1225,6 @@
 					"-framework",
 					"\"Masonry\"",
 					"-framework",
-					"\"Matrix\"",
-					"-framework",
 					"\"MobileCoreServices\"",
 					"-framework",
 					"\"Protobuf\"",
@@ -1240,6 +1244,8 @@
 					"\"UIKit\"",
 					"-framework",
 					"\"YYModel\"",
+					"-framework",
+					"\"Matrix\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.ModHookLibrary-Example.wangfei5";
 				PRODUCT_NAME = "$(TARGET_NAME)";
