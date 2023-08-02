@@ -14,28 +14,6 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
-  - CocoaLumberjack (3.7.4):
-    - CocoaLumberjack/Core (= 3.7.4)
-  - CocoaLumberjack/Core (3.7.4)
-  - DoraemonKit/Core (3.0.7):
-    - FMDB
-    - GCDWebServer
-    - GCDWebServer/WebDAV
-    - GCDWebServer/WebUploader
-  - DoraemonKit/WithDatabase (3.0.7):
-    - DoraemonKit/Core
-    - YYDebugDatabase
-  - DoraemonKit/WithGPS (3.0.7):
-    - DoraemonKit/Core
-  - DoraemonKit/WithLoad (3.0.7):
-    - DoraemonKit/Core
-  - DoraemonKit/WithLogger (3.0.7):
-    - CocoaLumberjack
-    - DoraemonKit/Core
-  - DoraemonKit/WithWeex (3.0.7):
-    - DoraemonKit/Core
-    - WeexSDK
-    - WXDevtool
   - Expecta (1.0.6)
   - "Expecta+Snapshots (3.1.1)":
     - Expecta (~> 1.0)
@@ -47,26 +25,7 @@ PODS:
   - FBSnapshotTestCase/SwiftSupport (2.1.4):
     - FBSnapshotTestCase/Core
   - FLAnimatedImage (1.0.17)
-  - FMDB (2.7.5):
-    - FMDB/standard (= 2.7.5)
-  - FMDB/standard (2.7.5)
-  - GCDWebServer (3.5.4):
-    - GCDWebServer/Core (= 3.5.4)
-  - GCDWebServer/Core (3.5.4)
-  - GCDWebServer/WebDAV (3.5.4):
-    - GCDWebServer/Core
-  - GCDWebServer/WebUploader (3.5.4):
-    - GCDWebServer/Core
   - Masonry (1.1.0)
-  - matrix-wechat (1.0.1):
-    - matrix-wechat/matrixARC (= 1.0.1)
-    - matrix-wechat/matrixNonARC1 (= 1.0.1)
-    - matrix-wechat/matrixNonARC2 (= 1.0.1)
-  - matrix-wechat/matrixARC (1.0.1):
-    - matrix-wechat/matrixNonARC1
-  - matrix-wechat/matrixNonARC1 (1.0.1)
-  - matrix-wechat/matrixNonARC2 (1.0.1):
-    - matrix-wechat/matrixARC
   - ModHookLibrary (0.0.16):
     - ModHookLibrary/APM1 (= 0.0.16)
     - ModHookLibrary/APM2 (= 0.0.16)
@@ -87,7 +46,6 @@ PODS:
   - SDWebImage (5.13.4):
     - SDWebImage/Core (= 5.13.4)
   - SDWebImage/Core (5.13.4)
-  - SocketRocket (0.6.0)
   - Specta (1.0.7)
   - SSZipArchive (2.4.3)
   - SVGAPlayer (2.5.7):
@@ -98,29 +56,15 @@ PODS:
     - SVGAPlayer/ProtoFiles
   - SVGAPlayer/ProtoFiles (2.5.7):
     - Protobuf (~> 3.4)
-  - WeexSDK (0.30.0)
-  - WXDevtool (0.24.0):
-    - SocketRocket
-    - WeexSDK
-  - YYDebugDatabase (2.1.1):
-    - FMDB
-    - GCDWebServer
   - YYModel (1.0.4)
 
 DEPENDENCIES:
   - AFNetworking (= 3.2.1)
-  - DoraemonKit/Core (~> 3.0.4)
-  - DoraemonKit/WithDatabase (~> 3.0.4)
-  - DoraemonKit/WithGPS (~> 3.0.4)
-  - DoraemonKit/WithLoad (~> 3.0.4)
-  - DoraemonKit/WithLogger (~> 3.0.4)
-  - DoraemonKit/WithWeex (~> 3.0.4)
   - Expecta
   - "Expecta+Snapshots"
   - FBSnapshotTestCase
   - FLAnimatedImage (~> 1.0)
   - Masonry (= 1.1.0)
-  - matrix-wechat
   - ModHookLibrary (from `../`)
   - SDWebImage (~> 5.0)
   - Specta
@@ -130,25 +74,16 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - AFNetworking
-    - CocoaLumberjack
-    - DoraemonKit
     - Expecta
     - "Expecta+Snapshots"
     - FBSnapshotTestCase
     - FLAnimatedImage
-    - FMDB
-    - GCDWebServer
     - Masonry
-    - matrix-wechat
     - Protobuf
     - SDWebImage
-    - SocketRocket
     - Specta
     - SSZipArchive
     - SVGAPlayer
-    - WeexSDK
-    - WXDevtool
-    - YYDebugDatabase
     - YYModel
 
 EXTERNAL SOURCES:
@@ -157,28 +92,19 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  CocoaLumberjack: 543c79c114dadc3b1aba95641d8738b06b05b646
-  DoraemonKit: 32fb97f3aa82efa133111d193080ca5462cef135
   Expecta: 3b6bd90a64b9a1dcb0b70aa0e10a7f8f631667d5
   "Expecta+Snapshots": dcff217eef506dabd6dfdc7864ea2da321fafbb8
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
   FLAnimatedImage: bbf914596368867157cc71b38a8ec834b3eeb32b
-  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
-  GCDWebServer: 2c156a56c8226e2d5c0c3f208a3621ccffbe3ce4
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
-  matrix-wechat: db0ef2c0bfe982aa9c2c42aa409c48724bedc507
   ModHookLibrary: 3a86bdd88aa505baec8a317dfe8572dadcd3fe88
   Protobuf: 0a11f3000cd10ffa17611bf96e66a66b25c956e4
   SDWebImage: e5cc87bf736e60f49592f307bdf9e157189298a3
-  SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
   Specta: 3e1bd89c3517421982dc4d1c992503e48bd5fe66
   SSZipArchive: fe6a26b2a54d5a0890f2567b5cc6de5caa600aef
   SVGAPlayer: 318b85a78b61292d6ae9dfcd651f3f0d1cdadd86
-  WeexSDK: 8e01e33244f51cb11f9f000b5200d93de5f4fa97
-  WXDevtool: 95b70c73c06fc3299d65bd53ba4b3e0b0087f3cb
-  YYDebugDatabase: 2e815f2b5ba7ff49aa298ea265dec6a7aa4664ad
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: 9f06bfd9cad183b211f85d22d4bff3b93a891a9e
+PODFILE CHECKSUM: f924dfda6cbf0206d45bac60d53fe8ffa86f9fd4
 
 COCOAPODS: 1.11.2

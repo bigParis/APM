@@ -46,6 +46,7 @@
 		2FB24744277DB26500C897E9 /* YmEzZjdhMjgtNmY1MC00MWQyLWE5NjEtMzZhN2M2ZTRlODJl.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2FB24743277DB26500C897E9 /* YmEzZjdhMjgtNmY1MC00MWQyLWE5NjEtMzZhN2M2ZTRlODJl.gif */; };
 		2FB78B8E2761C39C00E1365D /* BPContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB78B8D2761C39C00E1365D /* BPContainer.m */; };
 		2FC0B501273900060042CBB1 /* BPYYModelTestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0B500273900060042CBB1 /* BPYYModelTestVC.m */; };
+		2FC220522994F02700AF2B7C /* BPRunLoopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC220512994F02700AF2B7C /* BPRunLoopViewController.m */; };
 		2FC63A7F2733802F0006DE6C /* BPBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC63A7E2733802F0006DE6C /* BPBaseView.m */; };
 		2FC63A82273382BD0006DE6C /* BPDeriveTestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC63A81273382BD0006DE6C /* BPDeriveTestVC.m */; };
 		2FC63A85273383240006DE6C /* BPSubView1.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC63A84273383240006DE6C /* BPSubView1.m */; };
@@ -172,6 +173,8 @@
 		2FB78B8D2761C39C00E1365D /* BPContainer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPContainer.m; sourceTree = "<group>"; };
 		2FC0B4FF273900060042CBB1 /* BPYYModelTestVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPYYModelTestVC.h; sourceTree = "<group>"; };
 		2FC0B500273900060042CBB1 /* BPYYModelTestVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPYYModelTestVC.m; sourceTree = "<group>"; };
+		2FC220502994F02700AF2B7C /* BPRunLoopViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPRunLoopViewController.h; sourceTree = "<group>"; };
+		2FC220512994F02700AF2B7C /* BPRunLoopViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPRunLoopViewController.m; sourceTree = "<group>"; };
 		2FC63A7D2733802E0006DE6C /* BPBaseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPBaseView.h; sourceTree = "<group>"; };
 		2FC63A7E2733802F0006DE6C /* BPBaseView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPBaseView.m; sourceTree = "<group>"; };
 		2FC63A80273382BD0006DE6C /* BPDeriveTestVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPDeriveTestVC.h; sourceTree = "<group>"; };
@@ -431,6 +434,15 @@
 			path = YYModel;
 			sourceTree = "<group>";
 		};
+		2FC2204F2994F00E00AF2B7C /* RunLoop */ = {
+			isa = PBXGroup;
+			children = (
+				2FC220502994F02700AF2B7C /* BPRunLoopViewController.h */,
+				2FC220512994F02700AF2B7C /* BPRunLoopViewController.m */,
+			);
+			path = RunLoop;
+			sourceTree = "<group>";
+		};
 		2FC63A7C273380140006DE6C /* Derived */ = {
 			isa = PBXGroup;
 			children = (
@@ -583,6 +595,7 @@
 		6003F593195388D20070C39A /* Example for ModHookLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				2FC2204F2994F00E00AF2B7C /* RunLoop */,
 				2FD275DD28FEA22600B61266 /* Wakeup */,
 				2FA342B028BF0290000B3D4E /* Animation */,
 				2F2660402892A395004EC410 /* CollectionViewRotate */,
@@ -841,46 +854,26 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ModHookLibrary_Example/Pods-ModHookLibrary_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
-				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
-				"${BUILT_PRODUCTS_DIR}/DoraemonKit/DoraemonKit.framework",
-				"${PODS_ROOT}/DoraemonKit/iOS/DoraemonKit/Framework/DoraemonLoadAnalyze.framework",
 				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
-				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
-				"${BUILT_PRODUCTS_DIR}/GCDWebServer/GCDWebServer.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/ModHookLibrary/APM01.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SSZipArchive/SSZipArchive.framework",
 				"${BUILT_PRODUCTS_DIR}/SVGAPlayer/SVGAPlayer.framework",
-				"${BUILT_PRODUCTS_DIR}/SocketRocket/SocketRocket.framework",
-				"${BUILT_PRODUCTS_DIR}/WXDevtool/WXDevtool.framework",
-				"${BUILT_PRODUCTS_DIR}/WeexSDK/WeexSDK.framework",
-				"${BUILT_PRODUCTS_DIR}/YYDebugDatabase/YYDebugDatabase.framework",
 				"${BUILT_PRODUCTS_DIR}/YYModel/YYModel.framework",
-				"${BUILT_PRODUCTS_DIR}/matrix-wechat/Matrix.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DoraemonKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DoraemonLoadAnalyze.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GCDWebServer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/APM01.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SSZipArchive.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGAPlayer.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketRocket.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WXDevtool.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WeexSDK.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYDebugDatabase.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYModel.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Matrix.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -960,6 +953,7 @@
 				2F595D0D287D6A4600F0F5AD /* NSObject+DataRaceScaner.m in Sources */,
 				2FB1614B27A27E49001F638E /* BPTableViewDiffableDataSource.m in Sources */,
 				2FA909EE272791C00099A3F0 /* BPNetworkTestVC.m in Sources */,
+				2FC220522994F02700AF2B7C /* BPRunLoopViewController.m in Sources */,
 				2FC63A7F2733802F0006DE6C /* BPBaseView.m in Sources */,
 				2FAB9A6827579C48008BF04F /* BPLeakShowView.m in Sources */,
 				2FC7378027CF68D90041A89B /* BPRuntimeViewController.m in Sources */,
@@ -1175,8 +1169,6 @@
 					"\"UIKit\"",
 					"-framework",
 					"\"YYModel\"",
-					"-framework",
-					"\"Matrix\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1244,8 +1236,6 @@
 					"\"UIKit\"",
 					"-framework",
 					"\"YYModel\"",
-					"-framework",
-					"\"Matrix\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.ModHookLibrary-Example.wangfei5";
 				PRODUCT_NAME = "$(TARGET_NAME)";

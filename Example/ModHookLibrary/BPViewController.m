@@ -24,6 +24,8 @@ static NSString *kTableViewCellIdentifier = @"TableViewCellIdentifier";
 @property (nonatomic, weak) UITableView *tableView;
 @property (nonatomic, copy) NSArray<BPTableModel *> *dataSource;
 
+@property (nonatomic, strong) NSMutableArray *testArray;
+
 @end
 
 @implementation BPViewController
@@ -31,9 +33,14 @@ static NSString *kTableViewCellIdentifier = @"TableViewCellIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"天生我才";
-//    self.view.backgroundColor = [UIColor whiteColor];
-//    [self initSubViews];
-//    [self initData];
+    self.testArray =  [[NSMutableArray alloc] initWithCapacity:3];
+    [self.testArray addObject:@(1)];
+    [self.testArray addObject:@(1)];
+    [self.testArray addObject:@(1)];
+    [self.testArray insertObject:@(9) atIndex:1];
+    self.view.backgroundColor = [UIColor whiteColor];
+    [self initSubViews];
+    [self initData];
 }
 
 - (void)initSubViews
@@ -69,6 +76,7 @@ static NSString *kTableViewCellIdentifier = @"TableViewCellIdentifier";
     [tempArray addObject:[self createModelWith:@"TaggedPointer" vcName:@"BPTaggedPointerViewController"]];
     [tempArray addObject:[self createModelWith:@"CollectionView旋转" vcName:@"BPCollectionRotateVC"]];
     [tempArray addObject:[self createModelWith:@"wake up" vcName:@"BPWakeupVC"]];
+    [tempArray addObject:[self createModelWith:@"RunLoop" vcName:@"BPRunLoopViewController"]];
     self.dataSource = tempArray;
 }
 

@@ -11,15 +11,15 @@ target 'ModHookLibrary_Example' do
   pod 'YYModel', '1.0.4'
   pod 'SVGAPlayer', '~> 2.5'
   pod 'FLAnimatedImage', '~> 1.0'
-  pod 'matrix-wechat'
+#  pod 'matrix-wechat'
 #  pod 'EchoSDK', :configurations => ["Debug"]
-  pod 'DoraemonKit/Core', '~> 3.0.4', :configurations => ['Debug'] #必选
-  pod 'DoraemonKit/WithGPS', '~> 3.0.4', :configurations => ['Debug'] #可选
-  pod 'DoraemonKit/WithLoad', '~> 3.0.4', :configurations => ['Debug'] #可选
-  pod 'DoraemonKit/WithLogger', '~> 3.0.4', :configurations => ['Debug'] #可选
-  pod 'DoraemonKit/WithDatabase', '~> 3.0.4', :configurations => ['Debug'] #可选
+#  pod 'DoraemonKit/Core', '~> 3.0.4', :configurations => ['Debug'] #必选
+#  pod 'DoraemonKit/WithGPS', '~> 3.0.4', :configurations => ['Debug'] #可选
+#  pod 'DoraemonKit/WithLoad', '~> 3.0.4', :configurations => ['Debug'] #可选
+#  pod 'DoraemonKit/WithLogger', '~> 3.0.4', :configurations => ['Debug'] #可选
+#  pod 'DoraemonKit/WithDatabase', '~> 3.0.4', :configurations => ['Debug'] #可选
 #  pod 'DoraemonKit/WithMLeaksFinder', '~> 3.0.4', :configurations => ['Debug'] #可选
-  pod 'DoraemonKit/WithWeex', '~> 3.0.4', :configurations => ['Debug'] #可选
+#  pod 'DoraemonKit/WithWeex', '~> 3.0.4', :configurations => ['Debug'] #可选
   target 'ModHookLibrary_Tests' do
     inherit! :search_paths
 

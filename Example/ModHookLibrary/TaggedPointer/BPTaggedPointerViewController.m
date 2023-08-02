@@ -8,7 +8,13 @@
 
 #import "BPTaggedPointerViewController.h"
 
+static NSString *test = @"123";
+
 @interface BPTaggedPointerViewController ()
+@property (nonatomic, copy) dispatch_block_t testBlock;
+@property (nonatomic, copy) NSString *aString;
+
+@property (nonatomic, assign) CGRect rect;
 
 @end
 
@@ -16,17 +22,57 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+//    self.rect = CGRectZero;
+    NSLog(@"self.rect:%@", @(self.rect));
+    NSString *str = NSStringFromCGRect(self.rect);
+    UILabel *label = [[UILabel alloc] init];
+    [self.view addSubview:label];
+    label.text = str;
+    label.frame = CGRectMake(100, 100, 200, 30);
+    CGFloat x = 3.14f;
+    CGFloat y = 2 * x;
+    CGFloat z = 2 * y;
+    int yy = 3;
+    NSLog(@"Address of x: %p,y :%p, z:%p, yy:%p", &x, &y, &z, &yy);
+    if (x == 0) {
+        NSLog(@"wrong");
+    } else {
+        NSLog(@"right");
+    }
+//    NSString *other = @"910291021";
+//    __weak typeof(other) weak_other = other;
+//    __weak typeof(test) weak_test = test;
+//    NSLog(@"%p-%p", weak_test, test);
+//    NSLog(@"%p-%p", weak_other, other);
+//    __weak typeof(self) weakSelf = self;
+    
+//    self.testBlock = ^{
+//        weakSelf.aString = @"flaksdfj";
+//    };
     // Do any additional setup after loading the view.
+}
+
++ (void)test
+{
+    
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    NSNumber *number = [NSNumber numberWithInt:1];
-    NSString *string = [NSString stringWithFormat:@"热门话题"];
-    NSString *string2 = @"热门话题";
-    NSNumber *number2 = [NSNumber numberWithInteger:1];
-    NSNumber *number3 = [NSNumber numberWithLongLong:-36028797018963967];
-    NSNumber *number4 = [NSNumber numberWithLongLong:-36028797018963968];
-    NSLog(@"%p %p %p %p %p", number, string, string2, number3, number4);
+    NSLog(@"touch");
+    UIView *view = nil;
+
+    if (view) {
+        NSLog(@"已创建");
+        return;
+    }
+    UIView *temp = [[UIView alloc] init];
+    view = temp;
+    view.frame = CGRectMake(100, 200, 100, 200);
+    view.backgroundColor = [UIColor redColor];
+    [self.view addSubview:view];
+    view.backgroundColor = [UIColor grayColor];
+    [self.view addSubview:view];
+    NSLog(@"创建%p", view);
 }
 @end

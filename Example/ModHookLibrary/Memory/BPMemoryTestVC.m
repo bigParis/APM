@@ -17,10 +17,23 @@
 #import <objc/runtime.h>
 #import "NSObject+DataRaceScaner.h"
 #import <Masonry/Masonry.h>
-
+#import <Photos/Photos.h>
 //#define VIEW_LEAK 1
 //#define THREAD_LEAK 1
 //#define BLOCK_LEAK 1
+//#import "BPCppClass.h"
+//#include <iostream>
+//
+//class YLKAudioEncodedFrameObserver: public IAudioEncodedFrameObserver {
+//public:
+//    __weak id<TestProtocol> delegate;
+//    YLKAudioEncodedFrameObserver() {
+//        std::cout << "YLKAudioEncodedFrameObserver Object alloc" << std::endl;
+//    }
+//    ~YLKAudioEncodedFrameObserver() {
+//        std::cout << "YLKAudioEncodedFrameObserver Object released" << std::endl;
+//    }
+//};
 
 @interface NSTestObjc : NSObject
 @end
@@ -88,6 +101,8 @@
 #ifdef BLOCK_LEAK
     self.testCount = 0;
 #endif
+//    static YLKAudioEncodedFrameObserver *vob = new YLKAudioEncodedFrameObserver;
+//    vob->delegate = self;
 }
 
 - (void)setupLeakImageView
@@ -107,6 +122,50 @@
     imageView2.image = [UIImage imageNamed:@"tianai2png.png"];
     self.imageView2 = imageView2;
     [self.view addSubview:self.imageView2];
+}
+
+- (void)requestAuthorization
+{
+    [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+        switch (status) {
+            case PHAuthorizationStatusAuthorized:
+                // 用户已授权访问相册
+                // 在这里调用保存图片到相册的方法
+                break;
+            case PHAuthorizationStatusDenied:
+            case PHAuthorizationStatusRestricted:
+                // 用户拒绝或限制了相册访问权限
+                // 在这里处理相册访问权限被拒绝或限制的情况
+                break;
+            case PHAuthorizationStatusNotDetermined:
+                // 用户还未决定是否授权相册访问权限
+                // 在这里处理相册访问权限还未决定的情况
+                break;
+            default:
+                break;
+        }
+    }];
+}
+
+- (void)writeImage
+{
+    
+    for (int i = 0; i < 10000; ++i) {
+        UIImage *image = [UIImage imageNamed:@"glasses"];
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+        });
+    }
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
+    if (error) {
+        // 保存失败
+        NSLog(@"保存图片失败：%@", error.localizedDescription);
+    } else {
+        // 保存成功
+        NSLog(@"保存图片成功");
+    }
 }
 
 - (void)initViews
@@ -292,9 +351,10 @@
 
 - (void)onImageLeakClicked
 {
-    self.imageLeakOpen = !self.imageLeakOpen;
-    [self.view setNeedsLayout];
-    [self.view layoutIfNeeded];
+//    self.imageLeakOpen = !self.imageLeakOpen;
+//    [self.view setNeedsLayout];
+//    [self.view layoutIfNeeded];
+//    [self writeImage];
 }
 
 - (UIImage *)getCompressedImage
