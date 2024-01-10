@@ -45,9 +45,10 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    [self.imageView sd_setImageWithURL:[NSURL URLWithString:@"https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.jj20.com%2Fup%2Fallimg%2F1114%2F060421091316%2F210604091316-2-1200.jpg&refer=http%3A%2F%2Fimg.jj20.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1637464797&t=e11afa136f946d0979903b6a9e11997f"]
-                 placeholderImage:nil options:SDWebImageRefreshCached];
-    [self.alphaImage setImage:[UIImage imageNamed:@"Ybear_Color_2k.png"]];
+//    [self.imageView sd_setImageWithURL:[NSURL URLWithString:@"https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.jj20.com%2Fup%2Fallimg%2F1114%2F060421091316%2F210604091316-2-1200.jpg&refer=http%3A%2F%2Fimg.jj20.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1637464797&t=e11afa136f946d0979903b6a9e11997f"]
+//                 placeholderImage:nil options:SDWebImageRefreshCached];
+    [self.imageView sd_setImageWithURL:[NSURL URLWithString:@"https://downhdlogo.yy.com/hdlogo/100100/100/100/45/0000453463/u453463zB7d5ZK_iDg.gif"]];
+//    [self.alphaImage setImage:[UIImage imageNamed:@"Ybear_Color_2k.png"]];
 }
 
 - (void)testCode

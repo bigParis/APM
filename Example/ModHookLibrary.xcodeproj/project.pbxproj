@@ -15,6 +15,7 @@
 		2F14E50A284604AD007E6503 /* tianaiwebp.webp in Resources */ = {isa = PBXBuildFile; fileRef = 2F14E509284604AD007E6503 /* tianaiwebp.webp */; };
 		2F14E50C28460B5B007E6503 /* tianai2webp.webp in Resources */ = {isa = PBXBuildFile; fileRef = 2F14E50B28460B5B007E6503 /* tianai2webp.webp */; };
 		2F2660432892A3B7004EC410 /* BPCollectionRotateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2660422892A3B7004EC410 /* BPCollectionRotateVC.m */; };
+		2F2BC24C2B4BCE3700A406AD /* BPTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2BC24B2B4BCE3700A406AD /* BPTextViewController.m */; };
 		2F595D0A287D68DA00F0F5AD /* NSMutableArray+hook.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F595D09287D68DA00F0F5AD /* NSMutableArray+hook.m */; };
 		2F595D0D287D6A4600F0F5AD /* NSObject+DataRaceScaner.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F595D0C287D6A4600F0F5AD /* NSObject+DataRaceScaner.m */; };
 		2F78C0B72726FCF100C0E335 /* BPPrivateModelVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F78C0B62726FCF100C0E335 /* BPPrivateModelVC.m */; };
@@ -32,6 +33,7 @@
 		2FA909EE272791C00099A3F0 /* BPNetworkTestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA909EC272791C00099A3F0 /* BPNetworkTestVC.m */; };
 		2FA90D7C2727A2520099A3F0 /* BPMultiThreadVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA90D7B2727A2520099A3F0 /* BPMultiThreadVC.m */; };
 		2FA90D7F2727A2A50099A3F0 /* BPMultiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA90D7E2727A2A50099A3F0 /* BPMultiManager.m */; };
+		2FAAA1F22AA034D40099AD6B /* BPHitchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FAAA1F12AA034D40099AD6B /* BPHitchViewController.m */; };
 		2FAB9A5C27577267008BF04F /* BPLeakModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FAB9A5B27577266008BF04F /* BPLeakModel.m */; };
 		2FAB9A5F275781BB008BF04F /* BPHoldModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FAB9A5E275781BB008BF04F /* BPHoldModel.m */; };
 		2FAB9A6227578258008BF04F /* BPLeakModelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FAB9A6127578257008BF04F /* BPLeakModelManager.m */; };
@@ -111,6 +113,8 @@
 		2F14E50B28460B5B007E6503 /* tianai2webp.webp */ = {isa = PBXFileReference; lastKnownFileType = file; path = tianai2webp.webp; sourceTree = "<group>"; };
 		2F2660412892A3B7004EC410 /* BPCollectionRotateVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPCollectionRotateVC.h; sourceTree = "<group>"; };
 		2F2660422892A3B7004EC410 /* BPCollectionRotateVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPCollectionRotateVC.m; sourceTree = "<group>"; };
+		2F2BC24A2B4BCE3700A406AD /* BPTextViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPTextViewController.h; sourceTree = "<group>"; };
+		2F2BC24B2B4BCE3700A406AD /* BPTextViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPTextViewController.m; sourceTree = "<group>"; };
 		2F595D08287D68D900F0F5AD /* NSMutableArray+hook.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+hook.h"; sourceTree = "<group>"; };
 		2F595D09287D68DA00F0F5AD /* NSMutableArray+hook.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+hook.m"; sourceTree = "<group>"; };
 		2F595D0B287D6A4600F0F5AD /* NSObject+DataRaceScaner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+DataRaceScaner.h"; sourceTree = "<group>"; };
@@ -147,6 +151,8 @@
 		2FA90D7B2727A2520099A3F0 /* BPMultiThreadVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPMultiThreadVC.m; sourceTree = "<group>"; };
 		2FA90D7D2727A2A50099A3F0 /* BPMultiManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPMultiManager.h; sourceTree = "<group>"; };
 		2FA90D7E2727A2A50099A3F0 /* BPMultiManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPMultiManager.m; sourceTree = "<group>"; };
+		2FAAA1F02AA034D40099AD6B /* BPHitchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPHitchViewController.h; sourceTree = "<group>"; };
+		2FAAA1F12AA034D40099AD6B /* BPHitchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPHitchViewController.m; sourceTree = "<group>"; };
 		2FAB9A5A27577266008BF04F /* BPLeakModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPLeakModel.h; sourceTree = "<group>"; };
 		2FAB9A5B27577266008BF04F /* BPLeakModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPLeakModel.m; sourceTree = "<group>"; };
 		2FAB9A5D275781BB008BF04F /* BPHoldModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPHoldModel.h; sourceTree = "<group>"; };
@@ -320,6 +326,15 @@
 			path = CollectionViewRotate;
 			sourceTree = "<group>";
 		};
+		2F2BC2492B4BCE0000A406AD /* TextView */ = {
+			isa = PBXGroup;
+			children = (
+				2F2BC24A2B4BCE3700A406AD /* BPTextViewController.h */,
+				2F2BC24B2B4BCE3700A406AD /* BPTextViewController.m */,
+			);
+			path = TextView;
+			sourceTree = "<group>";
+		};
 		2F78C0B42726FCD400C0E335 /* PrivateModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -399,6 +414,15 @@
 				2FDB238F272F7E99005DF5C5 /* BPMutableArray.m */,
 			);
 			path = MultiThread;
+			sourceTree = "<group>";
+		};
+		2FAAA1EF2AA034950099AD6B /* Hitch */ = {
+			isa = PBXGroup;
+			children = (
+				2FAAA1F02AA034D40099AD6B /* BPHitchViewController.h */,
+				2FAAA1F12AA034D40099AD6B /* BPHitchViewController.m */,
+			);
+			path = Hitch;
 			sourceTree = "<group>";
 		};
 		2FB1614527A27D89001F638E /* List */ = {
@@ -595,6 +619,8 @@
 		6003F593195388D20070C39A /* Example for ModHookLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				2F2BC2492B4BCE0000A406AD /* TextView */,
+				2FAAA1EF2AA034950099AD6B /* Hitch */,
 				2FC2204F2994F00E00AF2B7C /* RunLoop */,
 				2FD275DD28FEA22600B61266 /* Wakeup */,
 				2FA342B028BF0290000B3D4E /* Animation */,
@@ -936,6 +962,7 @@
 				2FB1614827A27DA2001F638E /* BPListViewController.m in Sources */,
 				2FC63A88273383340006DE6C /* BPSubView2.m in Sources */,
 				2FC966FF272A92E0008819D1 /* BPTemplateVC.m in Sources */,
+				2FAAA1F22AA034D40099AD6B /* BPHitchViewController.m in Sources */,
 				2FA90D7F2727A2A50099A3F0 /* BPMultiManager.m in Sources */,
 				2FB1655B27A28B24001F638E /* BPOldTableViewDataSource.m in Sources */,
 				2F78C0B72726FCF100C0E335 /* BPPrivateModelVC.m in Sources */,
@@ -959,6 +986,7 @@
 				2FC7378027CF68D90041A89B /* BPRuntimeViewController.m in Sources */,
 				2F102B852720728900433099 /* BPTaskTestViewController.m in Sources */,
 				2FC63A82273382BD0006DE6C /* BPDeriveTestVC.m in Sources */,
+				2F2BC24C2B4BCE3700A406AD /* BPTextViewController.m in Sources */,
 				2FDB238D272F7C6D005DF5C5 /* BPMultiThreadSafeObject.m in Sources */,
 				2FA342B328BF02B7000B3D4E /* BPAnimationVC.m in Sources */,
 				2FC7378327CF69030041A89B /* BPRuntimeExcutor.m in Sources */,
@@ -1123,7 +1151,7 @@
 				GCC_PREFIX_HEADER = "ModHookLibrary/ModHookLibrary-Prefix.pch";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				INFOPLIST_FILE = "ModHookLibrary/ModHookLibrary-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				OTHER_LDFLAGS = (
@@ -1190,7 +1218,7 @@
 				GCC_PREFIX_HEADER = "ModHookLibrary/ModHookLibrary-Prefix.pch";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				INFOPLIST_FILE = "ModHookLibrary/ModHookLibrary-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				OTHER_LDFLAGS = (

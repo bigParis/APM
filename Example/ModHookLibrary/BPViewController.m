@@ -77,6 +77,8 @@ static NSString *kTableViewCellIdentifier = @"TableViewCellIdentifier";
     [tempArray addObject:[self createModelWith:@"CollectionView旋转" vcName:@"BPCollectionRotateVC"]];
     [tempArray addObject:[self createModelWith:@"wake up" vcName:@"BPWakeupVC"]];
     [tempArray addObject:[self createModelWith:@"RunLoop" vcName:@"BPRunLoopViewController"]];
+    [tempArray addObject:[self createModelWith:@"卡顿" vcName:@"BPHitchViewController"]];
+    [tempArray addObject:[self createModelWith:@"TextView" vcName:@"BPTextViewController"]];
     self.dataSource = tempArray;
 }
 
